@@ -10,10 +10,6 @@
 <!--- Use syntax /due <date>, e.g. in 2 days, this Friday and December 31st -->
 /due in 1 week
 
-## Due to
-<!--- Use syntax /weight <value>, e.g. 1, 2, 3, 4 -->
-/weight 1
-
 ## Detailed Description
 <!--- Provide a detailed description of the feature -->
 
