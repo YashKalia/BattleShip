@@ -1,15 +1,8 @@
-## Estimated time
-<!--- Use syntax days-hours-minutes /estimate 0d 0h 0m -->
-/estimate 1h
-
-## Spend time
-<!--- Use syntax days-hours-minutes /spend 0d 0h 0m -->
-/spend 0h
-
-## Due to
-<!--- Use syntax /due <date>, e.g. in 2 days, this Friday and December 31st -->
-/due in 1 week
-
 ## Detailed Description
 <!--- Provide a detailed description of the feature -->
 
+## What should be done
+<!--- Provide a detailed description on what needs to be done before the issue is considered done -->
+
+<!--- Use /estimate 0d 0h 0m in the comment section to determine the estimate amount of hours spend on this task -->
+<!--- Use /spend 0d 0h 0m in comment section to declare the actual hours worked on a task -->
