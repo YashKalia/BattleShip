@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,12 +10,15 @@ class StudentTest {
     private transient Student student1;
     private transient Student student2;
     private transient Student student3;
+    private transient Student notValid;
+
 
     @BeforeEach
     void setupTestEnvironment() {
         student1 = new Student("Black Widow", 1234567);
         student2 = new Student("Thor", 7654321);
         student3 = new Student("Loki", 1234567);
+        notValid = new Student("Loser", 10000000);
     }
 
     @Test
@@ -46,4 +50,20 @@ class StudentTest {
     void testEqualsNegative() {
         assertNotEquals(student1, student2);
     }
+
+    @Test
+    void testNotValidStudentNumber() {
+        assertEquals(false, notValid.isValidStudentNumber());
+    }
+
+    @Test
+    void testValidStudentNumber() {
+        assertEquals(true, student1.isValidStudentNumber());
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals(1425489871, student1.hashCode());
+    }
+
 }

@@ -16,6 +16,14 @@ plugins {
 
     // FindBugs / SpotBugs
     id "com.github.spotbugs" version "2.0.1"
+
+    // JavaFX
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+application {
+    mainClassName = 'org.gradle.sample.HelloWorld'
 }
 
 group 'nl.tudelft.cse.sem.template'
@@ -42,6 +50,11 @@ dependencies {
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
 
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 jacocoTestCoverageVerification {
     violationRules {
         rule {
@@ -57,6 +70,7 @@ jacocoTestCoverageVerification {
         }
     }
 }
+
 
 checkstyle {
     toolVersion "8.25"
