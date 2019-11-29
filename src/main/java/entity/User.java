@@ -11,11 +11,18 @@ public class User {
         this.username = username;
     }
 
-    public User(int id,String username,String password,int highScore){
-        this.id=id;
-        this.username=username;
-        this.password=password;
-        this.highScore=highScore;
+    /**FUll constructor.
+     *
+     * @param id id of user.
+     * @param username of user.
+     * @param password of user.
+     * @param highScore of user.
+     */
+    public User(int id,String username,String password,int highScore) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.highScore = highScore;
     }
 
     public User(String username,String password) {
