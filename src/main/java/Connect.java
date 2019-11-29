@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-
-
-
 public class Connect {
 
     static Connection connection;
@@ -37,38 +34,43 @@ public class Connect {
     //NOTE
     //For now whenever executing void main, increment the first csv in the values-currently 3
     // so that userid which is a primary key does not throw exception on being the same.
+
     /**
      * Main method.
+     *
      * @param args parameters args.
      */
     public static void main(String[] args) throws SQLException {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url4,username,password);
-            ps1 = connection.prepareStatement("insert into projects_BattleShip.User"
-                    + " values (3,?,?,?);");
-            ps1.setString(1,"default");
-            ps1.setString(2,"abc");
-            ps1.setInt(3,0);
-            int status = ps1.executeUpdate();
-            if (status != 0) {
-                System.out.println("Connected and query added");
-            }
-            ps1.close();
+            connection = DriverManager.getConnection(url4, username, password);
+            // ps1 = connection.prepareStatement("insert into projects_BattleShip.User"
+            //  + " values (3,?,?,?);");
+            // ps1.setString(1,"default");
+            // ps1.setString(2,"abc");
+            // ps1.setInt(3,0);
+            User newuser = new User(new String("Yash"), new String("password"));
+            System.out.println(authenticate(newuser));
+            //int status = ps1.executeUpdate();
+            //if (status != 0) {
+            //   System.out.println("Connected and query added");
+            //}
+            //ps1.close();
             connection.close();
 
-        }   catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            ps1.close();
+            //ps1.close();
             connection.close();
 
         }
 
     }
 
-    /**Register a user to the database.
+    /**
+     * Register a user to the database.
      *
      * @param user The user object.
      * @return a String that will be printed on the screen.
@@ -78,9 +80,9 @@ public class Connect {
         if (!doesUserExist(user)) {
             ps4 = connection.prepareStatement(
                     "insert into projects_BattleShip.User values (?,?,?,0);");
-            ps4.setInt(1,5);
-            ps4.setString(2,user.getUsername());
-            ps4.setString(3,user.getPassword());
+            ps4.setInt(1, 5);
+            ps4.setString(2, user.getUsername());
+            ps4.setString(3, user.getPassword());
             int status = ps4.executeUpdate();
             if (status != 0) {
                 return new String("Registration successful.");
@@ -95,6 +97,7 @@ public class Connect {
 
     /**
      * Authentication of user.
+     *
      * @param user the user object made when user enters his/her details.
      * @return a String which will be printed on the screen.
      * @throws SQLException IF error occurs.
@@ -104,10 +107,12 @@ public class Connect {
         if (!doesUserExist(user)) {
             return new String("User does not exist.");
         } else {
+            connection = DriverManager.getConnection(url4, username, password);
             ps3 = connection.createStatement();
-            rs2 = ps3.executeQuery(
-                    "select password from projects_BattleShip.User where username=userName;");
-            String password = (rs2.getString("first"));
+            rs2 = ps3.executeQuery("select password from projects_BattleShip.User where"
+                    + " username='" + user.getUsername() + "';");
+            rs2.next();
+            String password = (rs2.getString("password"));
             if (password.equals(user.getPassword())) {
                 return new String("Authentication successful.");
             } else {
@@ -119,8 +124,8 @@ public class Connect {
     }
 
 
-
-    /**Checks if a user exists in the database or not.
+    /**
+     * Checks if a user exists in the database or not.
      *
      * @param user The user object.
      * @return a boolean value.
@@ -129,21 +134,24 @@ public class Connect {
     public static boolean doesUserExist(User user) throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url4,username,password);
+            connection = DriverManager.getConnection(url4, username, password);
             ps2 = connection.createStatement();
+
+
             rs1 = ps2.executeQuery("select password from"
                     + " projects_BattleShip.User"
-                    + " where username=user.getUsername();");
-            if (rs1.wasNull()) {
+                    + " where username='" + user.getUsername() + "';");
+            if (rs1.next()) {
+                ps2.close();
+                rs1.close();
+                connection.close();
+                return true;
+            } else {
                 ps2.close();
                 rs1.close();
                 connection.close();
                 return false;
             }
-            ps2.close();
-            rs1.close();
-            connection.close();
-            return true;
 
 
         } catch (ClassNotFoundException e) {
@@ -151,11 +159,10 @@ public class Connect {
         } finally {
             ps2.close();
             connection.close();
-            rs1.close();
+            //rs1.close();
         }
         return false;
     }
-
 
 
 }
