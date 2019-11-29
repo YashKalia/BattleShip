@@ -1,10 +1,14 @@
 import entity.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
+import java.sql.Statement;
+
+
+
 
 
 public class Connect {
@@ -22,9 +26,13 @@ public class Connect {
     static String username = "pu_BattleShip";
 
     static PreparedStatement ps1 = null;
-    static PreparedStatement ps2 = null;
+    static PreparedStatement ps4 = null;
+    static Statement ps2 = null;
+    static Statement ps3 = null;
+
 
     static ResultSet rs1 = null;
+    static ResultSet rs2 = null;
 
     //NOTE
     //For now whenever executing void main, increment the first csv in the values-currently 3
@@ -60,6 +68,57 @@ public class Connect {
 
     }
 
+    /**Register a user to the database.
+     *
+     * @param user The user object.
+     * @return a String that will be printed on the screen.
+     * @throws SQLException If error occurs.
+     */
+    public static String registerUser(User user) throws SQLException {
+        if (!doesUserExist(user)) {
+            ps4 = connection.prepareStatement(
+                    "insert into projects_BattleShip.User values (?,?,?,0);");
+            ps4.setInt(1,5);
+            ps4.setString(2,user.getUsername());
+            ps4.setString(3,user.getPassword());
+            int status = ps4.executeUpdate();
+            if (status != 0) {
+                return new String("Registration successful.");
+            } else {
+                return new String("Registration unsuccessful.");
+            }
+        } else {
+            return new String("User already exists,please log in.");
+        }
+    }
+
+
+    /**
+     * Authentication of user.
+     * @param user the user object made when user enters his/her details.
+     * @return a String which will be printed on the screen.
+     * @throws SQLException IF error occurs.
+     */
+    public static String authenticate(User user) throws SQLException {
+
+        if (!doesUserExist(user)) {
+            return new String("User does not exist.");
+        } else {
+            ps3 = connection.createStatement();
+            rs2 = ps3.executeQuery(
+                    "select password from projects_BattleShip.User where username=userName;");
+            String password = (rs2.getString("first"));
+            if (password.equals(user.getPassword())) {
+                return new String("Authentication successful.");
+            } else {
+                return new String("Incorrect password,authentication unsuccessful.");
+            }
+
+        }
+
+    }
+
+
 
     /**Checks if a user exists in the database or not.
      *
@@ -71,12 +130,10 @@ public class Connect {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url4,username,password);
-            ps2 = connection.prepareStatement("select password from"
+            ps2 = connection.createStatement();
+            rs1 = ps2.executeQuery("select password from"
                     + " projects_BattleShip.User"
-                    + " where username=? and password=? ");
-            ps2.setString(1,user.getUsername());
-            ps2.setString(2,user.getPassword());
-            rs1 = ps2.executeQuery();
+                    + " where username=user.getUsername();");
             if (rs1.wasNull()) {
                 ps2.close();
                 rs1.close();
