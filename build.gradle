@@ -21,7 +21,7 @@ plugins {
 group 'nl.tudelft.cse.sem.template'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 12
+sourceCompatibility = 13
 
 repositories {
     mavenCentral()
@@ -40,6 +40,9 @@ test {
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+    //compile 'mysql:mysql-connector-java:6.0.+'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 }
 
 jacocoTestCoverageVerification {
@@ -74,6 +77,7 @@ spotbugs {
     reportLevel = "high"
     visitors = ["FindSqlInjection", "SwitchFallthrough"]
     excludeFilter = file("$rootProject.projectDir/config/spotbugs/excludeFilter.xml")
+    toolVersion = '4.0.0-beta4'
 }
 
 tasks.withType(SpotBugsTask) {
