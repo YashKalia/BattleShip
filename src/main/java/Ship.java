@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 /**
  * Class Ship.
  */
 public class Ship  {
     public int typeShip;
-    public boolean orientation = true;
+    public boolean orientation = false;
     private int damage;
 
     /**
