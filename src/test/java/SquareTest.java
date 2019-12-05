@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 class SquareTest {
 
     private transient Square square;
-    private transient Board board;
+    private Board board;
+    private transient Board opponentBoard;
 
     @BeforeEach
     public void setUpEnvironment() {
@@ -100,6 +101,35 @@ class SquareTest {
         assertEquals(true, actual);
     }
 
+    @Test
+    public void getSquareLeft() {
+        square = new Square(3, 4, board);
+        Square result = square.getSquareLeft(square);
+        Square actual = Board.squaresInGrid.get(42);
+        assertEquals(result, actual);
+    }
 
+    @Test
+    public void getSquareRight() {
+        square = new Square(3, 4, board);
+        Square result = square.getSquareRight(square);
+        Square actual = Board.squaresInGrid.get(44);
+        assertEquals(result, actual);
+    }
 
+    @Test
+    public void getSquareUp() {
+        square = new Square(3, 4, board);
+        Square result = square.getSquareUp(square);
+        Square actual = Board.squaresInGrid.get(33);
+        assertEquals(result, actual);
+    }
+
+    @Test
+    public void getSquareBelow() {
+        square = new Square(3, 4, board);
+        Square result = square.getSquareBelow(square);
+        Square actual = Board.squaresInGrid.get(53);
+        assertEquals(result, actual);
+    }
 }
