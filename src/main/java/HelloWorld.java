@@ -123,7 +123,7 @@ public class HelloWorld extends Application {
             }
 
             if (opponentTurn) {
-                opponentBoard.opponentPlayer.enemyShot(opponentBoard);
+                opponentBoard.opponentPlayer.enemyShot(playerBoard);
             }
 
         });

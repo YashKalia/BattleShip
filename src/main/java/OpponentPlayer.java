@@ -28,13 +28,13 @@ public class OpponentPlayer {
         }
     }
 
+    @SuppressWarnings("PMD")
     protected void placeShipsOpponent(Board opponentBoard) {
         List<Ship> ships = Board.makeListWithShips();
 
-        int allShipsPlaced;
-
+        int allShipsPlaced = 4;
         while (!ships.isEmpty()) {
-            allShipsPlaced = ships.size() - 1;
+
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
