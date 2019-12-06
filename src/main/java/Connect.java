@@ -43,7 +43,7 @@ public class Connect {
      *
      * @param args parameters args.
      */
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public void main(String[] args) throws SQLException, ClassNotFoundException {
 
         //User newuser = new User(new String("Ice"), new String("Cube"))
         try {
@@ -67,7 +67,7 @@ public class Connect {
      * @return a String that will be printed on the screen.
      * @throws SQLException If error occurs.
      */
-    public static String registerUser(User user) throws SQLException, ClassNotFoundException {
+    public String registerUser(User user) throws SQLException, ClassNotFoundException {
         Class.forName(driver);
         connection1 = DriverManager.getConnection(url4, username, password);
         if (!doesUserExist(user)) {
@@ -99,7 +99,7 @@ public class Connect {
      * @return a String which will be printed on the screen.
      * @throws SQLException IF error occurs.
      */
-    public static String authenticate(User user) throws SQLException, ClassNotFoundException {
+    public String authenticate(User user) throws SQLException, ClassNotFoundException {
         if (!doesUserExist(user)) {
             return new String("User does not exist.");
         } else {
@@ -129,7 +129,7 @@ public class Connect {
      * @throws ClassNotFoundException if class not found.
      * @throws SQLException if query is incorrect.
      */
-    public static ResultSet getTopFive() throws ClassNotFoundException, SQLException {
+    public ResultSet getTopFive() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
         connection5 = DriverManager.getConnection(url4, username, password);
         ps6 = connection5.createStatement();
@@ -147,7 +147,7 @@ public class Connect {
      * @return a boolean value.
      * @throws SQLException The exception thrown.
      */
-    public static boolean doesUserExist(User user) throws SQLException {
+    public boolean doesUserExist(User user) throws SQLException {
         try {
             Class.forName(driver);
             connection3 = DriverManager.getConnection(url4, username, password);
@@ -188,7 +188,7 @@ public class Connect {
      * @throws SQLException if error occurs.
      * @throws ClassNotFoundException if error occurs.
      */
-    public static String addScore(User user,int score) throws SQLException, ClassNotFoundException {
+    public String addScore(User user,int score) throws SQLException, ClassNotFoundException {
         Class.forName(driver);
         connection4 = DriverManager.getConnection(url4, username, password);
         ps5 = connection4.prepareStatement(
