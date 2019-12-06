@@ -88,6 +88,7 @@ public class Connect {
             Class.forName(driver);
             connection2 = DriverManager.getConnection(url4, username, password);
             ps3 = connection2.createStatement();
+
             rs2 = ps3.executeQuery("select password from projects_BattleShip.User where"
                     + " username='" + user.getUsername() + "';");
             rs2.next();
@@ -117,6 +118,7 @@ public class Connect {
             Class.forName(driver);
             connection3 = DriverManager.getConnection(url4, username, password);
             ps2 = connection3.createStatement();
+
             rs1 = ps2.executeQuery("select password from"
                     + " projects_BattleShip.User"
                     + " where username='" + user.getUsername() + "';");
@@ -128,6 +130,7 @@ public class Connect {
             } else {
                 ps2.close();
                 rs1.close();
+
                 connection3.close();
                 return false;
             }
@@ -139,6 +142,7 @@ public class Connect {
             ps2.close();
             connection3.close();
             rs1.close();
+
         }
         return false;
     }
@@ -174,6 +178,7 @@ public class Connect {
 
 
     //Need a method to check if the score being added is a high score or not.
+
 
 
 
