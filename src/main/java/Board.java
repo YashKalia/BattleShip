@@ -21,6 +21,7 @@ public class Board extends Parent {
     private boolean opponent = false;
     public int ships = 5;
     public static ArrayList<Square> squaresInGrid = new ArrayList<Square>();
+    public OpponentPlayer opponentPlayer = new OpponentPlayer();
 
 
     /**
@@ -98,6 +99,26 @@ public class Board extends Parent {
         }
 
         getChildren().add(rows);
+    }
+
+    /**
+     * Make a arraylist with the ships in it.
+     * @return list with ships.
+     */
+    public static List<Ship> makeListWithShips() {
+        List<Ship> ships = new ArrayList<>();
+        Ship carrier = new Ship(5, true);
+        ships.add(carrier);
+        Ship battleShip = new Ship(4, true);
+        ships.add(battleShip);
+        Ship cruiser = new Ship(3, true);
+        ships.add(cruiser);
+        Ship submarine = new Ship(3, true);
+        ships.add(submarine);
+        Ship destroyer = new Ship(2, true);
+        ships.add(destroyer);
+
+        return ships;
     }
 
     /**

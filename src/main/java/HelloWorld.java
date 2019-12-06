@@ -1,6 +1,5 @@
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
@@ -11,14 +10,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 public class HelloWorld extends Application {
 
-    private boolean inProgress = false;
-    private Board opponentBoard;
-    private Board playerBoard;
+    protected static boolean inProgress = false;
+    protected static Board opponentBoard;
+    protected static Board playerBoard;
     private int allShipsPlaced = 4;
-    private boolean opponentTurn = false;
+    protected static boolean opponentTurn = false;
 
     /**
      * Verifying whether the application is running.
@@ -100,11 +100,10 @@ public class HelloWorld extends Application {
         this.opponentTurn = opponentTurn;
     }
 
-    private Parent createContent() {
+    private Parent setUp() {
         BorderPane root = new BorderPane();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         root.setPrefSize(screenSize.getWidth(), screenSize.getHeight());
-
 
         opponentBoard = new Board(true, event -> {
             if (!inProgress) {
@@ -120,7 +119,11 @@ public class HelloWorld extends Application {
 
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
-                // Should add return to start screen so that new  game can be started.
+                //System.exit(0);
+            }
+
+            if (opponentTurn) {
+                opponentBoard.opponentPlayer.enemyShot(playerBoard);
             }
 
         });
@@ -130,23 +133,9 @@ public class HelloWorld extends Application {
                 return;
             }
 
-            List<Ship> ships = new ArrayList<>();
-            Ship carrier = new Ship(5, true);
-            ships.add(carrier);
-            Ship battleShip = new Ship(4, true);
-            ships.add(battleShip);
-            Ship cruiser = new Ship(3, true);
-            ships.add(cruiser);
-            Ship submarine = new Ship(3, true);
-            ships.add(submarine);
-            Ship destroyer = new Ship(2, true);
-            ships.add(destroyer);
+            List<Ship> ships = playerBoard.makeListWithShips();
 
             Square square = (Square) event.getSource();
-
-            //TESTING PURPOSES
-            Ship battleShipTest = new Ship(4, true);
-            opponentBoard.placeShip(battleShipTest,9,0);
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY)) {
@@ -155,7 +144,6 @@ public class HelloWorld extends Application {
                     startGame();
                 }
             }
-
         });
 
         VBox player = new VBox(playerBoard);
@@ -169,19 +157,17 @@ public class HelloWorld extends Application {
     }
 
 
+
     private void startGame() {
+        opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard);
         inProgress = true;
-
-
-
-
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(createContent());
+        Scene scene = new Scene(setUp());
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
