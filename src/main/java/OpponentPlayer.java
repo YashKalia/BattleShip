@@ -1,16 +1,47 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class OpponentPlayer {
     private transient Random random = new Random();
+    public int xCoord;
+    public int yCoord;
+    public List<Ship> ships = new ArrayList<>();
+    public int allShipsPlaced;
+
+
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
+    }
+
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
+    }
+
+    public List<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(List<Ship> ships) {
+        this.ships = ships;
+    }
 
     protected void enemyShot(Board playerBoard) {
         while (HelloWorld.opponentTurn) {
 
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            setxCoord(random.nextInt(10));
+            setyCoord(random.nextInt(10));
 
-            Square square = playerBoard.getSquare(x, y);
+            Square square = playerBoard.getSquare(xCoord, yCoord);
             if (square.shooted) {
                 continue;
             }
@@ -30,15 +61,15 @@ public class OpponentPlayer {
 
     @SuppressWarnings("PMD")
     protected void placeShipsOpponent(Board opponentBoard) {
-        List<Ship> ships = Board.makeListWithShips();
+        setShips(Board.makeListWithShips());
+        allShipsPlaced = ships.size()-1;
 
-        int allShipsPlaced = 4;
         while (!ships.isEmpty()) {
 
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            xCoord = random.nextInt(10);
+            yCoord = random.nextInt(10);
 
-            if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y)) {
+            if (opponentBoard.placeShip(ships.get(allShipsPlaced), xCoord, yCoord)) {
                 allShipsPlaced--;
             }
             if (allShipsPlaced < 0) {
