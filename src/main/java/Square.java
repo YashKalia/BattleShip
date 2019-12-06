@@ -1,5 +1,7 @@
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 
 /**
  * Class Square, representing a single block of the board.
@@ -10,9 +12,29 @@ public class Square extends Rectangle {
     public Ship ship = null;
     public boolean shooted = false;
     private Board board;
+    public Point2D coordinates = new Point2D(coordinateX, coordinateY);
+    public Scoring objectScore = new Scoring();
+
+    public Point2D getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Point2D coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public Scoring getObjectScore() {
+        return objectScore;
+    }
+
+    public void setObjectScore(Scoring objectScore) {
+        this.objectScore = objectScore;
+    }
+
 
     /**
      * Getting the X coordinate of the square.
+     *
      * @return The x coordinate of the square.
      */
     public int getCoordinateX() {
@@ -21,6 +43,7 @@ public class Square extends Rectangle {
 
     /**
      * Setting the X coordinate of the square.
+     *
      * @param coordinateX The specified X coordinate.
      */
     public void setCoordinateX(int coordinateX) {
@@ -29,6 +52,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the Y coordinate of the square.
+     *
      * @return The Y coordinate of the square.
      */
     public int getCoordinateY() {
@@ -37,6 +61,7 @@ public class Square extends Rectangle {
 
     /**
      * Setting the Y coordinate of the square.
+     *
      * @param coordinateY The specified Y coordinate.
      */
     public void setCoordinateY(int coordinateY) {
@@ -45,6 +70,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting of the ship.
+     *
      * @return specified ship.
      */
     public Ship getShip() {
@@ -53,6 +79,7 @@ public class Square extends Rectangle {
 
     /**
      * Setting the ship.
+     *
      * @param ship Specified ship to place.
      */
     public void setShip(Ship ship) {
@@ -61,6 +88,7 @@ public class Square extends Rectangle {
 
     /**
      * Verifying whether block a click event has already occurred on block.
+     *
      * @return Whether square is already touched.
      */
     public boolean isShooted() {
@@ -69,6 +97,7 @@ public class Square extends Rectangle {
 
     /**
      * Setting whether block is already touched.
+     *
      * @param shooted The current status of the block.
      */
     public void setShooted(boolean shooted) {
@@ -77,6 +106,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the board.
+     *
      * @return The board.
      */
     public Board getBoard() {
@@ -84,9 +114,9 @@ public class Square extends Rectangle {
     }
 
 
-
     /**
      * Setting the board.
+     *
      * @param board The board of the game.
      */
     public void setBoard(Board board) {
@@ -95,8 +125,9 @@ public class Square extends Rectangle {
 
     /**
      * Constructor of square class.
-     * @param x X-Coordinate of square.
-     * @param y Y-Coordinate of square.
+     *
+     * @param x     X-Coordinate of square.
+     * @param y     Y-Coordinate of square.
      * @param board The board of the game.
      */
     public Square(int x, int y, Board board) {
@@ -111,6 +142,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the square left of an given square.
+     *
      * @param square square of which you want to receive the square to its left.
      * @return the square which is positioned on the left of the square.
      */
@@ -119,8 +151,8 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!board.inRange(x,y) || x == 0) {
-            squareNotVisible = new Square(11,11,board);
+        if (!board.inRange(x, y) || x == 0) {
+            squareNotVisible = new Square(11, 11, board);
             return squareNotVisible;
         } else {
             return Board.squaresInGrid.get(10 * y + x - 1);
@@ -129,6 +161,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the square right of an given square.
+     *
      * @param square square of which you want to receive the square to its right.
      * @return the square which is positioned on the right of the square.
      */
@@ -139,8 +172,8 @@ public class Square extends Rectangle {
 
         final int nine = 9; //To avoid pmd error
 
-        if (!board.inRange(x,y) || x == nine) {
-            squareNotVisible = new Square(-1,-1,board);
+        if (!board.inRange(x, y) || x == nine) {
+            squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
             return Board.squaresInGrid.get(10 * y + x + 1);
@@ -149,6 +182,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the square above of an given square.
+     *
      * @param square square of which you want to receive the square above.
      * @return the square which is positioned above the square.
      */
@@ -157,8 +191,8 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!board.inRange(x,y) || y == 0) {
-            squareNotVisible = new Square(-1,-1,board);
+        if (!board.inRange(x, y) || y == 0) {
+            squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
             return Board.squaresInGrid.get(10 * (y - 1) + x);
@@ -167,6 +201,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the square below of an given square.
+     *
      * @param square square of which you want to receive the square below.
      * @return the square which is positioned below the square.
      */
@@ -177,16 +212,18 @@ public class Square extends Rectangle {
 
         final int nine = 9; //To avoid pmd error
 
-        if (!board.inRange(x,y) || y == nine) {
-            squareNotVisible = new Square(-1,-1,board);
+        if (!board.inRange(x, y) || y == nine) {
+            squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
             return Board.squaresInGrid.get(10 * (y + 1) + x);
         }
     }
 
-    /**}
+    /**
+     * }
      * Getter for a square.
+     *
      * @param x x-coordinate of the square in the board.
      * @param y y-coordinate of the square in the board.
      * @return the square which has those x and y coordinates.
@@ -203,6 +240,7 @@ public class Square extends Rectangle {
      * methods (see below).Blocks around the ship have to be marked as well, in this case with
      * the color orange, this is what happens if we don't find a ship on the square
      * left/right/up/down.
+     *
      * @param square The last square that was shot before the ship sunk.
      */
     public void setDestroyedShipColour(Square square) {
@@ -237,6 +275,7 @@ public class Square extends Rectangle {
      * method until we find a square without a ship part on it.
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well.
+     *
      * @param square Square that has to be colored and for which you want to check squares
      *               to the left.
      */
@@ -259,8 +298,9 @@ public class Square extends Rectangle {
      * rerun the method until we find a square without a ship part on it.
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well
+     *
      * @param square Square that has to be colored and for which you want to check squares
-     *              to the right.
+     *               to the right.
      */
     public void setSquareColorRight(Square square) {
         square.setFill((Color.GREEN));
@@ -281,8 +321,9 @@ public class Square extends Rectangle {
      * rerun the method until we find a square without a ship part on it.
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
+     *
      * @param square Square that has to be colored and for which you want to check
-     *              squares above.
+     *               squares above.
      */
     public void setSquareColorUp(Square square) {
         square.setFill((Color.GREEN));
@@ -304,8 +345,9 @@ public class Square extends Rectangle {
      * part on it.
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
+     *
      * @param square Square that has to be colored and for which you want to
-     *              check squares below.
+     *               check squares below.
      */
     public void setSquareColorBelow(Square square) {
         square.setFill((Color.GREEN));
@@ -323,6 +365,7 @@ public class Square extends Rectangle {
     /**
      * Set the color of a square, not containing a ship, that has been shot.
      * Set the color of a square, containing a ship, that has been shot.
+     *
      * @return Whether square is shot.
      */
     public boolean shoot() {
@@ -330,17 +373,23 @@ public class Square extends Rectangle {
 
 
         if (ship != null) {
+            if (ship.getDamage() == ship.getTypeShip()) {
+                int totalScore = objectScore.scoreSystem(coordinates, board, ship);
+                System.out.println(totalScore);
+            }
             ship.shot();
+
             setFill(Color.RED);
             if (!ship.isNotDestroyed()) {
                 setDestroyedShipColour(this);
                 board.ships--;
             }
             return true;
-        }
-        else {
+        } else {
             this.setFill(Color.BLACK);
-            board.misses += board.misses;
+            int miss = board.getMisses() + 1;
+            board.setMisses(miss);
+            System.out.println(board.misses);
         }
 
         return false;
