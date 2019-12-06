@@ -327,7 +327,6 @@ public class Square extends Rectangle {
      */
     public boolean shoot() {
         shooted = true;
-        this.setFill(Color.BLACK);
 
 
         if (ship != null) {
@@ -339,6 +338,11 @@ public class Square extends Rectangle {
             }
             return true;
         }
+        else {
+            this.setFill(Color.BLACK);
+            board.misses += board.misses;
+        }
+
         return false;
     }
 }

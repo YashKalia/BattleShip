@@ -131,21 +131,21 @@ public class HelloWorld extends Application {
             }
 
             List<Ship> ships = new ArrayList<>();
-            Ship carrier = new Ship(5, true);
+            Ship carrier = new Ship("Carrier", 5, true);
             ships.add(carrier);
-            Ship battleShip = new Ship(4, true);
+            Ship battleShip = new Ship("BattleShip", 4, true);
             ships.add(battleShip);
-            Ship cruiser = new Ship(3, true);
+            Ship cruiser = new Ship("Cruiser", 3, true);
             ships.add(cruiser);
-            Ship submarine = new Ship(3, true);
+            Ship submarine = new Ship("Submarine", 3, true);
             ships.add(submarine);
-            Ship destroyer = new Ship(2, true);
+            Ship destroyer = new Ship("Destroyer", 2, true);
             ships.add(destroyer);
 
             Square square = (Square) event.getSource();
 
             //TESTING PURPOSES
-            Ship battleShipTest = new Ship(4, true);
+            Ship battleShipTest = new Ship("BattleShip", 4, true);
             opponentBoard.placeShip(battleShipTest,9,0);
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
