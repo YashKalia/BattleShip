@@ -10,11 +10,13 @@ import java.sql.SQLException;
 public class ConnectTest {
 
     private User user;
+    private int score;
     private Connect connection;
 
     @BeforeEach
     public void init() {
         user = new User("Tom", "Cruise");
+        score = 10;
         connection = Mockito.mock(Connect.class);
     }
 
@@ -74,5 +76,19 @@ public class ConnectTest {
         Mockito.when(connection.doesUserExist(user)).thenReturn(false);
 
         assertEquals(false, connection.doesUserExist(user));
+    }
+
+    @Test
+    public void addScoreTest() throws SQLException, ClassNotFoundException {
+        Mockito.when(connection.addScore(user, score)).thenReturn("Score added.");
+
+        assertEquals("Score added.", connection.addScore(user, score));
+    }
+
+    @Test
+    public void addScoreFailTest() throws SQLException, ClassNotFoundException {
+        Mockito.when(connection.addScore(user, score)).thenReturn("Score not added.");
+
+        assertEquals("Score not added.", connection.addScore(user, score));
     }
 }
