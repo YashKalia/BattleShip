@@ -11,6 +11,7 @@ public class Square extends Rectangle {
     public boolean shooted = false;
     private Board board;
 
+
     /**
      * Getting the X coordinate of the square.
      * @return The x coordinate of the square.
@@ -210,24 +211,28 @@ public class Square extends Rectangle {
             setSquareColorLeft((square));
         } else {
             getSquareLeft(square).setFill(Color.ORANGE);
+            getSquareLeft(square).shooted = true;
         }
 
         if (getSquareRight(square).getShip() != null) {
             setSquareColorRight((square));
         } else {
             getSquareRight(square).setFill(Color.ORANGE);
+            getSquareRight(square).shooted = true;
         }
 
         if (getSquareUp(square).getShip() != null) {
             setSquareColorUp((square));
         } else {
             getSquareUp(square).setFill(Color.ORANGE);
+            getSquareUp(square).shooted = true;
         }
 
         if (getSquareBelow(square).getShip() != null) {
             setSquareColorBelow((square));
         } else {
             getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareBelow(square).shooted = true;
         }
     }
 
@@ -246,10 +251,15 @@ public class Square extends Rectangle {
             setSquareColorLeft(getSquareLeft(square));
             getSquareUp(square).setFill(Color.ORANGE);
             getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareUp(square).shooted = true;
+            getSquareBelow(square).shooted = true;
         } else {
             getSquareLeft(square).setFill(Color.ORANGE);
             getSquareUp(square).setFill(Color.ORANGE);
             getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareLeft(square).shooted = true;
+            getSquareUp(square).shooted = true;
+            getSquareBelow(square).shooted = true;
         }
     }
 
@@ -268,10 +278,15 @@ public class Square extends Rectangle {
             setSquareColorRight(getSquareRight(square));
             getSquareUp(square).setFill(Color.ORANGE);
             getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareUp(square).shooted = true;
+            getSquareBelow(square).shooted = true;
         } else {
             getSquareRight(square).setFill(Color.ORANGE);
             getSquareUp(square).setFill(Color.ORANGE);
             getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareRight(square).shooted = true;
+            getSquareUp(square).shooted = true;
+            getSquareBelow(square).shooted = true;
         }
     }
 
@@ -290,10 +305,15 @@ public class Square extends Rectangle {
             setSquareColorUp(getSquareUp(square));
             getSquareLeft(square).setFill(Color.ORANGE);
             getSquareRight(square).setFill(Color.ORANGE);
+            getSquareLeft(square).shooted = true;
+            getSquareRight(square).shooted = true;
         } else {
             getSquareUp(square).setFill(Color.ORANGE);
             getSquareLeft(square).setFill(Color.ORANGE);
             getSquareRight(square).setFill(Color.ORANGE);
+            getSquareLeft(square).shooted = true;
+            getSquareRight(square).shooted = true;
+            getSquareUp(square).shooted = true;
         }
     }
 
@@ -313,10 +333,15 @@ public class Square extends Rectangle {
             setSquareColorBelow(getSquareBelow(square));
             getSquareLeft(square).setFill(Color.ORANGE);
             getSquareRight(square).setFill(Color.ORANGE);
+            getSquareLeft(square).shooted = true;
+            getSquareRight(square).shooted = true;
         } else {
             getSquareBelow(square).setFill(Color.ORANGE);
             getSquareLeft(square).setFill(Color.ORANGE);
             getSquareRight(square).setFill(Color.ORANGE);
+            getSquareBelow(square).shooted = true;
+            getSquareLeft(square).shooted = true;
+            getSquareRight(square).shooted = true;
         }
     }
 
@@ -341,4 +366,21 @@ public class Square extends Rectangle {
         }
         return false;
     }
+
+    public boolean shoot1() {
+        shooted = true;
+        this.setFill(Color.BLACK);
+
+
+        if (ship != null) {
+            ship.shot();
+            setFill(Color.RED);
+            if (!ship.isNotDestroyed()) {
+                board.ships--;
+            }
+            return true;
+        }
+        return false;
+    }
+
 }
