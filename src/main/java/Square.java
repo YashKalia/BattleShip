@@ -346,8 +346,8 @@ public class Square extends Rectangle {
     }
 
     /**
-     * Set the color of a square, not containing a ship, that has been shot.
-     * Set the color of a square, containing a ship, that has been shot.
+     * Set the color of a square, not containing a ship, that has been shot for player.
+     * Set the color of a square, containing a ship, that has been shot for player.
      * @return Whether square is shot.
      */
     public boolean shoot() {
@@ -367,6 +367,12 @@ public class Square extends Rectangle {
         return false;
     }
 
+    /**
+     * Set the color of a square, not containing a ship, that has been shot for computer.
+     * Set the color of a square, containing a ship, that has been shot for computer.
+     *
+     * @return Whether square is shot.
+     */
     public boolean shootEnemy() {
         shooted = true;
         this.setFill(Color.BLACK);

@@ -106,9 +106,9 @@ public class HelloWorld extends Application {
         root.setPrefSize(screenSize.getWidth(), screenSize.getHeight());
 
         opponentBoard = new Board(true, event -> {
-                if (!inProgress) {
-                    return;
-                }
+            if (!inProgress) {
+                return;
+            }
 
             Square square = (Square) event.getSource();
             if (square.shooted) {
@@ -119,7 +119,7 @@ public class HelloWorld extends Application {
 
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
-                System.exit(0);
+                //System.exit(0);
             }
 
             if (opponentTurn) {

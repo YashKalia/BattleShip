@@ -2,11 +2,11 @@ import java.util.List;
 import java.util.Random;
 
 public class OpponentPlayer {
-    private Random random = new Random();
+    private transient Random random = new Random();
 
     protected void enemyShot(Board playerBoard) {
         while (HelloWorld.opponentTurn) {
-            int counter = 0;
+
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
@@ -22,19 +22,19 @@ public class OpponentPlayer {
 
             if (playerBoard.ships == 0) {
                 System.out.println("YOU LOSE");
-                System.exit(0);
+                // System.exit(0);
 
             }
-            counter++;
         }
     }
 
     protected void placeShipsOpponent(Board opponentBoard) {
         List<Ship> ships = Board.makeListWithShips();
 
-        int allShipsPlaced = 4;
+        int allShipsPlaced;
 
         while (!ships.isEmpty()) {
+            allShipsPlaced = ships.size() - 1;
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 

@@ -101,7 +101,11 @@ public class Board extends Parent {
         getChildren().add(rows);
     }
 
-    public static List<Ship> makeListWithShips () {
+    /**
+     * Make a arraylist with the ships in it.
+     * @return list with ships.
+     */
+    public static List<Ship> makeListWithShips() {
         List<Ship> ships = new ArrayList<>();
         Ship carrier = new Ship(5, true);
         ships.add(carrier);
@@ -116,6 +120,7 @@ public class Board extends Parent {
 
         return ships;
     }
+
     /**
      * The placement of the ships by the user.
      *
