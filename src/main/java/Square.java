@@ -367,7 +367,7 @@ public class Square extends Rectangle {
         return false;
     }
 
-    public boolean shoot1() {
+    public boolean shootEnemy() {
         shooted = true;
         this.setFill(Color.BLACK);
 

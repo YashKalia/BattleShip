@@ -1,33 +1,35 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class OpponentPlayer {
     private Random random = new Random();
 
-    protected void move() {
+    protected void enemyShot(Board playerBoard) {
         while (HelloWorld.opponentTurn) {
+            int counter = 0;
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
-            Square square = HelloWorld.playerBoard.getSquare(x, y);
+            Square square = playerBoard.getSquare(x, y);
             if (square.shooted) {
                 continue;
             }
 
-            HelloWorld.opponentTurn = square.shoot1();
+            HelloWorld.opponentTurn = square.shootEnemy();
             if (HelloWorld.opponentTurn) {
-                move();
+                enemyShot(playerBoard);
             }
 
-            if (HelloWorld.playerBoard.ships == 0) {
+            if (playerBoard.ships == 0) {
                 System.out.println("YOU LOSE");
                 System.exit(0);
+
             }
+            counter++;
         }
     }
 
-    protected void placeShipsOpponent() {
+    protected void placeShipsOpponent(Board opponentBoard) {
         List<Ship> ships = Board.makeListWithShips();
 
         int allShipsPlaced = 4;
@@ -36,7 +38,7 @@ public class OpponentPlayer {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
-            if (HelloWorld.opponentBoard.placeShip(ships.get(allShipsPlaced), x, y)) {
+            if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y)) {
                 allShipsPlaced--;
             }
             if (allShipsPlaced < 0) {

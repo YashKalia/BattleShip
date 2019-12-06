@@ -1,28 +1,24 @@
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import java.util.Random;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import static java.lang.Thread.sleep;
 
 @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 public class HelloWorld extends Application {
 
-    private boolean inProgress = false;
+    protected static boolean inProgress = false;
     protected static Board opponentBoard;
     protected static Board playerBoard;
     private int allShipsPlaced = 4;
-    private Random random = new Random();
-    public static boolean opponentTurn = false;
+    protected static boolean opponentTurn = false;
 
     /**
      * Verifying whether the application is running.
@@ -110,9 +106,9 @@ public class HelloWorld extends Application {
         root.setPrefSize(screenSize.getWidth(), screenSize.getHeight());
 
         opponentBoard = new Board(true, event -> {
-            if (!inProgress) {
-                return;
-            }
+                if (!inProgress) {
+                    return;
+                }
 
             Square square = (Square) event.getSource();
             if (square.shooted) {
@@ -127,7 +123,7 @@ public class HelloWorld extends Application {
             }
 
             if (opponentTurn) {
-                opponentBoard.opponentPlayer.move();
+                opponentBoard.opponentPlayer.enemyShot(opponentBoard);
             }
 
         });
@@ -163,7 +159,7 @@ public class HelloWorld extends Application {
 
 
     private void startGame() {
-        opponentBoard.opponentPlayer.placeShipsOpponent();
+        opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard);
         inProgress = true;
     }
 
@@ -171,7 +167,7 @@ public class HelloWorld extends Application {
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(setUp());
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
