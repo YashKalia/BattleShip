@@ -122,7 +122,8 @@ public class OpponentPlayer {
         }
         Square square = playerBoard.getSquare(x, y - 1);
 
-        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(), square.getCoordinateY()))) {
+        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
+                square.getCoordinateY()))) {
             random4 = new Random();
             int random = random4.nextInt(3);
             switch (random) {
@@ -163,7 +164,6 @@ public class OpponentPlayer {
      */
     public void shootLeft(Board playerBoard, int x, int y) {
 
-        System.out.println(x);
         if (x == 0) {
             random5 = new Random();
             int random = random5.nextInt(3);
@@ -184,7 +184,8 @@ public class OpponentPlayer {
         }
         Square square = playerBoard.getSquare(x - 1, y);
 
-        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(), square.getCoordinateY()))) {
+        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
+                square.getCoordinateY()))) {
             random6 = new Random();
             int random = random6.nextInt(3);
             switch (random) {
@@ -245,7 +246,8 @@ public class OpponentPlayer {
         }
         Square square = playerBoard.getSquare(x + 1, y);
 
-        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(), square.getCoordinateY()))) {
+        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
+                square.getCoordinateY()))) {
             random8 = new Random();
             int random = random8.nextInt(3);
             switch (random) {
@@ -306,7 +308,8 @@ public class OpponentPlayer {
         }
         Square square = playerBoard.getSquare(x, y + 1);
 
-        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(), square.getCoordinateY()))) {
+        if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
+                square.getCoordinateY()))) {
             random10 = new Random();
             int random = random10.nextInt(3);
             switch (random) {
