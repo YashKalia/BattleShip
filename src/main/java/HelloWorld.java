@@ -144,6 +144,10 @@ public class HelloWorld extends Application {
 
             Square square = (Square) event.getSource();
 
+            //TESTING PURPOSES
+            Ship battleShipTest = new Ship(4, true);
+            opponentBoard.placeShip(battleShipTest,9,0);
+
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY)) {
                 allShipsPlaced--;
@@ -167,6 +171,10 @@ public class HelloWorld extends Application {
 
     private void startGame() {
         inProgress = true;
+
+
+
+
     }
 
     @Override

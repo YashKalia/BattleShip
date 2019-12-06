@@ -12,11 +12,15 @@ import javafx.scene.paint.Color;
 /**
  * Class Board, representing the entire grid of the board.
  * The board consists of squares.
+ * The squaresInGrid ArrayList is a list containing all squares in the grid.
  */
+
+
 public class Board extends Parent {
     private VBox rows = new VBox();
     private boolean opponent = false;
     public int ships = 5;
+    public static ArrayList<Square> squaresInGrid = new ArrayList<Square>();
 
 
     /**
@@ -85,6 +89,7 @@ public class Board extends Parent {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
                 Square s = new Square(x, y, this);
+                squaresInGrid.add(s);
                 s.setOnMouseClicked(handler);
                 row.getChildren().add(s);
             }
