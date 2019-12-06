@@ -14,6 +14,7 @@ public class Connect {
     static Connection connection2;
     static Connection connection3;
     static Connection connection4;
+    static Connection connection5;
     static String url4 =
             "jdbc:mysql://projects-db.ewi.tudelft.nl/projects_BattleShip?"
                     + "useTimezone=true&serverTimezone=UTC";
@@ -25,12 +26,15 @@ public class Connect {
     static PreparedStatement ps1 = null;
     static PreparedStatement ps4 = null;
     static PreparedStatement ps5 = null;
+    static Statement ps6 = null;
     static Statement ps2 = null;
     static Statement ps3 = null;
 
 
     static ResultSet rs1 = null;
     static ResultSet rs2 = null;
+    static ResultSet rs3 = null;
+    static ResultSet rs4 = null;
 
     /**
      * Main method.
@@ -38,8 +42,19 @@ public class Connect {
      * @param args parameters args.
      */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        User newuser = new User(new String("Ice"), new String("Cube"));
-        System.out.println(addScore(newuser,100));
+        //User newuser = new User(new String("Ice"), new String("Cube"))
+        try {
+            rs4 = getTopFive();
+            while (rs4.next()) {
+                for (int i = 1;i <= rs4.getMetaData().getColumnCount();i++) {
+                    System.out.println(rs4.getInt(i));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            rs4.close();
+        }
     }
 
     /**
@@ -102,6 +117,22 @@ public class Connect {
 
         }
 
+    }
+
+    /**
+     * Return top 5 high scores from the database.
+     * @return a ResultSet.
+     * @throws ClassNotFoundException if class not found.
+     * @throws SQLException if query is incorrect.
+     */
+    public static ResultSet getTopFive() throws ClassNotFoundException, SQLException {
+        Class.forName(driver);
+        connection5 = DriverManager.getConnection(url4, username, password);
+        ps6 = connection5.createStatement();
+        rs3 = ps6.executeQuery("select highscore from"
+                + " projects_BattleShip.User"
+                + " order by highscore desc limit 5;");
+        return rs3;
     }
 
 
@@ -174,7 +205,6 @@ public class Connect {
 
 
     //Need a method to check if the score being added is a high score or not.
-
 
 
 
