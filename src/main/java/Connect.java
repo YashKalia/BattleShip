@@ -10,63 +10,54 @@ import java.sql.Statement;
 
 public class Connect {
 
-    static Connection connection;
-    static String url2 = "https://projects.ewi.tudelft.nl/BattleShip";
-    static String url3 =
-            "jdbc:mysql://projects-db.ewi.tudelft.nl/BattleShip?"
-                    + "useTimezone=true&serverTimezone=UTC";
+    static Connection connection1;
+    static Connection connection2;
+    static Connection connection3;
+    static Connection connection4;
+    static Connection connection5;
+
     static String url4 =
             "jdbc:mysql://projects-db.ewi.tudelft.nl/projects_BattleShip?"
                     + "useTimezone=true&serverTimezone=UTC";
+    static String driver = "com.mysql.cj.jdbc.Driver";
 
     static String password = "Cd5vH9NMZc84";
     static String username = "pu_BattleShip";
 
     static PreparedStatement ps1 = null;
     static PreparedStatement ps4 = null;
+    static PreparedStatement ps5 = null;
+    static Statement ps6 = null;
     static Statement ps2 = null;
     static Statement ps3 = null;
 
 
     static ResultSet rs1 = null;
     static ResultSet rs2 = null;
+    static ResultSet rs3 = null;
+    static ResultSet rs4 = null;
 
-    //NOTE
-    //For now whenever executing void main, increment the first csv in the values-currently 3
-    // so that userid which is a primary key does not throw exception on being the same.
 
     /**
      * Main method.
      *
      * @param args parameters args.
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
+        //User newuser = new User(new String("Ice"), new String("Cube"))
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url4, username, password);
-            // ps1 = connection.prepareStatement("insert into projects_BattleShip.User"
-            //  + " values (3,?,?,?);");
-            // ps1.setString(1,"default");
-            // ps1.setString(2,"abc");
-            // ps1.setInt(3,0);
-            User newuser = new User(new String("Yash"), new String("password"));
-            System.out.println(authenticate(newuser));
-            //int status = ps1.executeUpdate();
-            //if (status != 0) {
-            //   System.out.println("Connected and query added");
-            //}
-            //ps1.close();
-            connection.close();
-
-        } catch (ClassNotFoundException e) {
+            rs4 = getTopFive();
+            while (rs4.next()) {
+                for (int i = 1;i <= rs4.getMetaData().getColumnCount();i++) {
+                    System.out.println(rs4.getInt(i));
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //ps1.close();
-            connection.close();
-
+            rs4.close();
         }
-
     }
 
     /**
@@ -76,22 +67,28 @@ public class Connect {
      * @return a String that will be printed on the screen.
      * @throws SQLException If error occurs.
      */
-    public static String registerUser(User user) throws SQLException {
+    public static String registerUser(User user) throws SQLException, ClassNotFoundException {
+        Class.forName(driver);
+        connection1 = DriverManager.getConnection(url4, username, password);
         if (!doesUserExist(user)) {
-            ps4 = connection.prepareStatement(
-                    "insert into projects_BattleShip.User values (?,?,?,0);");
-            ps4.setInt(1, 5);
-            ps4.setString(2, user.getUsername());
-            ps4.setString(3, user.getPassword());
-            int status = ps4.executeUpdate();
-            if (status != 0) {
+            ps4 = connection1.prepareStatement(
+                    "insert into projects_BattleShip.User ("
+                            + "username,password,highscore) values (?,?,0);");
+            ps4.setString(1, user.getUsername());
+            ps4.setString(2, user.getPassword());
+            int status1 = ps4.executeUpdate();
+            if (status1 != 0) {
+                connection1.close();
                 return new String("Registration successful.");
             } else {
+                connection1.close();
                 return new String("Registration unsuccessful.");
             }
         } else {
+            connection1.close();
             return new String("User already exists,please log in.");
         }
+
     }
 
 
@@ -102,25 +99,44 @@ public class Connect {
      * @return a String which will be printed on the screen.
      * @throws SQLException IF error occurs.
      */
-    public static String authenticate(User user) throws SQLException {
-
+    public static String authenticate(User user) throws SQLException, ClassNotFoundException {
         if (!doesUserExist(user)) {
             return new String("User does not exist.");
         } else {
-            connection = DriverManager.getConnection(url4, username, password);
-            ps3 = connection.createStatement();
+            Class.forName(driver);
+            connection2 = DriverManager.getConnection(url4, username, password);
+            ps3 = connection2.createStatement();
+
             rs2 = ps3.executeQuery("select password from projects_BattleShip.User where"
                     + " username='" + user.getUsername() + "';");
             rs2.next();
             String password = (rs2.getString("password"));
             if (password.equals(user.getPassword())) {
+                connection2.close();
                 return new String("Authentication successful.");
             } else {
+                connection2.close();
                 return new String("Incorrect password,authentication unsuccessful.");
             }
 
         }
 
+    }
+
+    /**
+     * Return top 5 high scores from the database.
+     * @return a ResultSet.
+     * @throws ClassNotFoundException if class not found.
+     * @throws SQLException if query is incorrect.
+     */
+    public static ResultSet getTopFive() throws ClassNotFoundException, SQLException {
+        Class.forName(driver);
+        connection5 = DriverManager.getConnection(url4, username, password);
+        ps6 = connection5.createStatement();
+        rs3 = ps6.executeQuery("select highscore from"
+                + " projects_BattleShip.User"
+                + " order by highscore desc limit 5;");
+        return rs3;
     }
 
 
@@ -133,10 +149,9 @@ public class Connect {
      */
     public static boolean doesUserExist(User user) throws SQLException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url4, username, password);
-            ps2 = connection.createStatement();
-
+            Class.forName(driver);
+            connection3 = DriverManager.getConnection(url4, username, password);
+            ps2 = connection3.createStatement();
 
             rs1 = ps2.executeQuery("select password from"
                     + " projects_BattleShip.User"
@@ -144,12 +159,12 @@ public class Connect {
             if (rs1.next()) {
                 ps2.close();
                 rs1.close();
-                connection.close();
+                connection3.close();
                 return true;
             } else {
                 ps2.close();
                 rs1.close();
-                connection.close();
+                connection3.close();
                 return false;
             }
 
@@ -158,12 +173,43 @@ public class Connect {
             e.printStackTrace();
         } finally {
             ps2.close();
-            connection.close();
-            //rs1.close();
+            connection3.close();
+            rs1.close();
         }
         return false;
     }
 
+
+    /**Whenever a user finishes a game their score is added to their list of scores.
+     *
+     * @param user The user object.
+     * @param score The score of a game.
+     * @return a String description of success or not.
+     * @throws SQLException if error occurs.
+     * @throws ClassNotFoundException if error occurs.
+     */
+    public static String addScore(User user,int score) throws SQLException, ClassNotFoundException {
+        Class.forName(driver);
+        connection4 = DriverManager.getConnection(url4, username, password);
+        ps5 = connection4.prepareStatement(
+                "insert into projects_BattleShip.Score (id,scores) values (?,?);");
+
+        ps5.setInt(1, user.getId());
+        ps5.setInt(2, score);
+
+        int status1 = ps5.executeUpdate();
+
+        if (status1 != 0) {
+            connection4.close();
+            return new String("Score added.");
+        } else {
+            connection4.close();
+            return new String("Score not added.");
+        }
+    }
+
+
+    //Need a method to check if the score being added is a high score or not.
 
 
 
