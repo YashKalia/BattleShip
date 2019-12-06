@@ -15,6 +15,7 @@ public class Connect {
     static Connection connection3;
     static Connection connection4;
     static Connection connection5;
+
     static String url4 =
             "jdbc:mysql://projects-db.ewi.tudelft.nl/projects_BattleShip?"
                     + "useTimezone=true&serverTimezone=UTC";
@@ -36,12 +37,14 @@ public class Connect {
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
 
+
     /**
      * Main method.
      *
      * @param args parameters args.
      */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
         //User newuser = new User(new String("Ice"), new String("Cube"))
         try {
             rs4 = getTopFive();
@@ -103,6 +106,7 @@ public class Connect {
             Class.forName(driver);
             connection2 = DriverManager.getConnection(url4, username, password);
             ps3 = connection2.createStatement();
+
             rs2 = ps3.executeQuery("select password from projects_BattleShip.User where"
                     + " username='" + user.getUsername() + "';");
             rs2.next();
@@ -148,6 +152,7 @@ public class Connect {
             Class.forName(driver);
             connection3 = DriverManager.getConnection(url4, username, password);
             ps2 = connection3.createStatement();
+
             rs1 = ps2.executeQuery("select password from"
                     + " projects_BattleShip.User"
                     + " where username='" + user.getUsername() + "';");
