@@ -1,12 +1,20 @@
-import java.util.ArrayList;
-
 /**
  * Class Ship.
  */
 public class Ship  {
+    public String shipName;
     public int typeShip;
     public boolean orientation = false;
     private int damage;
+
+
+    public String getShipName() {
+        return shipName;
+    }
+
+    public void setShipName(String shipName) {
+        this.shipName = shipName;
+    }
 
     /**
      * Getting the type of the ship.
@@ -63,7 +71,8 @@ public class Ship  {
      * @param typeShip The number of squares the ship occupies.
      * @param orientation The orientation of the ship.
      */
-    public Ship(int typeShip, boolean orientation) {
+    public Ship(String shipName, int typeShip, boolean orientation) {
+        this.shipName = shipName;
         this.typeShip = typeShip;
         this.orientation = orientation;
         damage = typeShip;
