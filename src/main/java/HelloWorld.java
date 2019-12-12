@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
@@ -137,7 +138,6 @@ public class HelloWorld extends Application {
 
             Square square = (Square) event.getSource();
 
-            List<Ship> ships = new ArrayList<>();
             Ship carrier = new Ship("Carrier", 5, true);
             ships.add(carrier);
             Ship battleShip = new Ship("BattleShip", 4, true);
@@ -149,7 +149,6 @@ public class HelloWorld extends Application {
             Ship destroyer = new Ship("Destroyer", 2, true);
             ships.add(destroyer);
 
-            Square square = (Square) event.getSource();
 
             //TESTING PURPOSES
             Ship battleShipTest = new Ship("BattleShip", 4, true);

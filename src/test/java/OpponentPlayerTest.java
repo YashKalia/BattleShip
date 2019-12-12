@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-public class OpponentPlayerTest {
-=======
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
@@ -96,9 +94,6 @@ public class OpponentPlayerTest {
 //        assertEquals(opponentPlayer.allShipsPlaced, 0);
 //        opponentPlayer.placeShipsOpponent(board);
 //    }
-
-
->>>>>>> 2b1a1e952a512a93fd0988c091d8d894144f1c1c
 
 }
 
