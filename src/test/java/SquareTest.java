@@ -53,7 +53,7 @@ class SquareTest {
 
     @Test
     public void setShip() {
-        Ship ship = new Ship(5, false);
+        Ship ship = new Ship("Carrier", 5, false);
         square.setShip(ship);
         Ship actual = square.getShip();
         assertEquals(ship, actual);
@@ -94,8 +94,9 @@ class SquareTest {
 
     @Test
     public void shootShip() {
-        Ship placedShip = new Ship(1, true);
+        Ship placedShip = new Ship("Destroyer", 1, true);
         square.setShip(placedShip);
+        board.setMisses(1);
         square.shoot();
         boolean actual = square.isShooted();
         assertEquals(true, actual);

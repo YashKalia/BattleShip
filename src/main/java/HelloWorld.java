@@ -137,6 +137,24 @@ public class HelloWorld extends Application {
 
             Square square = (Square) event.getSource();
 
+            List<Ship> ships = new ArrayList<>();
+            Ship carrier = new Ship("Carrier", 5, true);
+            ships.add(carrier);
+            Ship battleShip = new Ship("BattleShip", 4, true);
+            ships.add(battleShip);
+            Ship cruiser = new Ship("Cruiser", 3, true);
+            ships.add(cruiser);
+            Ship submarine = new Ship("Submarine", 3, true);
+            ships.add(submarine);
+            Ship destroyer = new Ship("Destroyer", 2, true);
+            ships.add(destroyer);
+
+            Square square = (Square) event.getSource();
+
+            //TESTING PURPOSES
+            Ship battleShipTest = new Ship("BattleShip", 4, true);
+            opponentBoard.placeShip(battleShipTest,9,0);
+
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY)) {
                 allShipsPlaced--;
