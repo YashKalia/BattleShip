@@ -239,7 +239,7 @@ public class Square extends Rectangle {
      * by going to the left/right/up/down of the last square that was shot before the ship sunk,
      * if we find that there is a ship on that square, we change the color in the setSquareColor
      * methods (see below).Blocks around the ship have to be marked as well, in this case with
-     * the color orange, this is what happens if we don't find a ship on the square
+     * the color black, this is what happens if we don't find a ship on the square
      * left/right/up/down.
      *
      * @param square The last square that was shot before the ship sunk.
@@ -248,28 +248,28 @@ public class Square extends Rectangle {
         if (getSquareLeft(square).getShip() != null) {
             setSquareColorLeft((square));
         } else {
-            getSquareLeft(square).setFill(Color.ORANGE);
+            getSquareLeft(square).setFill(Color.BLACK);
             getSquareLeft(square).shooted = true;
         }
 
         if (getSquareRight(square).getShip() != null) {
             setSquareColorRight((square));
         } else {
-            getSquareRight(square).setFill(Color.ORANGE);
+            getSquareRight(square).setFill(Color.BLACK);
             getSquareRight(square).shooted = true;
         }
 
         if (getSquareUp(square).getShip() != null) {
             setSquareColorUp((square));
         } else {
-            getSquareUp(square).setFill(Color.ORANGE);
+            getSquareUp(square).setFill(Color.BLACK);
             getSquareUp(square).shooted = true;
         }
 
         if (getSquareBelow(square).getShip() != null) {
             setSquareColorBelow((square));
         } else {
-            getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareBelow(square).setFill(Color.BLACK);
             getSquareBelow(square).shooted = true;
         }
     }
@@ -288,14 +288,14 @@ public class Square extends Rectangle {
         square.setFill((Color.GREEN));
         if (getSquareLeft(square) != null && getSquareLeft(square).getShip() != null) {
             setSquareColorLeft(getSquareLeft(square));
-            getSquareUp(square).setFill(Color.ORANGE);
-            getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareUp(square).setFill(Color.BLACK);
+            getSquareBelow(square).setFill(Color.BLACK);
             getSquareUp(square).shooted = true;
             getSquareBelow(square).shooted = true;
         } else {
-            getSquareLeft(square).setFill(Color.ORANGE);
-            getSquareUp(square).setFill(Color.ORANGE);
-            getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareLeft(square).setFill(Color.BLACK);
+            getSquareUp(square).setFill(Color.BLACK);
+            getSquareBelow(square).setFill(Color.BLACK);
             getSquareLeft(square).shooted = true;
             getSquareUp(square).shooted = true;
             getSquareBelow(square).shooted = true;
@@ -316,14 +316,14 @@ public class Square extends Rectangle {
         square.setFill((Color.GREEN));
         if (getSquareRight(square) != null && getSquareRight(square).getShip() != null) {
             setSquareColorRight(getSquareRight(square));
-            getSquareUp(square).setFill(Color.ORANGE);
-            getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareUp(square).setFill(Color.BLACK);
+            getSquareBelow(square).setFill(Color.BLACK);
             getSquareUp(square).shooted = true;
             getSquareBelow(square).shooted = true;
         } else {
-            getSquareRight(square).setFill(Color.ORANGE);
-            getSquareUp(square).setFill(Color.ORANGE);
-            getSquareBelow(square).setFill(Color.ORANGE);
+            getSquareRight(square).setFill(Color.BLACK);
+            getSquareUp(square).setFill(Color.BLACK);
+            getSquareBelow(square).setFill(Color.BLACK);
             getSquareRight(square).shooted = true;
             getSquareUp(square).shooted = true;
             getSquareBelow(square).shooted = true;
@@ -344,14 +344,14 @@ public class Square extends Rectangle {
         square.setFill((Color.GREEN));
         if (getSquareUp(square) != null && getSquareUp(square).getShip() != null) {
             setSquareColorUp(getSquareUp(square));
-            getSquareLeft(square).setFill(Color.ORANGE);
-            getSquareRight(square).setFill(Color.ORANGE);
+            getSquareLeft(square).setFill(Color.BLACK);
+            getSquareRight(square).setFill(Color.BLACK);
             getSquareLeft(square).shooted = true;
             getSquareRight(square).shooted = true;
         } else {
-            getSquareUp(square).setFill(Color.ORANGE);
-            getSquareLeft(square).setFill(Color.ORANGE);
-            getSquareRight(square).setFill(Color.ORANGE);
+            getSquareUp(square).setFill(Color.BLACK);
+            getSquareLeft(square).setFill(Color.BLACK);
+            getSquareRight(square).setFill(Color.BLACK);
             getSquareLeft(square).shooted = true;
             getSquareRight(square).shooted = true;
             getSquareUp(square).shooted = true;
@@ -373,14 +373,14 @@ public class Square extends Rectangle {
         square.setFill((Color.GREEN));
         if (getSquareBelow(square) != null && getSquareBelow(square).getShip() != null) {
             setSquareColorBelow(getSquareBelow(square));
-            getSquareLeft(square).setFill(Color.ORANGE);
-            getSquareRight(square).setFill(Color.ORANGE);
+            getSquareLeft(square).setFill(Color.BLACK);
+            getSquareRight(square).setFill(Color.BLACK);
             getSquareLeft(square).shooted = true;
             getSquareRight(square).shooted = true;
         } else {
-            getSquareBelow(square).setFill(Color.ORANGE);
-            getSquareLeft(square).setFill(Color.ORANGE);
-            getSquareRight(square).setFill(Color.ORANGE);
+            getSquareBelow(square).setFill(Color.BLACK);
+            getSquareLeft(square).setFill(Color.BLACK);
+            getSquareRight(square).setFill(Color.BLACK);
             getSquareBelow(square).shooted = true;
             getSquareLeft(square).shooted = true;
             getSquareRight(square).shooted = true;
@@ -437,6 +437,7 @@ public class Square extends Rectangle {
             setFill(Color.RED);
             if (!ship.isNotDestroyed()) {
                 board.ships--;
+
             }
             return true;
         }
