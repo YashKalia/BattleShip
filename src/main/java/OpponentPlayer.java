@@ -17,7 +17,7 @@ public class OpponentPlayer {
     private transient int nine = 9; //pmd purposes
     private transient int allShipsPlaced = 4; //pmd purposes.
     public static ArrayList<Square> shotSquares = new ArrayList<>();
-    private transient int counter = 0; //To prevent a possible infinite loop.
+    private static int counter = 0; //To prevent a possible infinite loop.
 
     /**
      * Randomised shot that enemy performs.
@@ -113,13 +113,13 @@ public class OpponentPlayer {
      */
     public void shootUp(Board playerBoard, int x, int y) {
 
-        if (counter > seventeen) { //17 because the total amount of squares that ships occupy is 17.
-            enemyShot(playerBoard);
-        }
-
-        counter++;
-
         if (y == 0) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random3 = new Random();
             int random = random3.nextInt(3);
             switch (random) {
@@ -140,6 +140,12 @@ public class OpponentPlayer {
 
         if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
                 square.getCoordinateY()))) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random4 = new Random();
             int random = random4.nextInt(3);
             switch (random) {
@@ -161,6 +167,7 @@ public class OpponentPlayer {
         if (HelloWorld.opponentTurn) {
             shotSquares.add(square);
             if (!square.getShip().isNotDestroyed()) {
+                counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard);
                 return;
@@ -184,13 +191,13 @@ public class OpponentPlayer {
      */
     public void shootLeft(Board playerBoard, int x, int y) {
 
-        if (counter > seventeen) {
-            enemyShot(playerBoard);
-        }
-
-        counter++;
-
         if (x == 0) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random5 = new Random();
             int random = random5.nextInt(3);
             switch (random) {
@@ -211,6 +218,12 @@ public class OpponentPlayer {
 
         if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
                 square.getCoordinateY()))) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random6 = new Random();
             int random = random6.nextInt(3);
             switch (random) {
@@ -231,6 +244,7 @@ public class OpponentPlayer {
         if (HelloWorld.opponentTurn) {
             shotSquares.add(square);
             if (!square.getShip().isNotDestroyed()) {
+                counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard);
                 return;
@@ -252,13 +266,12 @@ public class OpponentPlayer {
      */
     public void shootRight(Board playerBoard, int x, int y) {
 
-        if (counter > seventeen) {
-            enemyShot(playerBoard);
-        }
-
-        counter++;
-
         if (x == nine) {
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random7 = new Random();
             int random = random7.nextInt(3);
             switch (random) {
@@ -279,6 +292,12 @@ public class OpponentPlayer {
 
         if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
                 square.getCoordinateY()))) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random8 = new Random();
             int random = random8.nextInt(3);
             switch (random) {
@@ -299,6 +318,7 @@ public class OpponentPlayer {
         if (HelloWorld.opponentTurn) {
             shotSquares.add(square);
             if (!square.getShip().isNotDestroyed()) {
+                counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard);
                 return;
@@ -321,13 +341,13 @@ public class OpponentPlayer {
      */
     public void shootDown(Board playerBoard, int x, int y) {
 
-        if (counter > seventeen) {
-            enemyShot(playerBoard);
-        }
-
-        counter++;
-
         if (y == nine) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random9 = new Random();
             int random = random9.nextInt(3);
             switch (random) {
@@ -348,6 +368,12 @@ public class OpponentPlayer {
 
         if (square.shooted || (!playerBoard.inRange(square.getCoordinateX(),
                 square.getCoordinateY()))) {
+
+            if (counter > seventeen) {
+                enemyShot(playerBoard);
+            }
+            counter++;
+
             random10 = new Random();
             int random = random10.nextInt(3);
             switch (random) {
@@ -369,6 +395,7 @@ public class OpponentPlayer {
         if (HelloWorld.opponentTurn) {
             shotSquares.add(square);
             if (!square.getShip().isNotDestroyed()) {
+                counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard);
                 return;
