@@ -7,19 +7,19 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.controller.MainController">
   <children>
     <Label layoutX="114.0" layoutY="36.0" prefHeight="56.0" prefWidth="327.0" text="           WELCOME TO BATTLESHIP" textAlignment="CENTER" textFill="#0021cc">
       <font>
         <Font name="Agency FB Bold" size="30.0" />
       </font>
     </Label>
-    <Button layoutX="211.0" layoutY="123.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="177.0" text="Log-in" textFill="#00ff55">
+    <Button layoutX="211.0" layoutY="123.0" mnemonicParsing="false" onAction="#show_Login_Screen" prefHeight="48.0" prefWidth="177.0" text="Log-in" textFill="#00ff55">
       <font>
         <Font name="Arial Bold Italic" size="20.0" fx:id="x1" />
       </font>
     </Button>
-    <Button font="$x1" layoutX="211.0" layoutY="216.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="177.0" text="Register" textFill="#1400ff" />
+    <Button font="$x1" layoutX="211.0" layoutY="216.0" mnemonicParsing="false" onAction="#show_Register_Screen" prefHeight="48.0" prefWidth="177.0" text="Register" textFill="#1400ff" />
     <Button font="$x1" layoutX="211.0" layoutY="305.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="177.0" text="Close Game" textFill="#ff3333" />
   </children>
 </AnchorPane>

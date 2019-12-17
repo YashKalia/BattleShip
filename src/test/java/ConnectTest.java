@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import database.Connect;
 import entity.User;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
