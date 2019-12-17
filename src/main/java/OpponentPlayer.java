@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +15,8 @@ public class OpponentPlayer {
     private transient Random random8;
     private transient Random random9;
     private transient Random random10;
-    public static ArrayList<Square> shotSquares = new ArrayList<Square>();
+    public static ArrayList<Square> shotSquares = new ArrayList<>();
+    int counter = 0; //To prevent a possible infinite loop.
 
     /**
      * Randomised shot that enemy performs.
@@ -43,7 +46,9 @@ public class OpponentPlayer {
             if (HelloWorld.opponentTurn) {
                 shotSquares.add(square);
                 if (!square.getShip().isNotDestroyed()) {
+
                     shotSquares.clear();
+                    counter = 0;
                     enemyShot(playerBoard);
                     return;
                 }
@@ -106,7 +111,12 @@ public class OpponentPlayer {
      * @param y           coordinate of square location
      */
     public void shootUp(Board playerBoard, int x, int y) {
-        System.out.println(y);
+
+        if (counter > 17) { //17 because the total amount of squares that ships occupy is 17.
+            enemyShot(playerBoard);
+        }
+
+        counter++;
 
         if (y == 0) {
             random3 = new Random();
@@ -173,6 +183,12 @@ public class OpponentPlayer {
      */
     public void shootLeft(Board playerBoard, int x, int y) {
 
+        if (counter > 17) {
+            enemyShot(playerBoard);
+        }
+
+        counter++;
+
         if (x == 0) {
             random5 = new Random();
             int random = random5.nextInt(3);
@@ -237,6 +253,12 @@ public class OpponentPlayer {
 
         int nine = 9; //PMD purposes.
 
+        if (counter > 17) {
+            enemyShot(playerBoard);
+        }
+
+        counter++;
+
         if (x == nine) {
             random7 = new Random();
             int random = random7.nextInt(3);
@@ -299,6 +321,12 @@ public class OpponentPlayer {
      * @param y           coordinate of square location
      */
     public void shootDown(Board playerBoard, int x, int y) {
+
+        if (counter > 17) {
+            enemyShot(playerBoard);
+        }
+
+        counter++;
 
         int nine = 9; //PMD purposes.
         if (y == nine) {
