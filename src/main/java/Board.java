@@ -23,6 +23,7 @@ public class Board extends Parent {
     public static ArrayList<Square> squaresInGrid = new ArrayList<Square>();
     public OpponentPlayer opponentPlayer = new OpponentPlayer();
     public int misses = 0;
+    public int totalScore = 0;
     Map<String,Point2D> frontShip = new HashMap<String, Point2D>();
 
     /**
@@ -141,15 +142,15 @@ public class Board extends Parent {
      */
     public static List<Ship> makeListWithShips() {
         List<Ship> ships = new ArrayList<>();
-        Ship carrier = new Ship(5, true);
+        Ship carrier = new Ship("Carrier", 5, true);
         ships.add(carrier);
-        Ship battleShip = new Ship(4, true);
+        Ship battleShip = new Ship("BattleShip", 4, true);
         ships.add(battleShip);
-        Ship cruiser = new Ship(3, true);
+        Ship cruiser = new Ship("Cruiser", 3, true);
         ships.add(cruiser);
-        Ship submarine = new Ship(3, true);
+        Ship submarine = new Ship("Submarine", 3, true);
         ships.add(submarine);
-        Ship destroyer = new Ship(2, true);
+        Ship destroyer = new Ship("Destroyer", 2, true);
         ships.add(destroyer);
 
         return ships;

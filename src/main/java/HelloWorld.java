@@ -1,5 +1,4 @@
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -104,7 +104,6 @@ public class HelloWorld extends Application {
     private Parent setUp() {
         BorderPane root = new BorderPane();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        root.setPrefSize(screenSize.getWidth(), screenSize.getHeight());
 
         opponentBoard = new Board(true, event -> {
             if (!inProgress) {
@@ -137,18 +136,6 @@ public class HelloWorld extends Application {
             List<Ship> ships = playerBoard.makeListWithShips();
 
             Square square = (Square) event.getSource();
-
-            Ship carrier = new Ship("Carrier", 5, true);
-            ships.add(carrier);
-            Ship battleShip = new Ship("BattleShip", 4, true);
-            ships.add(battleShip);
-            Ship cruiser = new Ship("Cruiser", 3, true);
-            ships.add(cruiser);
-            Ship submarine = new Ship("Submarine", 3, true);
-            ships.add(submarine);
-            Ship destroyer = new Ship("Destroyer", 2, true);
-            ships.add(destroyer);
-
 
             //TESTING PURPOSES
             Ship battleShipTest = new Ship("BattleShip", 4, true);
