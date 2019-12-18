@@ -152,11 +152,17 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!board.inRange(x, y) || x == 0) {
-            squareNotVisible = new Square(11, 11, board);
+        if (!square.getBoard().inRange(x, y) || x == 0) {
+            squareNotVisible = new Square(11, 11, square.getBoard());
             return squareNotVisible;
         } else {
-            return Board.squaresInGrid.get(10 * y + x - 1);
+
+
+            if (square.getBoard().isOpponent()) {
+                return Board.squaresInGridOpponent.get(10 * y + x - 1);
+            } else {
+                return Board.squaresInGrid.get(10 * y + x - 1);
+            }
         }
     }
 
@@ -177,7 +183,11 @@ public class Square extends Rectangle {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
-            return Board.squaresInGrid.get(10 * y + x + 1);
+            if (square.getBoard().isOpponent()) {
+                return Board.squaresInGridOpponent.get(10 * y + x + 1);
+            } else {
+                return Board.squaresInGrid.get(10 * y + x + 1);
+            }
         }
     }
 
@@ -196,7 +206,12 @@ public class Square extends Rectangle {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
-            return Board.squaresInGrid.get(10 * (y - 1) + x);
+            if (square.getBoard().isOpponent()) {
+                return Board.squaresInGridOpponent.get(10 * (y - 1) + x);
+            } else {
+                return Board.squaresInGrid.get(10 * (y - 1) + x);
+            }
+
         }
     }
 
@@ -217,7 +232,12 @@ public class Square extends Rectangle {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
-            return Board.squaresInGrid.get(10 * (y + 1) + x);
+
+            if (square.getBoard().isOpponent()) {
+                return Board.squaresInGridOpponent.get(10 * (y + 1) + x);
+            } else {
+                return Board.squaresInGrid.get(10 * (y + 1) + x);
+            }
         }
     }
 
@@ -390,6 +410,7 @@ public class Square extends Rectangle {
     /**
      * Set the color of a square, not containing a ship, that has been shot for player.
      * Set the color of a square, containing a ship, that has been shot for player.
+     *
      * @return Whether square is shot.
      */
     public boolean shoot() {
@@ -436,6 +457,7 @@ public class Square extends Rectangle {
             ship.shot();
             setFill(Color.RED);
             if (!ship.isNotDestroyed()) {
+                setDestroyedShipColour(this);
                 board.ships--;
 
             }

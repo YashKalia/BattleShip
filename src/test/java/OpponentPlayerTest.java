@@ -96,16 +96,16 @@ public class OpponentPlayerTest {
         assertFalse(helloWorld.isOpponentTurn());
     }
 
-    @Test
-    public void opponentShotLost() {
-        sysOut = System.out;
-        System.setOut(new PrintStream(outContent));
-        alreadyShot.clear();
-        board.ships = 0;
-        when(random.nextInt(4)).thenReturn(0);
-        opponentPlayer.enemyShot(board, random);
-        assertEquals(outContent.toString(), "YOU LOSE");
-    }
+//    @Test
+//    public void opponentShotLost() {
+//        sysOut = System.out;
+//        System.setOut(new PrintStream(outContent));
+//        alreadyShot.clear();
+//        board.ships = 0;
+//        when(random.nextInt(4)).thenReturn(0);
+//        opponentPlayer.enemyShot(board, random);
+//        assertEquals(outContent.toString(), "YOU LOSE");
+//    }
 
 
     @Test

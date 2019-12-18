@@ -20,7 +20,8 @@ public class Board extends Parent {
     private VBox rows = new VBox();
     private boolean opponent = false;
     public int ships = 5;
-    public static ArrayList<Square> squaresInGrid = new ArrayList<Square>();
+    public static ArrayList<Square> squaresInGrid = new ArrayList<>();
+    public static ArrayList<Square> squaresInGridOpponent = new ArrayList<>();
     public OpponentPlayer opponentPlayer = new OpponentPlayer();
     public int misses = 0;
     public int totalScore = 0;
@@ -125,7 +126,12 @@ public class Board extends Parent {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
                 Square s = new Square(x, y, this);
-                squaresInGrid.add(s);
+
+                if (opponent) {
+                    squaresInGridOpponent.add(s);
+                } else {
+                    squaresInGrid.add(s);
+                }
                 s.setOnMouseClicked(handler);
                 row.getChildren().add(s);
             }

@@ -164,7 +164,7 @@ public class HelloWorld extends Application {
 
 
     private void startGame() {
-        opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard);
+        opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard, new Random());
         inProgress = true;
     }
 
