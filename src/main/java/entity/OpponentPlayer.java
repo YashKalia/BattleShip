@@ -1,10 +1,18 @@
+package entity;
+
+import gui.HelloWorld;
+
 import java.util.List;
 import java.util.Random;
 
 public class OpponentPlayer {
     private transient Random random = new Random();
 
-    protected void enemyShot(Board playerBoard) {
+    /**Creates a enemy shot.
+     *
+     * @param playerBoard the player board.
+     */
+    public void enemyShot(Board playerBoard) {
         while (HelloWorld.opponentTurn) {
 
             int x = random.nextInt(10);
@@ -28,8 +36,12 @@ public class OpponentPlayer {
         }
     }
 
+    /**Places opponent ships on board.
+     *
+     * @param opponentBoard the opp. board.
+     */
     @SuppressWarnings("PMD")
-    protected void placeShipsOpponent(Board opponentBoard) {
+    public void placeShipsOpponent(Board opponentBoard) {
         List<Ship> ships = Board.makeListWithShips();
 
         int allShipsPlaced = 4;
