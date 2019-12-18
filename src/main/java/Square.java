@@ -419,7 +419,7 @@ public class Square extends Rectangle {
 
         if (ship != null) {
             if (ship.getDamage() == ship.getTypeShip()) {
-                int achieved= objectScore.scoreSystem(coordinates, board, ship);
+                int achieved = objectScore.scoreSystem(coordinates, board, ship);
                 board.totalScore = board.totalScore + achieved;
                 System.out.println("Achieved " + achieved);
                 System.out.println("Total" + board.totalScore);

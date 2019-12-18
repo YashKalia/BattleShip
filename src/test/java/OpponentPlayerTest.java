@@ -1,29 +1,30 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Random;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class OpponentPlayerTest {
     private transient OpponentPlayer opponentPlayer;
     private transient Board board;
     private transient HelloWorld helloWorld;
-    private  transient Random random;
+    private transient Random random;
     private transient ArrayList<Square> alreadyShot;
     private transient Ship destroyer;
     private transient Ship mini;
-    private PrintStream sysOut;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
-
+    /**
+     * Setting up the enviroment for the tests.
+     */
     @BeforeEach
     public void setUpEnvironment() {
         opponentPlayer = new OpponentPlayer();
@@ -43,40 +44,33 @@ public class OpponentPlayerTest {
     }
 
     @Test
-    public void Random() {
-        Random random = new Random();
-        opponentPlayer.setRandom(random);
-        assertEquals(opponentPlayer.getRandom(), random);
-    }
-
-    @Test
-    public void shottedSquares()  {
+    public void shottedSquares() {
         assertEquals(opponentPlayer.getShotSquares(), alreadyShot);
     }
 
     @Test
-    public void Right()  {
+    public void right() {
         Square right = new Square(3, 5, board);
         opponentPlayer.setRight(right);
         assertEquals(right, opponentPlayer.getRight());
     }
 
     @Test
-    public void Left()  {
+    public void left() {
         Square left = new Square(8, 5, board);
         opponentPlayer.setLeft(left);
         assertEquals(left, opponentPlayer.getLeft());
     }
 
     @Test
-    public void Down()  {
+    public void down() {
         Square down = new Square(1, 3, board);
         opponentPlayer.setDown(down);
         assertEquals(down, opponentPlayer.getDown());
     }
 
     @Test
-    public void Up()  {
+    public void up() {
         Square up = new Square(6, 2, board);
         opponentPlayer.setUp(up);
         assertEquals(up, opponentPlayer.getUp());
@@ -95,18 +89,6 @@ public class OpponentPlayerTest {
         // Verifying it is not the opponent's turn anymore.
         assertFalse(helloWorld.isOpponentTurn());
     }
-
-//    @Test
-//    public void opponentShotLost() {
-//        sysOut = System.out;
-//        System.setOut(new PrintStream(outContent));
-//        alreadyShot.clear();
-//        board.ships = 0;
-//        when(random.nextInt(4)).thenReturn(0);
-//        opponentPlayer.enemyShot(board, random);
-//        assertEquals(outContent.toString(), "YOU LOSE");
-//    }
-
 
     @Test
     public void opponentShootRightEmpty() {
@@ -502,7 +484,7 @@ public class OpponentPlayerTest {
         assertFalse(helloWorld.isOpponentTurn());
     }
 
-       @Test
+    @Test
     public void opponentShootRightBoarder_0() {
         when(random.nextInt(3)).thenReturn(0);
         opponentPlayer.shootRight(board, 9, 5, random);
@@ -694,9 +676,6 @@ public class OpponentPlayerTest {
         // Verifying it is not the opponent's turn anymore.
         assertFalse(helloWorld.isOpponentTurn());
     }
-
-
-
 
 
 }

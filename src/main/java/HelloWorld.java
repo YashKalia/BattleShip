@@ -1,5 +1,5 @@
-import java.awt.*;
-import java.util.ArrayList;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -103,26 +102,21 @@ public class HelloWorld extends Application {
     }
 
     private Parent setUp() {
-        BorderPane root = new BorderPane();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         opponentBoard = new Board(true, event -> {
             if (!inProgress) {
                 return;
             }
-
             Square square = (Square) event.getSource();
             if (square.shooted) {
                 return;
             }
-
             opponentTurn = !square.shoot();
-
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
                 //System.exit(0);
             }
-
             if (opponentTurn) {
                 opponentBoard.opponentPlayer.enemyShot(playerBoard, new Random());
             }
@@ -156,6 +150,7 @@ public class HelloWorld extends Application {
         player.setAlignment(Pos.CENTER);
         opponent.setAlignment(Pos.CENTER);
         VBox vbox = new VBox(30, player, opponent);
+        BorderPane root = new BorderPane();
         root.setCenter(vbox);
 
         return root;

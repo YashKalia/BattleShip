@@ -15,14 +15,6 @@ public class OpponentPlayer {
     private transient int allShipsPlaced = 4;
     private transient int seventeen = 17;
 
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
-    }
-
     public static ArrayList<Square> getShotSquares() {
         return shotSquares;
     }
@@ -116,8 +108,6 @@ public class OpponentPlayer {
     protected void enemyShotCoordinates(Board playerBoard, int x, int y, Random randomizer) {
         while (HelloWorld.opponentTurn) {
 
-//            Random random2 = new Random();
-//            setRandom(random2);
             int random = randomizer.nextInt(4);
             switch (random) {
                 case 0:
@@ -342,7 +332,6 @@ public class OpponentPlayer {
                     break;
             }
         }
-//        right.shooted  = true;
         HelloWorld.opponentTurn = right.shootEnemy();
         if (HelloWorld.opponentTurn) {
             shotSquares.add(right);
@@ -353,7 +342,8 @@ public class OpponentPlayer {
                 return;
             }
             if (right.getCoordinateX() != nine) {
-                shootRight(playerBoard, right.getCoordinateX(), right.getCoordinateY(), new Random());
+                shootRight(playerBoard, right.getCoordinateX(), right.getCoordinateY(),
+                        new Random());
 
             } else {
                 enemyShot(playerBoard, new Random());
