@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -123,7 +124,7 @@ public class HelloWorld extends Application {
             }
 
             if (opponentTurn) {
-                opponentBoard.opponentPlayer.enemyShot(playerBoard);
+                opponentBoard.opponentPlayer.enemyShot(playerBoard, new Random());
             }
 
         });

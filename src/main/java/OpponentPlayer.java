@@ -63,19 +63,18 @@ public class OpponentPlayer {
      *
      * @param playerBoard board of player.
      */
-    protected void enemyShot(Board playerBoard) {
+    protected void enemyShot(Board playerBoard, Random randomizer) {
 
         while (HelloWorld.opponentTurn) {
 
             if (!shotSquares.isEmpty()) {
                 enemyShotCoordinates(playerBoard, shotSquares.get(0).getCoordinateX(),
-                        shotSquares.get(0).getCoordinateY(), new Random());
+                        shotSquares.get(0).getCoordinateY(), randomizer);
                 break;
             }
 
-            random = new Random();
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            int x = randomizer.nextInt(10);
+            int y = randomizer.nextInt(10);
 
             Square square = playerBoard.getSquare(x, y);
             if (square.shooted) {
@@ -87,7 +86,7 @@ public class OpponentPlayer {
                 shotSquares.add(square);
                 if (!square.getShip().isNotDestroyed()) {
                     shotSquares.clear();
-                    enemyShot(playerBoard);
+                    enemyShot(playerBoard, new Random());
                     return;
                 }
                 enemyShotCoordinates(playerBoard, x, y, new Random());
@@ -116,13 +115,13 @@ public class OpponentPlayer {
             int random = randomizer.nextInt(4);
             switch (random) {
                 case 0:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 case 3:
                     shootUp(playerBoard, x, y, new Random());
@@ -151,13 +150,13 @@ public class OpponentPlayer {
             int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 default:
                     break;
@@ -169,13 +168,13 @@ public class OpponentPlayer {
             int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 default:
                     break;
@@ -186,13 +185,13 @@ public class OpponentPlayer {
             shotSquares.add(up);
             if (!up.getShip().isNotDestroyed()) {
                 shotSquares.clear();
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
                 return;
             }
             if (up.getCoordinateY() != 0) {
                 shootUp(playerBoard, up.getCoordinateX(), up.getCoordinateY(), randomizer);
             } else {
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
             }
         }
     }
@@ -205,21 +204,19 @@ public class OpponentPlayer {
      * @param x           coordinate of square location
      * @param y           coordinate of square location
      */
-    public void shootLeft(Board playerBoard, int x, int y) {
+    public void shootLeft(Board playerBoard, int x, int y, Random randomizer) {
 
         if (x == 0) {
-            Random random5 = new Random();
-            setRandom(random5);
-            int random = random5.nextInt(3);
+            int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 case 1:
                     shootUp(playerBoard, x, y, new Random());
-                    break;
+                    return;
                 case 2:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 default:
                     break;
@@ -227,20 +224,17 @@ public class OpponentPlayer {
         }
         left = playerBoard.getSquare(x - 1, y);
 
-        if (left.shooted || (!playerBoard.inRange(left.getCoordinateX(),
-                left.getCoordinateY()))) {
-            Random random6 = new Random();
-            setRandom(random6);
-            int random = random6.nextInt(3);
+        if (left.shooted) {
+            int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
                     shootUp(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 case 2:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 default:
                     break;
@@ -251,13 +245,13 @@ public class OpponentPlayer {
             shotSquares.add(left);
             if (!left.getShip().isNotDestroyed()) {
                 shotSquares.clear();
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
                 return;
             }
             if (left.getCoordinateX() != 0) {
-                shootLeft(playerBoard, left.getCoordinateX(), left.getCoordinateY());
+                shootLeft(playerBoard, left.getCoordinateX(), left.getCoordinateY(), new Random());
             } else {
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
             }
         }
     }
@@ -269,23 +263,21 @@ public class OpponentPlayer {
      * @param x           coordinate of square location
      * @param y           coordinate of square location
      */
-    public void shootRight(Board playerBoard, int x, int y) {
+    public void shootRight(Board playerBoard, int x, int y, Random randomizer) {
 
         int nine = 9; //PMD purposes.
 
         if (x == nine) {
-            Random random7 = new Random();
-            setRandom(random7);
-            int random = random7.nextInt(3);
+            int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
                     shootUp(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 default:
                     break;
@@ -295,18 +287,16 @@ public class OpponentPlayer {
 
         if (right.shooted || (!playerBoard.inRange(right.getCoordinateX(),
                 right.getCoordinateY()))) {
-            Random random8 = new Random();
-            setRandom(random8);
-            int random = random8.nextInt(3);
+            int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
                     shootUp(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
-                    shootDown(playerBoard, x, y);
+                    shootDown(playerBoard, x, y, new Random());
                     return;
                 default:
                     break;
@@ -318,13 +308,13 @@ public class OpponentPlayer {
             shotSquares.add(right);
             if (!right.getShip().isNotDestroyed()) {
                 shotSquares.clear();
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
                 return;
             }
             if (right.getCoordinateX() != 9) {
-                shootRight(playerBoard, right.getCoordinateX(), right.getCoordinateY());
+                shootRight(playerBoard, right.getCoordinateX(), right.getCoordinateY(), new Random());
             } else {
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
             }
         }
     }
@@ -337,19 +327,17 @@ public class OpponentPlayer {
      * @param x           coordinate of square location
      * @param y           coordinate of square location
      */
-    public void shootDown(Board playerBoard, int x, int y) {
+    public void shootDown(Board playerBoard, int x, int y, Random randomizer) {
 
         int nine = 9; //PMD purposes.
         if (y == nine) {
-            Random random9 = new Random();
-            setRandom(random9);
-            int random = random9.nextInt(3);
+            int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
                     shootUp(playerBoard, x, y, new Random());
@@ -360,17 +348,14 @@ public class OpponentPlayer {
         }
         down = playerBoard.getSquare(x, y + 1);
 
-        if (down.shooted || (!playerBoard.inRange(down.getCoordinateX(),
-                down.getCoordinateY()))) {
-            Random random10 = new Random();
-            setRandom(random10);
-            int random = random10.nextInt(3);
+        if (down.shooted) {
+            int random = randomizer.nextInt(3);
             switch (random) {
                 case 0:
-                    shootRight(playerBoard, x, y);
+                    shootRight(playerBoard, x, y, new Random());
                     return;
                 case 1:
-                    shootLeft(playerBoard, x, y);
+                    shootLeft(playerBoard, x, y, new Random());
                     return;
                 case 2:
                     shootUp(playerBoard, x, y, new Random());
@@ -385,13 +370,13 @@ public class OpponentPlayer {
             shotSquares.add(down);
             if (!down.getShip().isNotDestroyed()) {
                 shotSquares.clear();
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
                 return;
             }
             if (down.getCoordinateY() != 9) {
-                shootDown(playerBoard, down.getCoordinateX(), down.getCoordinateY());
+                shootDown(playerBoard, down.getCoordinateX(), down.getCoordinateY(), new Random());
             } else {
-                enemyShot(playerBoard);
+                enemyShot(playerBoard, new Random());
             }
         }
     }
