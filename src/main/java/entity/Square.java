@@ -19,24 +19,6 @@ public class Square extends Rectangle {
     public Point2D coordinates = new Point2D(coordinateX, coordinateY);
     public Scoring objectScore = new Scoring();
 
-    public Point2D getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Point2D coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public Scoring getObjectScore() {
-        return objectScore;
-    }
-
-    public void setObjectScore(Scoring objectScore) {
-        this.objectScore = objectScore;
-    }
-
-
-
     /**
      * Getting the X coordinate of the square.
      *
@@ -126,6 +108,38 @@ public class Square extends Rectangle {
      */
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    /**
+     * Get the x and y coordinate of the specified square.
+     * @return The X and Y coordinate of the square.
+     */
+    public Point2D getCoordinates() {
+        return coordinates;
+    }
+
+    /**
+     * Set the x and y coordinate of the specified square.
+     * @param coordinates The wanted X and Y for the square.
+     */
+    public void setCoordinates(Point2D coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    /**
+     * Getting the achieved score by the player.
+     * @return The amount of points a player has obtained.
+     */
+    public Scoring getObjectScore() {
+        return objectScore;
+    }
+
+    /**
+     * Updating the amount of points obtained by a player.
+     * @param objectScore The new amount of points a player has obtained.
+     */
+    public void setObjectScore(Scoring objectScore) {
+        this.objectScore = objectScore;
     }
 
     /**
