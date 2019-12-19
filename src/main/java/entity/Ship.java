@@ -1,7 +1,9 @@
+package entity;
+
 import java.util.ArrayList;
 
 /**
- * Class Ship.
+ * Class entity.Ship.
  */
 public class Ship  {
     public int typeShip;

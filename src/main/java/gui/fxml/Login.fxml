@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.controller.LoginController">
+  <children>
+    <Label layoutX="175.0" layoutY="50.0" prefWidth="277.0" text="             LOGIN" textAlignment="CENTER" textFill="#ccc400">
+      <font>
+        <Font name="Arial" size="25.0" />
+      </font>
+    </Label>
+    <TextField fx:id="txtUsername" layoutX="186.0" layoutY="200.0" prefWidth="200.0" promptText="Enter your username." text="" />
+    <Label layoutX="97.0" layoutY="92.0" prefHeight="29.0" prefWidth="129.0" text="Enter Login details." />
+    <TextField fx:id="txtPassword" layoutX="181.0" layoutY="276.0" prefWidth="200.0" promptText="Enter your password." />
+    <Label layoutX="186.0" layoutY="158.0" prefHeight="22.0" prefWidth="85.0" text="USERNAME" />
+    <Label layoutX="184.0" layoutY="240.0" prefHeight="22.0" prefWidth="85.0" text="PASSWORD" />
+    <Button layoutX="269.0" layoutY="349.0" mnemonicParsing="false" onAction="#login" text="Log-in" />
+    <Label id="lblStatus" fx:id="response" layoutX="318.0" layoutY="316.0" prefWidth="269.0" text="" />
+  </children>
+</AnchorPane>

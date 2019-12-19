@@ -1,3 +1,8 @@
+package gui;
+
+import entity.Board;
+import entity.Ship;
+import entity.Square;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
@@ -17,8 +22,8 @@ public class HelloWorld extends Application {
     protected static boolean inProgress = false;
     protected static Board opponentBoard;
     protected static Board playerBoard;
-    private int allShipsPlaced = 4;
-    protected static boolean opponentTurn = false;
+    private static int allShipsPlaced = 4;
+    public static boolean opponentTurn = false;
 
     /**
      * Verifying whether the application is running.
@@ -100,7 +105,11 @@ public class HelloWorld extends Application {
         this.opponentTurn = opponentTurn;
     }
 
-    private Parent setUp() {
+    /**Set up the game screen.
+     *
+     * @return a parent object.
+     */
+    public static Parent setUp() {
         BorderPane root = new BorderPane();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         root.setPrefSize(screenSize.getWidth(), screenSize.getHeight());
@@ -158,7 +167,7 @@ public class HelloWorld extends Application {
 
 
 
-    private void startGame() {
+    private static void startGame() {
         opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard);
         inProgress = true;
     }
@@ -171,7 +180,4 @@ public class HelloWorld extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
