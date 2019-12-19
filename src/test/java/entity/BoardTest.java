@@ -1,3 +1,5 @@
+package entity;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import entity.Board;
