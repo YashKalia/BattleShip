@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    Button button;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -25,10 +25,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        File file = new File("src/main/java/gui/fxml/MainFXML.fxml");
+        File file = new File("src/main/gui/fxml/MainFXML.fxml");
         primaryStage.setTitle("BattleShip");
         URL url = file.toURI().toURL();
-        Parent root = FXMLLoader.load(url);
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
