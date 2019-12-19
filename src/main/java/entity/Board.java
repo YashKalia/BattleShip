@@ -1,3 +1,5 @@
+package entity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,20 +14,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
- * Class Board, representing the entire grid of the board.
+ * Class entity.Board, representing the entire grid of the board.
  * The board consists of squares.
  * The squaresInGrid ArrayList is a list containing all squares in the grid.
  */
 public class Board extends Parent {
-    private VBox rows = new VBox();
-    private boolean opponent = false;
+    public VBox rows = new VBox();
+    public boolean opponent = false;
     public int ships = 5;
     public static ArrayList<Square> squaresInGrid = new ArrayList<>();
     public static ArrayList<Square> squaresInGridOpponent = new ArrayList<>();
     public OpponentPlayer opponentPlayer = new OpponentPlayer();
     public int misses = 0;
     public int totalScore = 0;
-    Map<String,Point2D> frontShip = new HashMap<String, Point2D>();
+    public Map<String,Point2D> frontShip = new HashMap<String, Point2D>();
 
     /**
      * Getting the rows of the board.
@@ -226,7 +228,7 @@ public class Board extends Parent {
      * @param y The Y-coordinate of the square.
      * @return List of squares around the specified square.
      */
-    protected Square[] getNeighbourSquares(double x, double y) {
+    public Square[] getNeighbourSquares(double x, double y) {
         Point2D[] points = new Point2D[]{
             new Point2D(x - 1, y),
             new Point2D(x + 1, y),
@@ -254,7 +256,7 @@ public class Board extends Parent {
      * @param y    The Y-coordinate of the specified location.
      * @return Whether the ship can be placed at a certain location.
      */
-    protected boolean canPlaceShip(Ship ship, int x, int y) {
+    public boolean canPlaceShip(Ship ship, int x, int y) {
         int length = ship.typeShip;
 
         if (ship.orientation) {
@@ -307,7 +309,7 @@ public class Board extends Parent {
      * @param point The point, location, the user wants to place the ship.
      * @return Whether the point is valid.
      */
-    protected boolean isValidPoint(Point2D point) {
+    public boolean isValidPoint(Point2D point) {
         return inRange(point.getX(), point.getY());
     }
 
@@ -318,7 +320,7 @@ public class Board extends Parent {
      * @param y The Y-Coordinate of the specified location.
      * @return Whether the specified point is within the boundaries of the board.
      */
-    protected boolean inRange(double x, double y) {
+    public boolean inRange(double x, double y) {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 }

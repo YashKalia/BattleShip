@@ -1,3 +1,7 @@
+package scoresystem;
+
+import entity.Board;
+import entity.Ship;
 import javafx.geometry.Point2D;
 
 /**

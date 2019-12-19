@@ -1,10 +1,14 @@
+package entity;
+
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import scoresystem.Scoring;
+
 
 
 /**
- * Class Square, representing a single block of the board.
+ * Class entity.Square, representing a single block of the board.
  */
 public class Square extends Rectangle {
     public int coordinateX;
@@ -300,8 +304,7 @@ public class Square extends Rectangle {
      * method until we find a square without a ship part on it.
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well.
-     *
-     * @param square Square that has to be colored and for which you want to check squares
+     * @param square entity.Square that has to be colored and for which you want to check squares
      *               to the left.
      */
     public void setSquareColorLeft(Square square) {
@@ -328,9 +331,8 @@ public class Square extends Rectangle {
      * rerun the method until we find a square without a ship part on it.
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well
-     *
-     * @param square Square that has to be colored and for which you want to check squares
-     *               to the right.
+     * @param square entity.Square that has to be colored and for which you want to check squares
+     *              to the right.
      */
     public void setSquareColorRight(Square square) {
         square.setFill((Color.GREEN));
@@ -356,9 +358,8 @@ public class Square extends Rectangle {
      * rerun the method until we find a square without a ship part on it.
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
-     *
-     * @param square Square that has to be colored and for which you want to check
-     *               squares above.
+     * @param square entity.Square that has to be colored and for which you want to check
+     *              squares above.
      */
     public void setSquareColorUp(Square square) {
         square.setFill((Color.GREEN));
@@ -385,9 +386,8 @@ public class Square extends Rectangle {
      * part on it.
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
-     *
-     * @param square Square that has to be colored and for which you want to
-     *               check squares below.
+     * @param square entity.Square that has to be colored and for which you want to
+     *              check squares below.
      */
     public void setSquareColorBelow(Square square) {
         square.setFill((Color.GREEN));

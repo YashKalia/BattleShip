@@ -1,5 +1,7 @@
+package entity;
+
 /**
- * Class Ship.
+ * Class entity.Ship.
  */
 public class Ship  {
     public String shipName;

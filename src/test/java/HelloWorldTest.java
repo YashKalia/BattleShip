@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import entity.Board;
+import gui.HelloWorld;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,15 +47,17 @@ class HelloWorldTest {
         assertEquals(player, actual);
     }
 
-    @Test
-    public void getAllShipsPlaced() {
-        int actual = helloWorld.getAllShipsPlaced();
-        assertEquals(4, actual);
-    }
+
 
     @Test
     public void setAllShipsPlaced() {
         helloWorld.setAllShipsPlaced(6);
+        int actual = helloWorld.getAllShipsPlaced();
+        assertEquals(6, actual);
+    }
+
+    @Test
+    public void getAllShipsPlaced() {
         int actual = helloWorld.getAllShipsPlaced();
         assertEquals(6, actual);
     }

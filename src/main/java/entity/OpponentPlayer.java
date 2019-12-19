@@ -1,3 +1,7 @@
+package entity;
+
+import gui.HelloWorld;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -60,7 +64,7 @@ public class OpponentPlayer {
      *
      * @param playerBoard board of player.
      */
-    protected void enemyShot(Board playerBoard, Random randomizer) {
+    public void enemyShot(Board playerBoard, Random randomizer) {
 
         while (HelloWorld.opponentTurn) {
 
@@ -105,7 +109,7 @@ public class OpponentPlayer {
      * @param x           coordinate of square location
      * @param y           coordinate of square location
      */
-    protected void enemyShotCoordinates(Board playerBoard, int x, int y, Random randomizer) {
+    public void enemyShotCoordinates(Board playerBoard, int x, int y, Random randomizer) {
         while (HelloWorld.opponentTurn) {
 
             int random = randomizer.nextInt(4);
@@ -430,7 +434,7 @@ public class OpponentPlayer {
      *
      * @param opponentBoard board of the opponent.
      */
-    protected void placeShipsOpponent(Board opponentBoard, Random randomizer) {
+    public void placeShipsOpponent(Board opponentBoard, Random randomizer) {
         List<Ship> ships = Board.makeListWithShips();
         while (!ships.isEmpty()) {
 
