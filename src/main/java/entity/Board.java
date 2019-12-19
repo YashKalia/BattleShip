@@ -28,6 +28,7 @@ public class Board extends Parent {
     public int misses = 0;
     public int totalScore = 0;
     public Map<String,Point2D> frontShip = new HashMap<String, Point2D>();
+    public static List<Ship> shipList = new ArrayList<>();
 
     /**
      * Getting the rows of the board.
@@ -108,6 +109,22 @@ public class Board extends Parent {
     }
 
     /**
+     * Get the list that have to be placed.
+     * @return The ships that still have to be placed.
+     */
+    public List<Ship> getShipList() {
+        return shipList;
+    }
+
+    /**
+     * Set the ships the player must place on the board.
+     * @param shipList The list containing the ships to place.
+     */
+    public void setShipList(List<Ship> shipList) {
+        this.shipList = shipList;
+    }
+
+    /**
      * Set all the locations of the fronts of the ship.
      * @param frontShip A map of coordinates containing a pair of the name and
      *                  front coordinate of the ship.
@@ -149,19 +166,18 @@ public class Board extends Parent {
      * @return list with ships.
      */
     public static List<Ship> makeListWithShips() {
-        List<Ship> ships = new ArrayList<>();
         Ship carrier = new Ship("Carrier", 5, true);
-        ships.add(carrier);
+        shipList.add(carrier);
         Ship battleShip = new Ship("BattleShip", 4, true);
-        ships.add(battleShip);
+        shipList.add(battleShip);
         Ship cruiser = new Ship("Cruiser", 3, true);
-        ships.add(cruiser);
+        shipList.add(cruiser);
         Ship submarine = new Ship("Submarine", 3, true);
-        ships.add(submarine);
+        shipList.add(submarine);
         Ship destroyer = new Ship("Destroyer", 2, true);
-        ships.add(destroyer);
+        shipList.add(destroyer);
 
-        return ships;
+        return shipList;
     }
 
     /**

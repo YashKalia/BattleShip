@@ -10,6 +10,7 @@ import entity.Square;
 import gui.HelloWorld;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javafx.event.EventHandler;
@@ -27,6 +28,7 @@ public class OpponentPlayerTest {
     private transient ArrayList<Square> alreadyShot;
     private transient Ship destroyer;
     private transient Ship mini;
+    private transient Board mockedBoard;
 
     /**
      * Setting up the enviroment for the tests.
@@ -44,6 +46,7 @@ public class OpponentPlayerTest {
         helloWorld.opponentTurn = true;
         opponentPlayer.setShotSquares(alreadyShot);
         random = Mockito.mock(Random.class);
+        mockedBoard = Mockito.mock(Board.class);
         destroyer = new Ship("Destroyer", 2, true);
         mini = new Ship("Mini", 1, true);
 
@@ -681,6 +684,17 @@ public class OpponentPlayerTest {
         // No ship located on the up:
         // Verifying it is not the opponent's turn anymore.
         assertFalse(helloWorld.isOpponentTurn());
+    }
+
+    @Test
+    public void placingShips() {
+        List<Ship> myShips = new ArrayList<>();
+        myShips.add(destroyer);
+        board.setShipList(myShips);
+        when(random.nextInt(10)).thenReturn(3);
+        opponentPlayer.placeShipsOpponent(board, random);
+        // Verifying whether the ship is indeed placed
+        // Assertion missing
     }
 
 
