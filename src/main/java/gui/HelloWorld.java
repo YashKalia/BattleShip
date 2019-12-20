@@ -6,6 +6,7 @@ import entity.Square;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
+import java.util.Random;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -110,29 +111,23 @@ public class HelloWorld extends Application {
      * @return a parent object.
      */
     public static Parent setUp() {
-        BorderPane root = new BorderPane();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        root.setPrefSize(screenSize.getWidth(), screenSize.getHeight());
 
         opponentBoard = new Board(true, event -> {
             if (!inProgress) {
                 return;
             }
-
             Square square = (Square) event.getSource();
             if (square.shooted) {
                 return;
             }
-
             opponentTurn = !square.shoot();
-
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
                 //System.exit(0);
             }
-
             if (opponentTurn) {
-                opponentBoard.opponentPlayer.enemyShot(playerBoard);
+                opponentBoard.opponentPlayer.enemyShot(playerBoard, new Random());
             }
 
         });
@@ -145,6 +140,10 @@ public class HelloWorld extends Application {
             List<Ship> ships = playerBoard.makeListWithShips();
 
             Square square = (Square) event.getSource();
+
+            //TESTING PURPOSES
+            Ship battleShipTest = new Ship("BattleShip", 4, true);
+            opponentBoard.placeShip(battleShipTest,9,0);
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY)) {
@@ -160,15 +159,15 @@ public class HelloWorld extends Application {
         player.setAlignment(Pos.CENTER);
         opponent.setAlignment(Pos.CENTER);
         VBox vbox = new VBox(30, player, opponent);
+        BorderPane root = new BorderPane();
         root.setCenter(vbox);
 
         return root;
     }
 
 
-
     private static void startGame() {
-        opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard);
+        opponentBoard.opponentPlayer.placeShipsOpponent(opponentBoard, new Random());
         inProgress = true;
     }
 
@@ -180,4 +179,8 @@ public class HelloWorld extends Application {
         primaryStage.show();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
+

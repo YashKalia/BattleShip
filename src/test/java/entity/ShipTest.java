@@ -1,6 +1,7 @@
+package entity;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import entity.Ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,20 @@ class ShipTest {
 
     @BeforeEach
     public void setUpEnvironment() {
-        ship = new Ship(4, true);
+        ship = new Ship("BattleShip", 4, true);
+    }
+
+    @Test
+    public void getshipName() {
+        String actual = ship.getShipName();
+        assertEquals("BattleShip", actual);
+    }
+
+    @Test
+    public void setshipName() {
+        ship.setShipName("Carrier");
+        String actual = ship.getShipName();
+        assertEquals("Carrier", actual);
     }
 
     @Test
