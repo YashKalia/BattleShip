@@ -89,6 +89,6 @@ public class ConnectTest {
     public void addScoreFailTest() throws SQLException, ClassNotFoundException {
         Mockito.when(connection.addScore(user, score)).thenReturn("Score not added.");
 
-        assertEquals("Score not added.", connection.addScore(user, score));
+        assertEquals("Score not added.", connection.addScore(user,score));
     }
 }
