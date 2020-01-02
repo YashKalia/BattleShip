@@ -1,11 +1,14 @@
-/*import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import database.Connect;
 import entity.User;
-import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
+import java.sql.SQLException;
+
+
+import static org.mockito.Mockito.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ConnectTest {
@@ -18,7 +21,7 @@ public class ConnectTest {
     /**
      *  Initializes variables used for testing.
      */
-    /*@BeforeEach
+    @BeforeEach
     public void init() {
         user = new User("Tom", "Cruise");
         score = 10;
@@ -101,4 +104,3 @@ public class ConnectTest {
         assertEquals("Score not added.", connection.addScore(user, score));
     }
 }
-*/
