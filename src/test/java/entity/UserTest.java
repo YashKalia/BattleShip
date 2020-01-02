@@ -1,11 +1,8 @@
+package entity;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import entity.User;
 import org.junit.jupiter.api.Test;
-
-
-
-
 
 public class UserTest {
     static String password = "Billy";

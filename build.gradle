@@ -41,7 +41,7 @@ test {
 
     jacoco {
         enabled = true
-        includes = ['nl.tudelft.cse.sem.*']
+        includes = ['entity.*', 'database.*', 'gui.*']
         excludes = []
     }
 }
