@@ -3,6 +3,7 @@ package gui;
 import entity.Board;
 import entity.Ship;
 import entity.Square;
+import entity.ships.BattleShip;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
@@ -142,7 +143,7 @@ public class HelloWorld extends Application {
             Square square = (Square) event.getSource();
 
             //TESTING PURPOSES
-            Ship battleShipTest = new Ship("BattleShip", 4, true);
+            Ship battleShipTest = new BattleShip(4, true);
             opponentBoard.placeShip(battleShipTest,9,0);
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
