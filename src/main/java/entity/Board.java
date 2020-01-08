@@ -1,7 +1,9 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -16,15 +18,17 @@ import javafx.scene.paint.Color;
  * The board consists of squares.
  * The squaresInGrid ArrayList is a list containing all squares in the grid.
  */
-
-
 public class Board extends Parent {
     public VBox rows = new VBox();
     public boolean opponent = false;
     public int ships = 5;
-    public static ArrayList<Square> squaresInGrid = new ArrayList<Square>();
+    public static ArrayList<Square> squaresInGrid = new ArrayList<>();
+    public static ArrayList<Square> squaresInGridOpponent = new ArrayList<>();
     public OpponentPlayer opponentPlayer = new OpponentPlayer();
-
+    public int misses = 0;
+    public int totalScore = 0;
+    public Map<String,Point2D> frontShip = new HashMap<String, Point2D>();
+    public static List<Ship> shipList = new ArrayList<>();
 
     /**
      * Getting the rows of the board.
@@ -81,6 +85,55 @@ public class Board extends Parent {
     }
 
     /**
+     * Getting the misses during the game.
+     * @return the amount of click-events on squares not containing a piece of a ship.
+     */
+    public int getMisses() {
+        return misses;
+    }
+
+    /**
+     * Setting the misses during the game.
+     * @param misses The amount of click-events on squares not containing a piece of a ship.
+     */
+    public void setMisses(int misses) {
+        this.misses = misses;
+    }
+
+    /**
+     * Get all the locations of the fronts of the ship.
+     * @return A map of coordinates containing a pair of the name and front coordinate of the ship.
+     */
+    public Map<String, Point2D> getFrontShip() {
+        return frontShip;
+    }
+
+    /**
+     * Get the list that have to be placed.
+     * @return The ships that still have to be placed.
+     */
+    public List<Ship> getShipList() {
+        return shipList;
+    }
+
+    /**
+     * Set the ships the player must place on the board.
+     * @param shipList The list containing the ships to place.
+     */
+    public void setShipList(List<Ship> shipList) {
+        this.shipList = shipList;
+    }
+
+    /**
+     * Set all the locations of the fronts of the ship.
+     * @param frontShip A map of coordinates containing a pair of the name and
+     *                  front coordinate of the ship.
+     */
+    public void setFrontShip(Map<String, Point2D> frontShip) {
+        this.frontShip = frontShip;
+    }
+
+    /**
      * Creation of a board.
      *
      * @param opponent Presence of an opponent.
@@ -92,7 +145,12 @@ public class Board extends Parent {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
                 Square s = new Square(x, y, this);
-                squaresInGrid.add(s);
+
+                if (opponent) {
+                    squaresInGridOpponent.add(s);
+                } else {
+                    squaresInGrid.add(s);
+                }
                 s.setOnMouseClicked(handler);
                 row.getChildren().add(s);
             }
@@ -108,19 +166,18 @@ public class Board extends Parent {
      * @return list with ships.
      */
     public static List<Ship> makeListWithShips() {
-        List<Ship> ships = new ArrayList<>();
-        Ship carrier = new Ship(5, true);
-        ships.add(carrier);
-        Ship battleShip = new Ship(4, true);
-        ships.add(battleShip);
-        Ship cruiser = new Ship(3, true);
-        ships.add(cruiser);
-        Ship submarine = new Ship(3, true);
-        ships.add(submarine);
-        Ship destroyer = new Ship(2, true);
-        ships.add(destroyer);
+        Ship carrier = new Ship("Carrier", 5, true);
+        shipList.add(carrier);
+        Ship battleShip = new Ship("BattleShip", 4, true);
+        shipList.add(battleShip);
+        Ship cruiser = new Ship("Cruiser", 3, true);
+        shipList.add(cruiser);
+        Ship submarine = new Ship("Submarine", 3, true);
+        shipList.add(submarine);
+        Ship destroyer = new Ship("Destroyer", 2, true);
+        shipList.add(destroyer);
 
-        return ships;
+        return shipList;
     }
 
     /**
@@ -139,6 +196,10 @@ public class Board extends Parent {
                 for (int i = y; i < y + length; i++) {
                     Square square = getSquare(x, i);
                     square.ship = ship;
+                    int frontX = square.getCoordinateX();
+                    int frontY = square.getCoordinateY();
+                    Point2D front = new Point2D(frontX, frontY);
+                    frontShip.put(square.ship.getShipName(), front);
                     if (!opponent) {
                         square.setFill(Color.GRAY);
                         square.setStroke(Color.GRAY);
@@ -148,6 +209,10 @@ public class Board extends Parent {
                 for (int i = x; i < x + length; i++) {
                     Square square = getSquare(i, y);
                     square.ship = ship;
+                    int frontX = square.getCoordinateX();
+                    int frontY = square.getCoordinateY();
+                    Point2D front = new Point2D(frontX, frontY);
+                    frontShip.put(square.ship.getShipName(), front);
                     if (!opponent) {
                         square.setFill(Color.GRAY);
                         square.setStroke(Color.GRAY);
