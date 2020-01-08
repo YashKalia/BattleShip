@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import entity.ships.Destroyer;
+import entity.ships.Mini;
 import gui.HelloWorld;
 
 import java.util.ArrayList;
@@ -45,8 +47,8 @@ public class OpponentPlayerTest {
         opponentPlayer.setShotSquares(alreadyShot);
         random = Mockito.mock(Random.class);
         mockedBoard = Mockito.mock(Board.class);
-        destroyer = new Ship("Destroyer", 2, true);
-        mini = new Ship("Mini", 1, true);
+        destroyer = new Destroyer(2, true);
+        mini = new Mini(1, true);
 
     }
 
