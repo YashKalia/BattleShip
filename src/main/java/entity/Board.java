@@ -1,7 +1,7 @@
 package entity;
 
-
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +28,10 @@ public class Board extends Parent {
     public OpponentPlayer opponentPlayer = new OpponentPlayer();
     public int misses = 0;
     public int totalScore = 0;
-    public Map<String,Point2D> frontShip = new HashMap<String, Point2D>();
+    public Map<String, Point2D> frontShip = new HashMap<String, Point2D>();
     public static List<Ship> shipList = new ArrayList<>();
+    private transient int startCoordinate = -1;
+    private transient Square startSquare = null;
 
     /**
      * Getting the rows of the board.
@@ -87,6 +89,7 @@ public class Board extends Parent {
 
     /**
      * Getting the misses during the game.
+     *
      * @return the amount of click-events on squares not containing a piece of a ship.
      */
     public int getMisses() {
@@ -95,6 +98,7 @@ public class Board extends Parent {
 
     /**
      * Setting the misses during the game.
+     *
      * @param misses The amount of click-events on squares not containing a piece of a ship.
      */
     public void setMisses(int misses) {
@@ -103,6 +107,7 @@ public class Board extends Parent {
 
     /**
      * Get all the locations of the fronts of the ship.
+     *
      * @return A map of coordinates containing a pair of the name and front coordinate of the ship.
      */
     public Map<String, Point2D> getFrontShip() {
@@ -111,6 +116,7 @@ public class Board extends Parent {
 
     /**
      * Get the list that have to be placed.
+     *
      * @return The ships that still have to be placed.
      */
     public List<Ship> getShipList() {
@@ -119,6 +125,7 @@ public class Board extends Parent {
 
     /**
      * Set the ships the player must place on the board.
+     *
      * @param shipList The list containing the ships to place.
      */
     public void setShipList(List<Ship> shipList) {
@@ -127,6 +134,7 @@ public class Board extends Parent {
 
     /**
      * Set all the locations of the fronts of the ship.
+     *
      * @param frontShip A map of coordinates containing a pair of the name and
      *                  front coordinate of the ship.
      */
@@ -164,6 +172,7 @@ public class Board extends Parent {
 
     /**
      * Make a arraylist with the ships in it.
+     *
      * @return list with ships.
      */
     public static List<Ship> makeListWithShips() {
@@ -193,30 +202,28 @@ public class Board extends Parent {
         if (canPlaceShip(ship, x, y)) {
             int length = ship.typeShip;
 
-            int startCoordinate = -1;
-            if (ship.orientation)
+            if (ship.orientation) {
                 startCoordinate = y;
-            else
+            } else {
                 startCoordinate = x;
+            }
 
             for (int i = startCoordinate; i < startCoordinate + length; i++) {
-                Square square = null;
 
                 if (ship.orientation) {
-                    square = getSquare(x, i);
-                }
-                else {
-                    square = getSquare(i, y);
+                    startSquare = getSquare(x, i);
+                } else {
+                    startSquare = getSquare(i, y);
                 }
 
-                square.ship = ship;
-                int frontX = square.getCoordinateX();
-                int frontY = square.getCoordinateY();
+                startSquare.ship = ship;
+                int frontX = startSquare.getCoordinateX();
+                int frontY = startSquare.getCoordinateY();
                 Point2D front = new Point2D(frontX, frontY);
-                frontShip.put(square.ship.getShipName(), front);
+                frontShip.put(startSquare.ship.getShipName(), front);
                 if (!opponent) {
-                    square.setFill(Color.GRAY);
-                    square.setStroke(Color.GRAY);
+                    startSquare.setFill(Color.GRAY);
+                    startSquare.setStroke(Color.GRAY);
                 }
             }
             return true;
@@ -224,9 +231,6 @@ public class Board extends Parent {
 
         return false;
     }
-
-
-
 
 
     /**
@@ -278,33 +282,32 @@ public class Board extends Parent {
     public boolean canPlaceShip(Ship ship, int x, int y) {
         int length = ship.typeShip;
 
-        int startCoordinate = -1;
-        if (ship.orientation)
+        if (ship.orientation) {
             startCoordinate = y;
-        else
+        } else {
             startCoordinate = x;
+        }
 
         for (int i = startCoordinate; i < startCoordinate + length; i++) {
-            Square square = null;
 
             if (ship.orientation) {
-                if (!inRange(x,i)) {
+                if (!inRange(x, i)) {
                     return false;
                 }
-                square = getSquare(x, i);
-            }
-            else {
-                if (!inRange(i,y)) {
+                startSquare = getSquare(x, i);
+            } else {
+                if (!inRange(i, y)) {
                     return false;
                 }
-                square = getSquare(i, y);
+                startSquare = getSquare(i, y);
             }
 
-            if (square.ship != null) {
+            if (startSquare.ship != null) {
                 return false;
             }
 
-            Square[] neighboursX = getNeighbourSquares(square.getCoordinateX(), square.getCoordinateY());
+            Square[] neighboursX = getNeighbourSquares(startSquare.getCoordinateX(),
+                    startSquare.getCoordinateY());
             for (int neighbourSquare = 0; neighbourSquare < neighboursX.length;
                  neighbourSquare++) {
 

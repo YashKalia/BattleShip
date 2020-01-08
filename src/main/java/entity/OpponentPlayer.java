@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class OpponentPlayer {
 
-    public transient Random random;
     public static ArrayList<Square> shotSquares = new ArrayList<Square>();
     public Square right;
     public Square left;
@@ -146,7 +145,7 @@ public class OpponentPlayer {
      * @param y           coordinate of square location
      */
     public void shootUp(Board playerBoard, int x, int y, Random randomizer) {
-        if (y == 0) {
+        if (y == 0 || (playerBoard.getSquare(x, y - 1).isShooted())) {
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
             }
@@ -168,26 +167,6 @@ public class OpponentPlayer {
         }
         up = playerBoard.getSquare(x, y - 1);
 
-        if (up.shooted) {
-            if (counter > seventeen) {
-                enemyShot(playerBoard, new Random());
-            }
-            counter++;
-            int random = randomizer.nextInt(3);
-            switch (random) {
-                case 0:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
-            }
-        }
         HelloWorld.opponentTurn = up.shootEnemy();
         if (HelloWorld.opponentTurn) {
             shotSquares.add(up);
@@ -288,7 +267,7 @@ public class OpponentPlayer {
      */
     public void shootRight(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (x == nine) {
+        if (x == nine || (playerBoard.getSquare(x + 1, y).isShooted())) {
 
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
@@ -313,29 +292,6 @@ public class OpponentPlayer {
         }
         right = playerBoard.getSquare(x + 1, y);
 
-        if (right.shooted) {
-
-            if (counter > seventeen) {
-                enemyShot(playerBoard, new Random());
-            }
-            counter++;
-
-            int random = randomizer.nextInt(3);
-
-            switch (random) {
-                case 0:
-                    shootUp(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
-            }
-        }
         HelloWorld.opponentTurn = right.shootEnemy();
         if (HelloWorld.opponentTurn) {
             shotSquares.add(right);
@@ -365,7 +321,7 @@ public class OpponentPlayer {
      */
     public void shootDown(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (y == nine) {
+        if (y == nine || (playerBoard.getSquare(x, y + 1).isShooted())) {
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
             }
@@ -388,28 +344,6 @@ public class OpponentPlayer {
         }
         down = playerBoard.getSquare(x, y + 1);
 
-        if (down.shooted) {
-            if (counter > seventeen) {
-                enemyShot(playerBoard, new Random());
-            }
-            counter++;
-
-            int random = randomizer.nextInt(3);
-
-            switch (random) {
-                case 0:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootUp(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
-            }
-        }
         HelloWorld.opponentTurn = down.shootEnemy();
 
         if (HelloWorld.opponentTurn) {
