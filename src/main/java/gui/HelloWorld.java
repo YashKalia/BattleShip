@@ -3,8 +3,8 @@ package gui;
 import entity.Board;
 import entity.Ship;
 import entity.Square;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+
+import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 
 @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
@@ -112,7 +113,6 @@ public class HelloWorld extends Application {
      */
     public static Parent setUp() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
         opponentBoard = new Board(true, event -> {
             if (!inProgress) {
                 return;
@@ -154,9 +154,17 @@ public class HelloWorld extends Application {
             }
         });
 
+//        Button boat1 = new Button();
+//        boat1.setText("Destroyer");
+//        final Button boat2 = new Button("boat2");
+//        final Button boat3 = new Button("boat3");
+//        final Button boat4 = new Button("boat4");
+
         VBox player = new VBox(playerBoard);
         VBox opponent = new VBox(opponentBoard);
         player.setAlignment(Pos.CENTER);
+//        player.getChildren().add(boat1);
+
         opponent.setAlignment(Pos.CENTER);
         VBox vbox = new VBox(30, player, opponent);
         BorderPane root = new BorderPane();
@@ -173,6 +181,8 @@ public class HelloWorld extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
         Scene scene = new Scene(setUp());
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
