@@ -1,5 +1,11 @@
 package entity;
 
+import entity.ships.BattleShip;
+import entity.ships.Carrier;
+import entity.ships.Cruiser;
+import entity.ships.Destroyer;
+import entity.ships.Submarine;
+
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -176,15 +182,15 @@ public class Board extends Parent {
      * @return list with ships.
      */
     public static List<Ship> makeListWithShips() {
-        Ship carrier = new Ship("Carrier", 5, true);
+        Ship carrier = new Carrier(5, true);
         shipList.add(carrier);
-        Ship battleShip = new Ship("BattleShip", 4, true);
+        Ship battleShip = new BattleShip(4, true);
         shipList.add(battleShip);
-        Ship cruiser = new Ship("Cruiser", 3, true);
+        Ship cruiser = new Cruiser(3, true);
         shipList.add(cruiser);
-        Ship submarine = new Ship("Submarine", 3, true);
+        Ship submarine = new Submarine(3, true);
         shipList.add(submarine);
-        Ship destroyer = new Ship("Destroyer", 2, true);
+        Ship destroyer = new Destroyer(2, true);
         shipList.add(destroyer);
 
         return shipList;
@@ -200,7 +206,7 @@ public class Board extends Parent {
      */
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlaceShip(ship, x, y)) {
-            int length = ship.typeShip;
+            int length = ship.getTypeShip();
 
             if (ship.orientation) {
                 startCoordinate = y;
@@ -280,7 +286,7 @@ public class Board extends Parent {
      * @return Whether the ship can be placed at a certain location.
      */
     public boolean canPlaceShip(Ship ship, int x, int y) {
-        int length = ship.typeShip;
+        int length = ship.getTypeShip();
 
         if (ship.orientation) {
             startCoordinate = y;
