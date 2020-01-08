@@ -1,5 +1,6 @@
 package entity;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -192,39 +193,41 @@ public class Board extends Parent {
         if (canPlaceShip(ship, x, y)) {
             int length = ship.typeShip;
 
-            if (ship.orientation) {
-                for (int i = y; i < y + length; i++) {
-                    Square square = getSquare(x, i);
-                    square.ship = ship;
-                    int frontX = square.getCoordinateX();
-                    int frontY = square.getCoordinateY();
-                    Point2D front = new Point2D(frontX, frontY);
-                    frontShip.put(square.ship.getShipName(), front);
-                    if (!opponent) {
-                        square.setFill(Color.GRAY);
-                        square.setStroke(Color.GRAY);
-                    }
+            int startCoordinate = -1;
+            if (ship.orientation)
+                startCoordinate = y;
+            else
+                startCoordinate = x;
+
+            for (int i = startCoordinate; i < startCoordinate + length; i++) {
+                Square square = null;
+
+                if (ship.orientation) {
+                    square = getSquare(x, i);
                 }
-            } else {
-                for (int i = x; i < x + length; i++) {
-                    Square square = getSquare(i, y);
-                    square.ship = ship;
-                    int frontX = square.getCoordinateX();
-                    int frontY = square.getCoordinateY();
-                    Point2D front = new Point2D(frontX, frontY);
-                    frontShip.put(square.ship.getShipName(), front);
-                    if (!opponent) {
-                        square.setFill(Color.GRAY);
-                        square.setStroke(Color.GRAY);
-                    }
+                else {
+                    square = getSquare(i, y);
+                }
+
+                square.ship = ship;
+                int frontX = square.getCoordinateX();
+                int frontY = square.getCoordinateY();
+                Point2D front = new Point2D(frontX, frontY);
+                frontShip.put(square.ship.getShipName(), front);
+                if (!opponent) {
+                    square.setFill(Color.GRAY);
+                    square.setStroke(Color.GRAY);
                 }
             }
-
             return true;
         }
 
         return false;
     }
+
+
+
+
 
     /**
      * Getting the square of the specified coordinates.
@@ -275,47 +278,41 @@ public class Board extends Parent {
     public boolean canPlaceShip(Ship ship, int x, int y) {
         int length = ship.typeShip;
 
-        if (ship.orientation) {
-            for (int i = y; i < y + length; i++) {
-                if (!inRange(x, i)) {
+        int startCoordinate = -1;
+        if (ship.orientation)
+            startCoordinate = y;
+        else
+            startCoordinate = x;
+
+        for (int i = startCoordinate; i < startCoordinate + length; i++) {
+            Square square = null;
+
+            if (ship.orientation) {
+                if (!inRange(x,i)) {
                     return false;
                 }
-
-                Square square = getSquare(x, i);
-                if (square.ship != null) {
-                    return false;
-                }
-
-                Square[] neighboursX = getNeighbourSquares(x, i);
-                for (int neighbourSquare = 0; neighbourSquare < neighboursX.length;
-                     neighbourSquare++) {
-
-                    if (neighboursX[neighbourSquare].ship != null) {
-                        return false;
-                    }
-                }
+                square = getSquare(x, i);
             }
-        } else {
-            for (int i = x; i < x + length; i++) {
-                if (!inRange(i, y)) {
+            else {
+                if (!inRange(i,y)) {
                     return false;
                 }
+                square = getSquare(i, y);
+            }
 
-                Square square = getSquare(i, y);
-                if (square.ship != null) {
+            if (square.ship != null) {
+                return false;
+            }
+
+            Square[] neighboursX = getNeighbourSquares(square.getCoordinateX(), square.getCoordinateY());
+            for (int neighbourSquare = 0; neighbourSquare < neighboursX.length;
+                 neighbourSquare++) {
+
+                if (neighboursX[neighbourSquare].ship != null) {
                     return false;
-                }
-
-                Square[] neighboursY = getNeighbourSquares(i, y);
-                for (int neighbour = 0; neighbour < neighboursY.length; neighbour++) {
-
-                    if (neighboursY[neighbour].ship != null) {
-                        return false;
-                    }
                 }
             }
         }
-
         return true;
     }
 
