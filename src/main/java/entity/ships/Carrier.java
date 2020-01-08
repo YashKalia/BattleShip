@@ -30,5 +30,4 @@ public class Carrier extends Ship {
         return 5;
     }
 
-
 }
