@@ -3,6 +3,9 @@ package entity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import entity.ships.Carrier;
+import entity.ships.Destroyer;
+import entity.ships.Submarine;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
@@ -58,7 +61,7 @@ class SquareTest {
 
     @Test
     public void setShip() {
-        Ship ship = new Ship("Carrier", 5, false);
+        Ship ship = new Carrier(5, false);
         square.setShip(ship);
         Ship actual = square.getShip();
         assertEquals(ship, actual);
@@ -122,7 +125,7 @@ class SquareTest {
 
     @Test
     public void shootShip() {
-        Ship placedShip = new Ship("Destroyer", 1, true);
+        Ship placedShip = new Destroyer(1, true);
         square.setShip(placedShip);
         board.setMisses(1);
         square.shoot();
@@ -164,7 +167,7 @@ class SquareTest {
 
     @Test
     public void setColorSquareLeft() {
-        Ship carrier = new Ship("Carrier", 3, true);
+        Ship carrier = new Carrier(3, true);
         board.placeShip(carrier,3, 4);
         Square leftSquare = new Square(3, 4, board);
         square.setSquareColorLeft(leftSquare);
@@ -174,7 +177,7 @@ class SquareTest {
 
     @Test
     public void setColorSquareRight() {
-        Ship submarine = new Ship("Submarine", 3, true);
+        Ship submarine = new Submarine(3, true);
         board.placeShip(submarine,6, 7);
         Square leftSquare = new Square(6, 7, board);
         square.setSquareColorRight(leftSquare);
@@ -184,7 +187,7 @@ class SquareTest {
 
     @Test
     public void setColorSquareUp() {
-        Ship carrier = new Ship("Carrier", 3, true);
+        Ship carrier = new Carrier(3, true);
         board.placeShip(carrier,4, 2);
         Square leftSquare = new Square(4, 2, board);
         square.setSquareColorUp(leftSquare);
@@ -194,7 +197,7 @@ class SquareTest {
 
     @Test
     public void setColorSquareBelow() {
-        Ship submarine = new Ship("Submarine", 3, true);
+        Ship submarine = new Submarine(3, true);
         board.placeShip(submarine,7, 3);
         Square leftSquare = new Square(7, 3, board);
         square.setSquareColorBelow(leftSquare);
