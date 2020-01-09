@@ -7,7 +7,6 @@ import entity.ships.Destroyer;
 import entity.ships.Submarine;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,14 +17,10 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
 import javafx.scene.paint.Color;
 
-/**
- * Class entity.Board, representing the entire grid of the board.
- * The board consists of squares.
- * The squaresInGrid ArrayList is a list containing all squares in the grid.
- */
-public class Board extends Parent {
+public abstract class Board extends Parent {
     public VBox rows = new VBox();
     public boolean opponent = false;
     public int ships = 5;
@@ -36,8 +31,36 @@ public class Board extends Parent {
     public int totalScore = 0;
     public Map<String, Point2D> frontShip = new HashMap<String, Point2D>();
     public static List<Ship> shipList = new ArrayList<>();
-    private transient int startCoordinate = -1;
-    private transient Square startSquare = null;
+    public transient int startCoordinate = -1;
+    public transient Square startSquare = null;
+
+    /**
+     * Creation of a board.
+     *
+     * @param opponent Presence of an opponent.
+     * @param handler  Click of the mouse.
+     */
+    public Board(boolean opponent, EventHandler<? super MouseEvent> handler) {
+        this.opponent = opponent;
+        for (int y = 0; y < 10; y++) {
+            HBox row = new HBox();
+            for (int x = 0; x < 10; x++) {
+                Square s = new Square(x, y, this);
+
+                if (opponent) {
+                    squaresInGridOpponent.add(s);
+                } else {
+                    squaresInGrid.add(s);
+                }
+                s.setOnMouseClicked(handler);
+                row.getChildren().add(s);
+            }
+
+            rows.getChildren().add(row);
+        }
+
+        getChildren().add(rows);
+    }
 
     /**
      * Getting the rows of the board.
@@ -149,34 +172,6 @@ public class Board extends Parent {
     }
 
     /**
-     * Creation of a board.
-     *
-     * @param opponent Presence of an opponent.
-     * @param handler  Click of the mouse.
-     */
-    public Board(boolean opponent, EventHandler<? super MouseEvent> handler) {
-        this.opponent = opponent;
-        for (int y = 0; y < 10; y++) {
-            HBox row = new HBox();
-            for (int x = 0; x < 10; x++) {
-                Square s = new Square(x, y, this);
-
-                if (opponent) {
-                    squaresInGridOpponent.add(s);
-                } else {
-                    squaresInGrid.add(s);
-                }
-                s.setOnMouseClicked(handler);
-                row.getChildren().add(s);
-            }
-
-            rows.getChildren().add(row);
-        }
-
-        getChildren().add(rows);
-    }
-
-    /**
      * Make a arraylist with the ships in it.
      *
      * @return list with ships.
@@ -197,6 +192,94 @@ public class Board extends Parent {
     }
 
     /**
+     * Getting the square of the specified coordinates.
+     *
+     * @param x The X-Coordinate of the square.
+     * @param y The Y-Coordinate of the square.
+     * @return The square on the board corresponding to the specified coordinates.
+     */
+    public Square getSquare(int x, int y) {
+        return (Square) ((HBox) rows.getChildren().get(y)).getChildren().get(x);
+    }
+
+
+    /**
+     * The squares surrounding of a specific square.
+     *
+     * @param x The X-coordinate of the square.
+     * @param y The Y-coordinate of the square.
+     * @return List of squares around the specified square.
+     */
+    public Square[] getNeighbourSquares(double x, double y, Board board) {
+        Point2D[] points = new Point2D[]{
+            new Point2D(x - 1, y),
+            new Point2D(x + 1, y),
+            new Point2D(x, y - 1),
+            new Point2D(x, y + 1)
+        };
+
+        List<Square> neighbors = new ArrayList<Square>();
+
+
+        for (int p = 0; p < points.length; p++) {
+            if (isValidPoint(points[p], board)) {
+                neighbors.add(getSquare((int) points[p].getX(), (int) points[p].getY()));
+            }
+        }
+
+        return neighbors.toArray(new Square[0]);
+    }
+
+    /**
+     * Verifying whether ship can be placed at specified position.
+     *
+     * @param ship The ship to be placed.
+     * @param x    The X-coordinate of the specified location.
+     * @param y    The Y-coordinate of the specified location.
+     * @return Whether the ship can be placed at a certain location.
+     */
+    public boolean canPlaceShip(Ship ship, int x, int y, Board board) {
+        int length = ship.getTypeShip();
+
+
+        if (ship.orientation) {
+            startCoordinate = y;
+        } else {
+            startCoordinate = x;
+        }
+
+        for (int i = startCoordinate; i < startCoordinate + length; i++) {
+
+            if (ship.orientation) {
+                if (!inRange(x, i, board)) {
+                    return false;
+                }
+                startSquare = getSquare(x, i);
+            } else {
+                if (!inRange(i, y, board)) {
+                    return false;
+                }
+                startSquare = getSquare(i, y);
+            }
+
+            if (startSquare.ship != null) {
+                return false;
+            }
+
+            Square[] neighboursX = getNeighbourSquares(startSquare.getCoordinateX(),
+                    startSquare.getCoordinateY(), board);
+            for (int neighbourSquare = 0; neighbourSquare < neighboursX.length;
+                 neighbourSquare++) {
+
+                if (neighboursX[neighbourSquare].ship != null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * The placement of the ships by the user.
      *
      * @param ship Specified ship the user may place.
@@ -204,8 +287,8 @@ public class Board extends Parent {
      * @param y    The Y-coordinate where the user has placed the ship.
      * @return Whether the ship can be placed.
      */
-    public boolean placeShip(Ship ship, int x, int y) {
-        if (canPlaceShip(ship, x, y)) {
+    public boolean placeShip(Ship ship, int x, int y, Board board) {
+        if (canPlaceShip(ship, x, y, board)) {
             int length = ship.getTypeShip();
 
             if (ship.orientation) {
@@ -238,102 +321,13 @@ public class Board extends Parent {
         return false;
     }
 
-
-    /**
-     * Getting the square of the specified coordinates.
-     *
-     * @param x The X-Coordinate of the square.
-     * @param y The Y-Coordinate of the square.
-     * @return The square on the board corresponding to the specified coordinates.
-     */
-    public Square getSquare(int x, int y) {
-        return (Square) ((HBox) rows.getChildren().get(y)).getChildren().get(x);
-    }
-
-    /**
-     * The squares surrounding of a specific square.
-     *
-     * @param x The X-coordinate of the square.
-     * @param y The Y-coordinate of the square.
-     * @return List of squares around the specified square.
-     */
-    public Square[] getNeighbourSquares(double x, double y) {
-        Point2D[] points = new Point2D[]{
-            new Point2D(x - 1, y),
-            new Point2D(x + 1, y),
-            new Point2D(x, y - 1),
-            new Point2D(x, y + 1)
-        };
-
-        List<Square> neighbors = new ArrayList<Square>();
-
-
-        for (int p = 0; p < points.length; p++) {
-            if (isValidPoint(points[p])) {
-                neighbors.add(getSquare((int) points[p].getX(), (int) points[p].getY()));
-            }
-        }
-
-        return neighbors.toArray(new Square[0]);
-    }
-
-    /**
-     * Verifying whether ship can be placed at specified position.
-     *
-     * @param ship The ship to be placed.
-     * @param x    The X-coordinate of the specified location.
-     * @param y    The Y-coordinate of the specified location.
-     * @return Whether the ship can be placed at a certain location.
-     */
-    public boolean canPlaceShip(Ship ship, int x, int y) {
-        int length = ship.getTypeShip();
-
-        if (ship.orientation) {
-            startCoordinate = y;
-        } else {
-            startCoordinate = x;
-        }
-
-        for (int i = startCoordinate; i < startCoordinate + length; i++) {
-
-            if (ship.orientation) {
-                if (!inRange(x, i)) {
-                    return false;
-                }
-                startSquare = getSquare(x, i);
-            } else {
-                if (!inRange(i, y)) {
-                    return false;
-                }
-                startSquare = getSquare(i, y);
-            }
-
-            if (startSquare.ship != null) {
-                return false;
-            }
-
-            Square[] neighboursX = getNeighbourSquares(startSquare.getCoordinateX(),
-                    startSquare.getCoordinateY());
-            for (int neighbourSquare = 0; neighbourSquare < neighboursX.length;
-                 neighbourSquare++) {
-
-                if (neighboursX[neighbourSquare].ship != null) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     /**
      * Verifying the point is valid.
      *
      * @param point The point, location, the user wants to place the ship.
      * @return Whether the point is valid.
      */
-    public boolean isValidPoint(Point2D point) {
-        return inRange(point.getX(), point.getY());
-    }
+    public abstract boolean isValidPoint(Point2D point, Board board);
 
     /**
      * Verifying whether the specified point is lying inside the board.
@@ -342,7 +336,7 @@ public class Board extends Parent {
      * @param y The Y-Coordinate of the specified location.
      * @return Whether the specified point is within the boundaries of the board.
      */
-    public boolean inRange(double x, double y) {
-        return x >= 0 && x < 10 && y >= 0 && y < 10;
-    }
+    public abstract boolean inRange(int x, int y, Board board);
+
+    public abstract void createBoard();
 }
