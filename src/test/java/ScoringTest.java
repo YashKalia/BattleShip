@@ -31,7 +31,7 @@ class ScoringTest {
         boolean opponent = false;
         EventHandler<? super MouseEvent> handler = null;
         board = new Board(opponent, handler);
-        square = new Square(1,2,board);
+        square = new Square(1,5,board);
         battleship = "BattleShip";
         destroyer = "Destroyer";
         username = "pravesha";
@@ -111,7 +111,7 @@ class ScoringTest {
     }
 
     @Test
-    void scoreSystemSuccessfulBattleShipMissStrong() {
+    void scoreSystemSuccessfulBattleShipMiss() {
         board.setMisses(2);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -127,12 +127,12 @@ class ScoringTest {
     @Test
     void scoreSystemSuccessfulBattleShipMissWeak1() {
         board.setMisses(2);
-        testShipB.setTypeShip(1);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
+        Point2D testCoordinate = new Point2D(square.getCoordinateX(), 2);
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put(battleship, coordinate);
+        frontShip.put(battleship, testCoordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipB);
@@ -142,12 +142,12 @@ class ScoringTest {
     @Test
     void scoreSystemSuccessfulBattleShipMissWeak2() {
         board.setMisses(2);
-        testShipB.setTypeShip(2);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
+        Point2D testCoordinate = new Point2D(square.getCoordinateX(), 3);
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put(battleship, coordinate);
+        frontShip.put(battleship, testCoordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipB);
@@ -155,7 +155,7 @@ class ScoringTest {
     }
 
     @Test
-    void scoreSystemSuccessfulCarrierMiss() {
+    void scoreSystemSuccessfulCarrierMissWeak1() {
         board.setMisses(2);
         square.setShip(testShipC);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -166,6 +166,64 @@ class ScoringTest {
 
         int result = score.scoreSystem(coordinate, board, testShipC);
         assertEquals(result, 1500);
+    }
+
+    @Test
+    void scoreSystemSuccessfulCarrierMiss() {
+        board.setMisses(2);
+        square.setShip(testShipC);
+        Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
+        Point2D testCoordinate = new Point2D(square.getCoordinateX(), 0);
+
+        Map<String,Point2D> frontShip= new HashMap<>();
+        frontShip.put("Carrier", testCoordinate);
+        board.setFrontShip(frontShip);
+
+        int result = score.scoreSystem(coordinate, board, testShipC);
+        assertEquals(result, 2500);
+    }
+
+    @Test
+    void scoreSystemSuccessfulCarrierMissCoordinate2() {
+        board.setMisses(2);
+        square.setShip(testShipC);
+        Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
+        Point2D testCoordinate = new Point2D(square.getCoordinateX(), 2);
+
+        Map<String,Point2D> frontShip= new HashMap<>();
+        frontShip.put("Carrier", testCoordinate);
+        board.setFrontShip(frontShip);
+
+        int result = score.scoreSystem(coordinate, board, testShipC);
+        assertEquals(result, 2000);
+    }
+
+    @Test
+    void scoreSystemSuccessfulSubmarineMiss() {
+        board.setMisses(2);
+        square.setShip(testShipS);
+        Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
+
+        Map<String,Point2D> frontShip= new HashMap<>();
+        frontShip.put("Submarine", coordinate);
+        board.setFrontShip(frontShip);
+
+        int result = score.scoreSystem(coordinate, board, testShipS);
+        assertEquals(result, 1500);
+    }
+
+    @Test
+    void scoreSystemSuccessfulDestroyerMiss() {
+        board.setMisses(2);
+        square.setShip(testShipD);
+        Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
+
+        Map<String,Point2D> frontShip= new HashMap<>();
+        frontShip.put("Destroyer", coordinate);
+        board.setFrontShip(frontShip);
+
+        int result = score.scoreSystem(coordinate, board, testShipD);
+        assertEquals(result, 750);
     }
 
 }
