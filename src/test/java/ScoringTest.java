@@ -1,13 +1,12 @@
 import entity.User;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import javafx.geometry.Point2D;
 
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +24,8 @@ class ScoringTest {
     private transient Ship testShipS;
     private transient Ship testShipD;
     private transient Ship testIncorrectShip;
+    private transient String carrier;
+    private transient String cruiser;
 
     @BeforeEach
     public void setUpEnvironment() {
@@ -34,12 +35,14 @@ class ScoringTest {
         square = new Square(1,5,board);
         battleship = "BattleShip";
         destroyer = "Destroyer";
+        carrier = "Carrier";
+        cruiser = "Cruiser";
         username = "pravesha";
         password = "password";
         score = new Scoring();
         testShipB = new Ship(battleship, 4, true);
-        testShipC = new Ship("Carrier", 5, true);
-        testShipCr = new Ship("Cruiser", 3, true);
+        testShipC = new Ship(carrier, 5, true);
+        testShipCr = new Ship(cruiser, 3, true);
         testShipS = new Ship("Submarine", 2, true);
         testShipD = new Ship(destroyer, 2, true);
         testIncorrectShip = new Ship("Pravesha", 2, true);
@@ -161,7 +164,7 @@ class ScoringTest {
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put("Carrier", coordinate);
+        frontShip.put(carrier, coordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipC);
@@ -176,7 +179,7 @@ class ScoringTest {
         Point2D testCoordinate = new Point2D(square.getCoordinateX(), 0);
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put("Carrier", testCoordinate);
+        frontShip.put(carrier, testCoordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipC);
@@ -191,7 +194,7 @@ class ScoringTest {
         Point2D testCoordinate = new Point2D(square.getCoordinateX(), 2);
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put("Carrier", testCoordinate);
+        frontShip.put(carrier, testCoordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipC);
@@ -264,7 +267,7 @@ class ScoringTest {
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put("Cruiser", coordinate);
+        frontShip.put(cruiser, coordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipCr);
@@ -279,7 +282,7 @@ class ScoringTest {
         Point2D testCoordinate = new Point2D(square.getCoordinateX(), 4);
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put("Cruiser", testCoordinate);
+        frontShip.put(cruiser, testCoordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipCr);
@@ -294,7 +297,7 @@ class ScoringTest {
         Point2D testCoordinate = new Point2D(square.getCoordinateX(), 3);
 
         Map<String,Point2D> frontShip= new HashMap<>();
-        frontShip.put("Cruiser", testCoordinate);
+        frontShip.put(cruiser, testCoordinate);
         board.setFrontShip(frontShip);
 
         int result = score.scoreSystem(coordinate, board, testShipCr);
