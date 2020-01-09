@@ -3,6 +3,7 @@ package gui;
 import entity.Board;
 import entity.Ship;
 import entity.Square;
+import entity.StandardBoard;
 import entity.ships.BattleShip;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -114,7 +115,7 @@ public class HelloWorld extends Application {
     public static Parent setUp() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        opponentBoard = new Board(true, event -> {
+        opponentBoard = new StandardBoard(true, event -> {
             if (!inProgress) {
                 return;
             }
@@ -133,7 +134,7 @@ public class HelloWorld extends Application {
 
         });
 
-        playerBoard = new Board(false, event -> {
+        playerBoard = new StandardBoard(false, event -> {
             if (inProgress) {
                 return;
             }
@@ -144,10 +145,10 @@ public class HelloWorld extends Application {
 
             //TESTING PURPOSES
             Ship battleShipTest = new BattleShip(4, true);
-            opponentBoard.placeShip(battleShipTest,9,0);
+            opponentBoard.placeShip(battleShipTest,9,0, opponentBoard);
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
-                    square.coordinateY)) {
+                    square.coordinateY, playerBoard)) {
                 allShipsPlaced--;
                 if (allShipsPlaced < 0) {
                     startGame();

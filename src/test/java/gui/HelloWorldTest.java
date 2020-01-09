@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import entity.Board;
 
+import entity.StandardBoard;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ class HelloWorldTest {
     @Test
     public void opponentBoard() {
         EventHandler<? super MouseEvent> handler = null;
-        Board opponent = new Board(false, handler);
+        Board opponent = new StandardBoard(false, handler);
         helloWorld.setOpponentBoard(opponent);
         Board actual = helloWorld.getOpponentBoard();
         assertEquals(opponent, actual);
@@ -43,7 +44,7 @@ class HelloWorldTest {
     @Test
     public void playerBoard() {
         EventHandler<? super MouseEvent> handler = null;
-        Board player = new Board(true, handler);
+        Board player = new StandardBoard(true, handler);
         helloWorld.setPlayerBoard(player);
         Board actual = helloWorld.getPlayerBoard();
         assertEquals(player, actual);
