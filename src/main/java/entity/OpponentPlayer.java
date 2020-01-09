@@ -376,7 +376,7 @@ public class OpponentPlayer {
             int x = randomizer.nextInt(10);
             int y = randomizer.nextInt(10);
 
-            if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y)) {
+            if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y, opponentBoard)) {
                 allShipsPlaced--;
             }
             if (allShipsPlaced < 0) {
