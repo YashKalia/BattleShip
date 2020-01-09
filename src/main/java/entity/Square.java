@@ -170,7 +170,7 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!square.getBoard().inRange(x, y) || x == 0) {
+        if (!square.getBoard().inRange(x, y, getBoard()) || x == 0) {
             squareNotVisible = new Square(11, 11, square.getBoard());
             return squareNotVisible;
         } else {
@@ -197,7 +197,7 @@ public class Square extends Rectangle {
 
         final int nine = 9; //To avoid pmd error
 
-        if (!board.inRange(x, y) || x == nine) {
+        if (!board.inRange(x, y, getBoard()) || x == nine) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
@@ -220,7 +220,7 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!board.inRange(x, y) || y == 0) {
+        if (!board.inRange(x, y, getBoard()) || y == 0) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
@@ -246,7 +246,7 @@ public class Square extends Rectangle {
 
         final int nine = 9; //To avoid pmd error
 
-        if (!board.inRange(x, y) || y == nine) {
+        if (!board.inRange(x, y, getBoard()) || y == nine) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {

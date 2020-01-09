@@ -23,7 +23,7 @@ class SquareTest {
     public void setUpEnvironment() {
         boolean opponent = false;
         EventHandler<? super MouseEvent> handler = null;
-        board = new Board(opponent, handler);
+        board = new StandardBoard(opponent, handler);
         square = new Square(3, 4, board);
     }
 
@@ -168,7 +168,7 @@ class SquareTest {
     @Test
     public void setColorSquareLeft() {
         Ship carrier = new Carrier(3, true);
-        board.placeShip(carrier,3, 4);
+        board.placeShip(carrier,3, 4, board);
         Square leftSquare = new Square(3, 4, board);
         square.setSquareColorLeft(leftSquare);
         assertTrue(square.getSquareUp(leftSquare).isShooted());
@@ -178,7 +178,7 @@ class SquareTest {
     @Test
     public void setColorSquareRight() {
         Ship submarine = new Submarine(3, true);
-        board.placeShip(submarine,6, 7);
+        board.placeShip(submarine,6, 7, board);
         Square leftSquare = new Square(6, 7, board);
         square.setSquareColorRight(leftSquare);
         assertTrue(square.getSquareUp(leftSquare).isShooted());
@@ -188,7 +188,7 @@ class SquareTest {
     @Test
     public void setColorSquareUp() {
         Ship carrier = new Carrier(3, true);
-        board.placeShip(carrier,4, 2);
+        board.placeShip(carrier,4, 2, board);
         Square leftSquare = new Square(4, 2, board);
         square.setSquareColorUp(leftSquare);
         assertTrue(square.getSquareLeft(leftSquare).isShooted());
@@ -198,7 +198,7 @@ class SquareTest {
     @Test
     public void setColorSquareBelow() {
         Ship submarine = new Submarine(3, true);
-        board.placeShip(submarine,7, 3);
+        board.placeShip(submarine,7, 3, board);
         Square leftSquare = new Square(7, 3, board);
         square.setSquareColorBelow(leftSquare);
         assertTrue(square.getSquareLeft(leftSquare).isShooted());
