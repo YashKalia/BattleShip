@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class Connect {
@@ -206,6 +207,17 @@ public class Connect {
         }
     }
 
+
+    /**Whenever a user finishes a game their score is added to their list of scores.
+     *
+     * @return an ArrayList of users of the leaderboard.
+     * @throws SQLException if error occurs.
+     * @throws ClassNotFoundException if error occurs.
+     */
+    public static ArrayList<User> getLeaderboard() throws SQLException, ClassNotFoundException {
+        ArrayList<User> leaderboard = new ArrayList<>();
+        return leaderboard;
+    }
 
     //Need a method to check if the score being added is a high score or not.
 
