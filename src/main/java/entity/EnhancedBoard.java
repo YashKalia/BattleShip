@@ -6,7 +6,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class EnhancedBoard extends Board {
-    public transient EnhancedBoard board;
 
     /**
      * Creation of a board.

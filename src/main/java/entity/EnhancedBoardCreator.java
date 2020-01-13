@@ -18,23 +18,6 @@ public class EnhancedBoardCreator implements BoardCreator  {
     private static int allShipsPlaced = 4;
 
     /**
-     * Verifying whether the application is running.
-     * @return Whether the game is in progress.
-     */
-    public boolean isInProgress() {
-        return inProgress;
-    }
-
-    /**
-     * Setting whether the application is running.
-     * @param inProgress Whether the game is progress.
-     */
-    public void setInProgress(boolean inProgress) {
-        this.inProgress = inProgress;
-    }
-
-
-    /**
      * Creation of an Enhanced Board.
      * @return Parent root.
      */

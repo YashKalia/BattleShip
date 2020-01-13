@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
  * The squaresInGrid ArrayList is a list containing all squares in the grid.
  */
 public class StandardBoard extends Board  {
-    public transient StandardBoard board;
 
     /**
      * Creation of a board.
