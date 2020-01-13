@@ -12,13 +12,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static Stage mainStage;
 
-    public static void setStage(Stage pStage) {
-        mainStage = pStage;
+    public static void setStage(Stage stage) {
+        mainStage = stage;
     }
 
     public static Stage getStage() {
         return mainStage;
     }
+
     public static void main(String[] args) {
         launch(args);
     }

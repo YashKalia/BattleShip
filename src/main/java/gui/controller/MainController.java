@@ -1,10 +1,10 @@
 package gui.controller;
 
+import gui.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import gui.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +55,7 @@ public class MainController {
      * @throws IOException if error occurs.
      */
     @SuppressWarnings("deprecation")
-    public void close_Window(ActionEvent event){
+    public void close_Window(ActionEvent event) {
         Stage primaryStage = Main.getStage();
         primaryStage.close();
     }

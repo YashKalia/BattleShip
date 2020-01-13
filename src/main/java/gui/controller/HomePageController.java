@@ -2,15 +2,15 @@ package gui.controller;
 
 import gui.HelloWorld;
 import gui.Main;
+import java.io.File;
 import javafx.event.ActionEvent;
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import java.net.URL;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 public class HomePageController {
 
