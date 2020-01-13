@@ -15,7 +15,7 @@ public class Square extends Rectangle {
     public int coordinateY;
     public Ship ship = null;
     public boolean shooted = false;
-    private Board board;
+    public Board board;
     public Point2D coordinates = new Point2D(coordinateX, coordinateY);
     public Scoring objectScore = new Scoring();
 
