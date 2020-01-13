@@ -1,8 +1,9 @@
 package entity;
 
+import javafx.scene.Parent;
 
 public interface BoardCreator {
-    void createBord();
+    Parent createBord();
 
 }
 

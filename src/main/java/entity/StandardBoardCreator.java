@@ -1,18 +1,24 @@
 package entity;
 
-import entity.ships.BattleShip;
-
 import java.util.List;
 import java.util.Random;
 
-public class StandardBoardCreator implements BoardCreator  {
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
+public class StandardBoardCreator implements BoardCreator {
 
     protected static boolean inProgress = false;
     protected static Board opponentBoard;
-    protected static Board playerBoard ;
+    protected static Board playerBoard;
+    protected static Game game;
+    private static int allShipsPlaced = 4;
 
     /**
      * Verifying whether the application is running.
+     *
      * @return Whether the game is in progress.
      */
     public boolean isInProgress() {
@@ -21,6 +27,7 @@ public class StandardBoardCreator implements BoardCreator  {
 
     /**
      * Setting whether the application is running.
+     *
      * @param inProgress Whether the game is progress.
      */
     public void setInProgress(boolean inProgress) {
@@ -28,23 +35,29 @@ public class StandardBoardCreator implements BoardCreator  {
     }
 
 
-    public void createBord() {
-        opponentBoard = new StandardBoard(false,  event -> {
-            if (isInProgress()) {
+    /**
+     * Creation of an Standard Board.
+     * @return Parent root.
+     */
+    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
+    public Parent createBord() {
+        opponentBoard = new StandardBoard(true, event -> {
+            if (!inProgress) {
                 return;
             }
             Square square = (Square) event.getSource();
             if (square.shooted) {
                 return;
             }
-            opponentBoard.getGame().setOpponentTurn(!square.shoot());
+            game.opponentTurn = !square.shoot();
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
                 //System.exit(0);
             }
-            if (opponentBoard.getGame().isOpponentTurn()) {
-                opponentBoard.opponentPlayer.enemyShot(playerBoard, new Random());
+            if (game.opponentTurn) {
+                opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
             }
+
         });
 
         playerBoard = new StandardBoard(false, event -> {
@@ -56,11 +69,6 @@ public class StandardBoardCreator implements BoardCreator  {
 
             Square square = (Square) event.getSource();
 
-            //TESTING PURPOSES
-            Ship battleShipTest = new BattleShip(4, true);
-            opponentBoard.placeShip(battleShipTest,9,0, opponentBoard.getBoard());
-
-            int allShipsPlaced = 4;
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY, playerBoard.getBoard())) {
                 allShipsPlaced--;
@@ -70,6 +78,15 @@ public class StandardBoardCreator implements BoardCreator  {
             }
         });
 
+        VBox player = new VBox(playerBoard);
+        VBox opponent = new VBox(opponentBoard);
+        player.setAlignment(Pos.CENTER);
+        opponent.setAlignment(Pos.CENTER);
+        VBox vbox = new VBox(30, player, opponent);
+        BorderPane root = new BorderPane();
+        root.setCenter(vbox);
+
+        return root;
     }
 
     private static void startGame() {

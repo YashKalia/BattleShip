@@ -2,6 +2,7 @@ package entity;
 
 import gui.HelloWorld;
 
+import java.awt.font.GlyphMetrics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -65,7 +66,7 @@ public class OpponentPlayer {
      */
     public void enemyShot(Board playerBoard, Random randomizer) {
 
-        while (HelloWorld.opponentTurn) {
+        while (Game.opponentTurn) {
 
             if (!shotSquares.isEmpty()) {
                 enemyShotCoordinates(playerBoard, shotSquares.get(0).getCoordinateX(),
@@ -81,8 +82,8 @@ public class OpponentPlayer {
                 continue;
             }
 
-            HelloWorld.opponentTurn = square.shootEnemy();
-            if (HelloWorld.opponentTurn) {
+            Game.opponentTurn = square.shootEnemy();
+            if (Game.opponentTurn) {
                 shotSquares.add(square);
                 if (!square.getShip().isNotDestroyed()) {
                     shotSquares.clear();
@@ -109,7 +110,7 @@ public class OpponentPlayer {
      * @param y           coordinate of square location
      */
     public void enemyShotCoordinates(Board playerBoard, int x, int y, Random randomizer) {
-        while (HelloWorld.opponentTurn) {
+        while (Game.opponentTurn) {
 
             int random = randomizer.nextInt(4);
             switch (random) {
@@ -167,8 +168,8 @@ public class OpponentPlayer {
         }
         up = playerBoard.getSquare(x, y - 1);
 
-        HelloWorld.opponentTurn = up.shootEnemy();
-        if (HelloWorld.opponentTurn) {
+        Game.opponentTurn = up.shootEnemy();
+        if (Game.opponentTurn) {
             shotSquares.add(up);
             if (!up.getShip().isNotDestroyed()) {
                 counter = 0;
@@ -241,8 +242,8 @@ public class OpponentPlayer {
                     break;
             }
         }
-        HelloWorld.opponentTurn = left.shootEnemy();
-        if (HelloWorld.opponentTurn) {
+        Game.opponentTurn = left.shootEnemy();
+        if (Game.opponentTurn) {
             shotSquares.add(left);
             if (!left.getShip().isNotDestroyed()) {
                 counter = 0;
@@ -292,8 +293,8 @@ public class OpponentPlayer {
         }
         right = playerBoard.getSquare(x + 1, y);
 
-        HelloWorld.opponentTurn = right.shootEnemy();
-        if (HelloWorld.opponentTurn) {
+        Game.opponentTurn = right.shootEnemy();
+        if (Game.opponentTurn) {
             shotSquares.add(right);
             if (!right.getShip().isNotDestroyed()) {
                 counter = 0;
@@ -344,9 +345,9 @@ public class OpponentPlayer {
         }
         down = playerBoard.getSquare(x, y + 1);
 
-        HelloWorld.opponentTurn = down.shootEnemy();
+        Game.opponentTurn = down.shootEnemy();
 
-        if (HelloWorld.opponentTurn) {
+        if (Game.opponentTurn) {
             shotSquares.add(down);
             if (!down.getShip().isNotDestroyed()) {
                 counter = 0;

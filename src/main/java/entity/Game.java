@@ -2,14 +2,10 @@ package entity;
 
 public class Game {
     protected static boolean inProgress = false;
-    protected static BoardCreator opponentBoard;
-    protected static BoardCreator playerBoard;
+    protected static Board opponentBoard;
+    protected static Board playerBoard;
     private static int allShipsPlaced = 4;
     public static boolean opponentTurn = false;
-
-
-
-
 
     /**
      * Verifying whether the application is running.
@@ -31,7 +27,7 @@ public class Game {
      * Getting the board of the opponent.
      * @return The board of the opponent.
      */
-    public BoardCreator getOpponentBoard() {
+    public Board getOpponentBoard() {
         return opponentBoard;
     }
 
@@ -39,7 +35,7 @@ public class Game {
      * Setting the board of the opponent.
      * @param opponentBoard Specifying the board of the opponent.
      */
-    public void setOpponentBoard(BoardCreator opponentBoard) {
+    public void setOpponentBoard(Board opponentBoard) {
         this.opponentBoard = opponentBoard;
     }
 
@@ -47,7 +43,7 @@ public class Game {
      * Getting the board of the player.
      * @return The board of the player.
      */
-    public BoardCreator getPlayerBoard() {
+    public Board getPlayerBoard() {
         return playerBoard;
     }
 
@@ -55,7 +51,7 @@ public class Game {
      * Setting the board of the player.
      * @param playerBoard Specifying the board of the player.
      */
-    public void setPlayerBoard(BoardCreator playerBoard) {
+    public void setPlayerBoard(Board playerBoard) {
         this.playerBoard = playerBoard;
     }
 

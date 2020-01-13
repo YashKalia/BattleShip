@@ -3,10 +3,9 @@ package gui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import entity.Board;
-
-import entity.BoardCreator;
+import entity.Game;
 import entity.StandardBoard;
-import entity.StandardBoardCreator;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,11 +13,11 @@ import org.junit.jupiter.api.Test;
 
 class HelloWorldTest {
 
-    private transient HelloWorld helloWorld;
+    private transient Game helloWorld;
 
     @BeforeEach
     public void setUpEnvironment() {
-        helloWorld = new HelloWorld();
+        helloWorld = new Game();
     }
 
     @Test

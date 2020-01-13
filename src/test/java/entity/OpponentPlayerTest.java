@@ -23,7 +23,7 @@ import org.mockito.Mockito;
 public class OpponentPlayerTest {
     private transient OpponentPlayer opponentPlayer;
     private transient Board board;
-    private transient HelloWorld helloWorld;
+    private transient Game helloWorld;
     private transient Random random;
     private transient ArrayList<Square> alreadyShot;
     private transient Ship destroyer;
@@ -39,7 +39,7 @@ public class OpponentPlayerTest {
         boolean opponent = false;
         EventHandler<? super MouseEvent> handler = null;
         board = new StandardBoard(opponent, handler);
-        helloWorld = new HelloWorld();
+        helloWorld = new Game();
         alreadyShot = new ArrayList<>();
         Square square = new Square(6, 7, board);
         alreadyShot.add(square);
