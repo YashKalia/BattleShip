@@ -170,13 +170,13 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!square.getBoard().inRange(x, y, getBoard()) || x == 0) {
-            squareNotVisible = new Square(11, 11, square.getBoard());
+        if (!board.inRange(x, y, board) || x == 0) {
+            squareNotVisible = new Square(11, 11, board);
             return squareNotVisible;
         } else {
 
 
-            if (square.getBoard().isOpponent()) {
+            if (square.board.isOpponent()) {
                 return Board.squaresInGridOpponent.get(10 * y + x - 1);
             } else {
                 return Board.squaresInGrid.get(10 * y + x - 1);
@@ -197,11 +197,11 @@ public class Square extends Rectangle {
 
         final int nine = 9; //To avoid pmd error
 
-        if (!board.inRange(x, y, getBoard()) || x == nine) {
+        if (!board.inRange(x, y, board) || x == nine) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
-            if (square.getBoard().isOpponent()) {
+            if (square.board.isOpponent()) {
                 return Board.squaresInGridOpponent.get(10 * y + x + 1);
             } else {
                 return Board.squaresInGrid.get(10 * y + x + 1);
@@ -220,11 +220,11 @@ public class Square extends Rectangle {
         int y = square.getCoordinateY();
         Square squareNotVisible;
 
-        if (!board.inRange(x, y, getBoard()) || y == 0) {
+        if (!board.inRange(x, y, board) || y == 0) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
-            if (square.getBoard().isOpponent()) {
+            if (square.board.isOpponent()) {
                 return Board.squaresInGridOpponent.get(10 * (y - 1) + x);
             } else {
                 return Board.squaresInGrid.get(10 * (y - 1) + x);
@@ -246,12 +246,12 @@ public class Square extends Rectangle {
 
         final int nine = 9; //To avoid pmd error
 
-        if (!board.inRange(x, y, getBoard()) || y == nine) {
+        if (!board.inRange(x, y, board) || y == nine) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
 
-            if (square.getBoard().isOpponent()) {
+            if (square.board.isOpponent()) {
                 return Board.squaresInGridOpponent.get(10 * (y + 1) + x);
             } else {
                 return Board.squaresInGrid.get(10 * (y + 1) + x);

@@ -8,14 +8,6 @@ import javafx.scene.paint.Color;
 public class EnhancedBoard extends Board {
     public transient EnhancedBoard board;
 
-    public EnhancedBoard getBoard() {
-        return board;
-    }
-
-    public void setBoard(EnhancedBoard board) {
-        this.board = board;
-    }
-
     /**
      * Creation of a board.
      *
@@ -23,16 +15,8 @@ public class EnhancedBoard extends Board {
      * @param handler  Click of the mouse.
      */
     @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
-    public EnhancedBoard(Boolean opponent,
-                         EventHandler<? super MouseEvent> handler) {
-        super(opponent, handler);
-    }
-
-    /**
-     * Creating the specified board type.
-     */
-    public void createBoard() {
-        reshape(board);
+    public EnhancedBoard(boolean opponent, EventHandler<? super MouseEvent> handler) {
+        super(opponent,handler);
     }
 
     /**
@@ -53,7 +37,7 @@ public class EnhancedBoard extends Board {
      * @return Whether the specified point is within the boundaries of the board.
      */
     public boolean inRange(int x, int y, Board board) {
-        return x >= 0 && x < 10 && y >= 0 && y < 10 && !faded(board.getSquare(x, y));
+        return x >= 0 && x < 10 && y >= 0 && y < 10 && !faded(board.getBoard().getSquare(x, y));
     }
 
     /**
@@ -61,16 +45,16 @@ public class EnhancedBoard extends Board {
      * @param board Board with new shape.
      */
     public void reshape(Board board) {
-        board.getSquare(3, 0).setFill(Color.WHITE);
-        board.getSquare(3, 1).setFill(Color.WHITE);
-        board.getSquare(4, 0).setFill(Color.WHITE);
-        board.getSquare(4, 1).setFill(Color.WHITE);
-        board.getSquare(4, 2).setFill(Color.WHITE);
-        board.getSquare(5, 0).setFill(Color.WHITE);
-        board.getSquare(5, 1).setFill(Color.WHITE);
-        board.getSquare(5, 2).setFill(Color.WHITE);
-        board.getSquare(6, 0).setFill(Color.WHITE);
-        board.getSquare(6, 1).setFill(Color.WHITE);
+        board.getBoard().getSquare(3, 0).setFill(Color.WHITE);
+        board.getBoard().getSquare(3, 1).setFill(Color.WHITE);
+        board.getBoard().getSquare(4, 0).setFill(Color.WHITE);
+        board.getBoard().getSquare(4, 1).setFill(Color.WHITE);
+        board.getBoard().getSquare(4, 2).setFill(Color.WHITE);
+        board.getBoard().getSquare(5, 0).setFill(Color.WHITE);
+        board.getBoard().getSquare(5, 1).setFill(Color.WHITE);
+        board.getBoard().getSquare(5, 2).setFill(Color.WHITE);
+        board.getBoard().getSquare(6, 0).setFill(Color.WHITE);
+        board.getBoard().getSquare(6, 1).setFill(Color.WHITE);
     }
 
     /**

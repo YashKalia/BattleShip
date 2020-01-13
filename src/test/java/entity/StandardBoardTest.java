@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 class StandardBoardTest {
 
-    private transient StandardBoard board;
+    private transient Board board;
 
 
     @BeforeEach

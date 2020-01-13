@@ -33,6 +33,8 @@ public abstract class Board extends Parent {
     public static List<Ship> shipList = new ArrayList<>();
     public transient int startCoordinate = -1;
     public transient Square startSquare = null;
+    public Game game;
+    public Board board;
 
     /**
      * Creation of a board.
@@ -41,11 +43,12 @@ public abstract class Board extends Parent {
      * @param handler  Click of the mouse.
      */
     public Board(boolean opponent, EventHandler<? super MouseEvent> handler) {
+        setBoard(board);
         this.opponent = opponent;
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
-                Square s = new Square(x, y, this);
+                Square s = new Square(x, y, board);
 
                 if (opponent) {
                     squaresInGridOpponent.add(s);
@@ -169,6 +172,22 @@ public abstract class Board extends Parent {
      */
     public void setFrontShip(Map<String, Point2D> frontShip) {
         this.frontShip = frontShip;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     /**
@@ -338,5 +357,4 @@ public abstract class Board extends Parent {
      */
     public abstract boolean inRange(int x, int y, Board board);
 
-    public abstract void createBoard();
 }

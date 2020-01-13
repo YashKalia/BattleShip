@@ -12,29 +12,14 @@ import javafx.scene.input.MouseEvent;
 public class StandardBoard extends Board  {
     public transient StandardBoard board;
 
-    public StandardBoard getBoard() {
-        return board;
-    }
-
-    public void setBoard(StandardBoard board) {
-        this.board = board;
-    }
-
     /**
      * Creation of a board.
      *
      * @param opponent Presence of an opponent.
      * @param handler  Click of the mouse.
      */
-    public StandardBoard(boolean opponent, EventHandler<? super MouseEvent> handler) {
+    public StandardBoard(boolean opponent,EventHandler<? super MouseEvent> handler) {
         super(opponent, handler);
-    }
-
-    /**
-     * Creating the specified board type.
-     */
-    public void createBoard() {
-
     }
 
     /**
