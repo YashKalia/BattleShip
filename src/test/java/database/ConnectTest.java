@@ -1,6 +1,5 @@
 //package database;
 //
-<<<<<<< HEAD
 //import database.Connect;
 //import entity.User;
 //import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,6 @@
 //
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //
-=======
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //
 //import entity.User;
@@ -21,7 +19,6 @@
 //import org.junit.jupiter.api.Test;
 //
 //import org.mockito.Mockito;
->>>>>>> 8e3824e8cd401b843164f410d7b27c811e622156
 //
 //public class ConnectTest {
 //
