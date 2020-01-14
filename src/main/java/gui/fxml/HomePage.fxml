@@ -7,28 +7,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.controller.HomePageController">
+<?import java.net.URL?>
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.controller.HomePageController">
   <children>
-    <Label layoutX="182.0" layoutY="59.0" prefHeight="35.0" prefWidth="270.0" text="Welcome to Naval Battle" textFill="#0029ff">
-      <font>
-        <Font name="Arial Bold" size="20.0" />
-      </font>
-    </Label>
-    <Button layoutX="102.0" layoutY="154.0" mnemonicParsing="false" onAction="#startGame" prefHeight="35.0" prefWidth="159.0" text="Start a new game.">
-      <font>
-        <Font name="System Bold" size="14.0" />
-      </font>
-    </Button>
-    <Button layoutX="355.0" layoutY="154.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="168.0" text="Get Top 5 Highscores.">
-      <font>
-        <Font name="System Bold" size="12.0" fx:id="x1" />
-      </font>
-    </Button>
-    <Button font="$x1" layoutX="355.0" layoutY="238.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="168.0" text="Get your high score" />
-    <Button layoutX="103.0" layoutY="240.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="159.0" text="How to Play">
-      <font>
-        <Font name="Arial Bold" size="14.0" />
-      </font>
-    </Button>
+    <Label layoutX="200.0" layoutY="36.0" prefHeight="56.0" prefWidth="327.0" id="main_title" text="Naval Battle" />
+    <Label layoutX="202.0" layoutY="65.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Welcome, $NAME. Please continue." />
+
+    <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" id="green_button" onAction="#startGame" prefWidth="200.0" text="New Game"/>
+    <Button layoutX="200.0" layoutY="180.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Tutorial"/>
+    <Button layoutX="200.0" layoutY="225.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Highscores"/>
+    <Button layoutX="200.0" layoutY="270.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="My scores"/>
+    <Button layoutX="200.0" layoutY="315.0" mnemonicParsing="false" id="grey_button" onAction="#show_main_screen" prefWidth="200.0" text="Logout"/>
   </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
 </AnchorPane>
