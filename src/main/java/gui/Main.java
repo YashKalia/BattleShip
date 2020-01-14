@@ -27,7 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         setStage(primaryStage);
-        primaryStage.setTitle("Navel Battle");
+        primaryStage.setTitle("Naval Battle");
 
         File file = new File("src/main/java/gui/fxml/MainFXML.fxml");
         URL url = file.toURI().toURL();

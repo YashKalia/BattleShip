@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.controller.HomePageController">
   <children>
     <Label layoutX="200.0" layoutY="36.0" prefHeight="56.0" prefWidth="327.0" id="main_title" text="Naval Battle" />
-    <Label layoutX="202.0" layoutY="65.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Welcome, $NAME. Please continue." />
+    <Label layoutX="202.0" layoutY="65.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Welcome, Tom Cruise. Please continue." />
 
     <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" id="green_button" onAction="#startGame" prefWidth="200.0" text="New Game"/>
     <Button layoutX="200.0" layoutY="180.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Tutorial"/>
