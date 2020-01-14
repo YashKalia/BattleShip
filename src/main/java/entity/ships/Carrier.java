@@ -1,7 +1,5 @@
 package entity.ships;
 
-import entity.Ship;
-
 public class Carrier extends Ship {
 
     /**
@@ -10,8 +8,8 @@ public class Carrier extends Ship {
      * @param typeShip    The number of squares the Carrier occupies is 5.
      * @param orientation The orientation of the ship.
      */
-    public Carrier(int typeShip, boolean orientation) {
-        super(5, orientation);
+    public Carrier(String shipName, int typeShip, boolean orientation) {
+        super("Carrier", 5, orientation);
     }
 
     /**

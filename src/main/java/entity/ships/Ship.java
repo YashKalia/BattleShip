@@ -1,7 +1,7 @@
-package entity;
+package entity.ships;
 
 /**
- * Class entity.Ship.
+ * Class entity.ships.Ship.
  */
 public abstract class Ship  {
     public boolean orientation = false;
@@ -54,7 +54,7 @@ public abstract class Ship  {
      * @param typeShip The number of squares the ship occupies.
      * @param orientation The orientation of the ship.
      */
-    public Ship(int typeShip, boolean orientation) {
+    public Ship(String shipName, int typeShip, boolean orientation) {
         this.orientation = orientation;
         damage = typeShip;
     }

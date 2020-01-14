@@ -2,8 +2,8 @@ package gui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import entity.board.Board;
 import entity.Game;
+import entity.board.Board;
 import entity.board.StandardBoard;
 
 import javafx.event.EventHandler;

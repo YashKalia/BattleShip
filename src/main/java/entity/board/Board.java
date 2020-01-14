@@ -2,7 +2,7 @@ package entity.board;
 
 import entity.Game;
 import entity.OpponentPlayer;
-import entity.Ship;
+import entity.ships.Ship;
 import entity.Square;
 import entity.ships.BattleShip;
 import entity.ships.Carrier;
@@ -195,15 +195,15 @@ public abstract class Board extends Parent {
      * @return list with ships.
      */
     public static List<Ship> makeListWithShips() {
-        Ship carrier = new Carrier(5, true);
+        Ship carrier = new Carrier("Carrier", 5, true);
         shipList.add(carrier);
-        Ship battleShip = new BattleShip(4, true);
+        Ship battleShip = new BattleShip("BattleShip", 4, true);
         shipList.add(battleShip);
-        Ship cruiser = new Cruiser(3, true);
+        Ship cruiser = new Cruiser("Cruiser", 3, true);
         shipList.add(cruiser);
-        Ship submarine = new Submarine(3, true);
+        Ship submarine = new Submarine("Submarine", 3, true);
         shipList.add(submarine);
-        Ship destroyer = new Destroyer(2, true);
+        Ship destroyer = new Destroyer("Destroyer", 2, true);
         shipList.add(destroyer);
 
         return shipList;

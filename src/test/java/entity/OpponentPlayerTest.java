@@ -9,6 +9,7 @@ import entity.board.Board;
 import entity.board.StandardBoard;
 import entity.ships.Destroyer;
 import entity.ships.Mini;
+import entity.ships.Ship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,8 @@ public class OpponentPlayerTest {
         opponentPlayer.setShotSquares(alreadyShot);
         random = Mockito.mock(Random.class);
         mockedBoard = Mockito.mock(Board.class);
-        destroyer = new Destroyer(2, true);
-        mini = new Mini(1, true);
+        destroyer = new Destroyer("Destroyer", 2, true);
+        mini = new Mini("Mini", 1, true);
 
     }
 

@@ -1,7 +1,5 @@
 package entity.ships;
 
-import entity.Ship;
-
 /**
  * This type of ship is added for testing purpose.
  */
@@ -13,8 +11,8 @@ public class Mini extends Ship {
      * @param typeShip    The number of squares the Destroyer occupies is 2.
      * @param orientation The orientation of the ship.
      */
-    public Mini(int typeShip, boolean orientation) {
-        super(1, orientation);
+    public Mini(String shipName, int typeShip, boolean orientation) {
+        super("Mini", 1, orientation);
     }
 
     /**

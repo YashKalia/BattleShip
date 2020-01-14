@@ -1,6 +1,7 @@
 package entity;
 
 import entity.board.Board;
+import entity.ships.Ship;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,6 +6,7 @@ import entity.board.Board;
 import entity.board.StandardBoard;
 import entity.ships.BattleShip;
 import entity.ships.Destroyer;
+import entity.ships.Ship;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,8 @@ import org.junit.jupiter.api.Test;
 class StandardBoardTest {
 
     private transient Board board;
+    private transient String battleship = "BattleShip";
+    private transient String destroyer = "Destroyer";
 
 
     @BeforeEach
@@ -111,87 +114,87 @@ class StandardBoardTest {
 
     @Test
     public void canPlaceShipVertical_InsideBoard() {
-        Ship ship = new BattleShip(4, false);
+        Ship ship = new BattleShip(battleship, 4, false);
         boolean actual = board.canPlaceShip(ship, 4, 5, board);
         assertEquals(true, actual);
     }
 
     @Test
     public void canNotPlaceShipVertical_OutsideBoard() {
-        Ship ship = new BattleShip(4, false);
+        Ship ship = new BattleShip(battleship, 4, false);
         boolean actual = board.canPlaceShip(ship, 5, 11, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canNotPlaceShipVertical_OutsideBoardPartially() {
-        Ship ship = new BattleShip(4, false);
+        Ship ship = new BattleShip(battleship, 4, false);
         boolean actual = board.canPlaceShip(ship, 7, 1, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canNotPlaceShipVertical_AlreadyOccupied() {
-        Ship placedShip = new Destroyer(2, true);
+        Ship placedShip = new Destroyer(destroyer, 2, true);
         board.placeShip(placedShip, 4, 1, board);
-        Ship ship = new BattleShip(4, false);
+        Ship ship = new BattleShip(battleship, 4, false);
         boolean actual = board.canPlaceShip(ship, 4, 1, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canNotPlaceShipVertical_Neighbour() {
-        Ship neighbour = new Destroyer(2, true);
+        Ship neighbour = new Destroyer(destroyer, 2, true);
         board.placeShip(neighbour, 4, 2, board);
-        Ship ship = new BattleShip(4, false);
+        Ship ship = new BattleShip(battleship, 4, false);
         boolean actual = board.canPlaceShip(ship, 4, 1, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canPlaceShipHorizontal_InsideBoard() {
-        Ship ship = new BattleShip(4, true);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.canPlaceShip(ship, 4, 5, board);
         assertEquals(true, actual);
     }
 
     @Test
     public void canNotPlaceShipHorizontal_OutsideBoard() {
-        Ship ship = new BattleShip(4, true);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.canPlaceShip(ship, 11, 5, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canNotPlaceShipHorizontal_OutsideBoardPartially() {
-        Ship ship = new BattleShip(4, true);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.canPlaceShip(ship, 1, 7, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canNotPlaceShipHorizontal_AlreadyOccupied() {
-        Ship placedShip = new Destroyer(2, false);
+        Ship placedShip = new Destroyer(destroyer, 2, false);
         board.placeShip(placedShip, 4, 1, board);
-        Ship ship = new BattleShip(4, true);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.canPlaceShip(ship, 4, 1, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void canNotPlaceShipHorizontal_Neighbour() {
-        Ship neighbour = new Destroyer(2, false);
+        Ship neighbour = new Destroyer(destroyer, 2, false);
         board.placeShip(neighbour, 4, 2, board);
-        Ship ship = new BattleShip(4, true);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.canPlaceShip(ship, 4, 1, board);
         assertEquals(false, actual);
     }
 
     @Test
     public void notPlaceShip_Neighbour() {
-        Ship neighbour = new Destroyer(2, true);
+        Ship neighbour = new Destroyer(destroyer, 2, true);
         board.placeShip(neighbour, 1, 1, board);
-        Ship ship = new BattleShip(4, true);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.placeShip(ship, 1, 2, board);
         assertEquals(false, actual);
     }

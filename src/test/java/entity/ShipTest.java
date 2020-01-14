@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import entity.ships.BattleShip;
 import entity.ships.Carrier;
 import entity.ships.Destroyer;
+import entity.ships.Ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,9 @@ class ShipTest {
 
     @BeforeEach
     public void setUpEnvironment() {
-        destroyer = new Destroyer(2, true);
-        battleship = new BattleShip(4, true);
-        carrier = new Carrier(5, false);
+        destroyer = new Destroyer("Destroyer", 2, true);
+        battleship = new BattleShip("BattleShip", 4, true);
+        carrier = new Carrier("Carrier", 5, false);
 
     }
 
