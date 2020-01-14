@@ -2,10 +2,12 @@ package gui.controller;
 
 import database.Connect;
 import entity.User;
+import gui.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +47,7 @@ public class RegisterController {
                 new User(fieldusername.getText(), fieldpassword.getText()));
         if (response.equals("Registration successful.")) {
             result.setText("Registration successful.");
-            Stage primaryStage = new Stage();
+            Stage primaryStage = Main.getStage();
             URL url = new File("src/main/java/gui/fxml/HomePage.fxml").toURL();
             Parent root = FXMLLoader.load(url);
             Scene scene = new Scene(root);
@@ -56,6 +58,22 @@ public class RegisterController {
         } else {
             result.setText("User already exists,please log in.");
         }
+    }
+
+    /**Display the home screen.
+     *
+     * @param event When user click on back option.
+     * @throws IOException if error occurs.
+     */
+    @SuppressWarnings("deprecation")
+    public void show_main_screen(ActionEvent event) throws IOException {
+        Stage primaryStage = Main.getStage();
+
+        URL url = new File("src/main/java/gui/fxml/MainFXML.fxml").toURL();
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        primaryStage.setScene(scene);
     }
 
 
