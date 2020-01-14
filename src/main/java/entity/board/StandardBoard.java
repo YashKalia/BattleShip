@@ -1,15 +1,15 @@
-package entity;
+package entity.board;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 
 /**
- * Class entity.Board, representing the entire grid of the board.
+ * Class entity.board.Board, representing the entire grid of the board.
  * The board consists of squares.
  * The squaresInGrid ArrayList is a list containing all squares in the grid.
  */
-public class StandardBoard extends Board  {
+public class StandardBoard extends Board {
 
     /**
      * Creation of a board.

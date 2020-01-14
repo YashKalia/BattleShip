@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import entity.board.Board;
+import entity.board.StandardBoard;
 import entity.ships.Destroyer;
 import entity.ships.Mini;
-import gui.HelloWorld;
 
 import java.util.ArrayList;
 import java.util.List;

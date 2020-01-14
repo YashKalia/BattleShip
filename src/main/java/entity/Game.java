@@ -1,5 +1,7 @@
 package entity;
 
+import entity.board.Board;
+
 public class Game {
     protected static boolean inProgress = false;
     protected static Board opponentBoard;

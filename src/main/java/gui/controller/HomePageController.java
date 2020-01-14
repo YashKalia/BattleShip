@@ -1,8 +1,6 @@
 package gui.controller;
 
-import entity.BoardCreator;
-import entity.Game;
-import gui.HelloWorld;
+import entity.board.BoardCreator;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

@@ -1,5 +1,9 @@
-package entity;
+package entity.board;
 
+import entity.Game;
+import entity.OpponentPlayer;
+import entity.Ship;
+import entity.Square;
 import entity.ships.BattleShip;
 import entity.ships.Carrier;
 import entity.ships.Cruiser;

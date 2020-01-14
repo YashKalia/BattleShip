@@ -1,8 +1,8 @@
 package gui;
 
-import entity.BoardCreator;
+import entity.board.BoardCreator;
 import entity.Game;
-import entity.StandardBoardCreator;
+import entity.board.StandardBoardCreator;
 
 import javafx.application.Application;
 import javafx.scene.Parent;

@@ -1,8 +1,7 @@
 package entity;
 
-import gui.HelloWorld;
+import entity.board.Board;
 
-import java.awt.font.GlyphMetrics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

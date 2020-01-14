@@ -1,4 +1,6 @@
-package entity;
+package entity.board;
+
+import entity.Square;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;

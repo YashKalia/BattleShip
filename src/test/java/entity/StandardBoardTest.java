@@ -2,6 +2,8 @@ package entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import entity.board.Board;
+import entity.board.StandardBoard;
 import entity.ships.BattleShip;
 import entity.ships.Destroyer;
 import javafx.event.EventHandler;
