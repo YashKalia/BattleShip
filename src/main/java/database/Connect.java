@@ -216,6 +216,13 @@ public class Connect {
      */
     public static ArrayList<User> getLeaderboard() throws SQLException, ClassNotFoundException {
         ArrayList<User> leaderboard = new ArrayList<>();
+        Class.forName(driver);
+        connection5 = DriverManager.getConnection(url4, username, password);
+        ps6 = connection5.createStatement();
+        rs3 = ps6.executeQuery("select highscore from"
+                + " projects_BattleShip.User"
+                + " order by highscore desc limit 5;");
+        //return rs3;
         return leaderboard;
     }
 

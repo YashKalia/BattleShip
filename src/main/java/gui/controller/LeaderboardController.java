@@ -1,11 +1,10 @@
 package gui.controller;
 
 import database.Connect;
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.SQLException;
 
 public class LeaderboardController {
 
@@ -18,7 +17,7 @@ public class LeaderboardController {
     /**
      * Get leaders and populate the leaderboard.
      */
-    private void getLeaders() throws SQLException, ClassNotFoundException{
+    private void getLeaders() throws SQLException, ClassNotFoundException {
         Connect.getLeaderboard();
 //        username.setCellValueFactory(new PropertyValueFactory("name"));
 //        score.setCellValueFactory(new PropertyValueFactory("score"));
