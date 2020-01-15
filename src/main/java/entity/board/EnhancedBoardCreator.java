@@ -1,11 +1,12 @@
 package entity.board;
 
+import entity.Game;
+import entity.Square;
+import entity.ships.Ship;
+
 import java.util.List;
 import java.util.Random;
 
-import entity.Game;
-import entity.ships.Ship;
-import entity.Square;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
