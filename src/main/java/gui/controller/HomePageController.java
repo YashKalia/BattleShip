@@ -1,11 +1,14 @@
 package gui.controller;
 
+import database.Connect;
 import entity.board.BoardCreator;
 import javafx.event.ActionEvent;
 import gui.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,7 +52,7 @@ public class HomePageController {
      * @throws IOException if error occurs.
      */
     @SuppressWarnings("deprecation")
-    public void show_Leaderboard(ActionEvent event) throws IOException {
+    public void show_Leaderboard(ActionEvent event) throws IOException, ClassNotFoundException, SQLException {
         Stage primaryStage = new Stage();
         URL url = new File("src/main/java/gui/fxml/Leaderboard.fxml").toURL();
         Parent root = FXMLLoader.load(url);

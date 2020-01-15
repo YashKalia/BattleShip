@@ -14,8 +14,6 @@
 
         <Button layoutX="200.0" layoutY="360.0" mnemonicParsing="false" id="grey_button" onAction="#show_home_page" prefWidth="200.0" text="Back"/>
         <Button layoutX="200.0" layoutY="315.0" mnemonicParsing="false" id="grey_button" onAction="#show_main_screen" prefWidth="200.0" text="Logout"/>
-
-    </children>
     <TableView fx:id="tableView" depthTest="DISABLE" layoutX="180.0" prefHeight="400.0" prefWidth="300.0"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
         <columns>
             <TableColumn fx:id="username" editable="false" prefWidth="160.0" sortable="false" text="Name" />
@@ -25,6 +23,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
+    </children>
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>

@@ -127,9 +127,9 @@ public class Connect {
         Class.forName(driver);
         connection5 = DriverManager.getConnection(url4, username, password);
         ps6 = connection5.createStatement();
-        rs3 = ps6.executeQuery("select highscore from"
-                + " projects_BattleShip.User"
-                + " order by highscore desc limit 5;");
+        rs3 = ps6.executeQuery("select scores from"
+                + " projects_BattleShip.Score"
+                + " order by scores desc limit 5;");
         ResultSetMetaData rsm3R = rs3.getMetaData();
         int rs3Count = rsm3R.getColumnCount();
 

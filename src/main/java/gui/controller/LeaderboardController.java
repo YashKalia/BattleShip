@@ -6,9 +6,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import gui.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,9 +66,9 @@ public class LeaderboardController {
     /**
      * Get leaders and populate the leaderboard.
      */
-    private void getLeaders() throws SQLException, ClassNotFoundException {
-        ArrayList result = Connect.getTopFive();
-        System.out.println(result);
+    private void getLeaders(ActionEvent event) throws SQLException, ClassNotFoundException {
+        ObservableList listTopFive = FXCollections.observableArrayList(Connect.getTopFive());
+        tableView.setItems(listTopFive);
 
         username.setCellValueFactory(new PropertyValueFactory("name"));
         score.setCellValueFactory(new PropertyValueFactory("score"));
