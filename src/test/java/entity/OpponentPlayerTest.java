@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-import gui.HelloWorld;
+import entity.board.Board;
+import entity.board.StandardBoard;
+import entity.ships.Destroyer;
+import entity.ships.Mini;
+import entity.ships.Ship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +25,7 @@ import org.mockito.Mockito;
 public class OpponentPlayerTest {
     private transient OpponentPlayer opponentPlayer;
     private transient Board board;
-    private transient HelloWorld helloWorld;
+    private transient Game helloWorld;
     private transient Random random;
     private transient ArrayList<Square> alreadyShot;
     private transient Ship destroyer;
@@ -36,8 +40,8 @@ public class OpponentPlayerTest {
         opponentPlayer = new OpponentPlayer();
         boolean opponent = false;
         EventHandler<? super MouseEvent> handler = null;
-        board = new Board(opponent, handler);
-        helloWorld = new HelloWorld();
+        board = new StandardBoard(opponent, handler);
+        helloWorld = new Game();
         alreadyShot = new ArrayList<>();
         Square square = new Square(6, 7, board);
         alreadyShot.add(square);
@@ -45,8 +49,8 @@ public class OpponentPlayerTest {
         opponentPlayer.setShotSquares(alreadyShot);
         random = Mockito.mock(Random.class);
         mockedBoard = Mockito.mock(Board.class);
-        destroyer = new Ship("Destroyer", 2, true);
-        mini = new Ship("Mini", 1, true);
+        destroyer = new Destroyer("Destroyer", 2, true);
+        mini = new Mini("Mini", 1, true);
 
     }
 
@@ -155,7 +159,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootRight_PartOfShip() {
-        board.placeShip(destroyer, 7, 7);
+        board.placeShip(destroyer, 7, 7, board);
         when(random.nextInt(4)).thenReturn(0);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square right = opponentPlayer.getRight();
@@ -171,7 +175,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootRight_WholeShip() {
-        board.placeShip(mini, 7, 7);
+        board.placeShip(mini, 7, 7, board);
         when(random.nextInt(4)).thenReturn(0);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square right = opponentPlayer.getRight();
@@ -191,7 +195,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootLeft_PartOfShip() {
-        board.placeShip(destroyer, 5, 7);
+        board.placeShip(destroyer, 5, 7, board);
         when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square left = opponentPlayer.getLeft();
@@ -207,7 +211,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootLeft_WholeShip() {
-        board.placeShip(mini, 5, 7);
+        board.placeShip(mini, 5, 7, board);
         when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square left = opponentPlayer.getLeft();
@@ -227,7 +231,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootDown_PartOfShip() {
-        board.placeShip(destroyer, 6, 8);
+        board.placeShip(destroyer, 6, 8, board);
         when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square down = opponentPlayer.getDown();
@@ -243,7 +247,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootDown_WholeShip() {
-        board.placeShip(mini, 6, 8);
+        board.placeShip(mini, 6, 8, board);
         when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square down = opponentPlayer.getDown();
@@ -263,7 +267,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootUp_PartOfShip() {
-        board.placeShip(destroyer, 6, 6);
+        board.placeShip(destroyer, 6, 6, board);
         when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square up = opponentPlayer.getUp();
@@ -279,7 +283,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootUp_WholeShip() {
-        board.placeShip(mini, 6, 6);
+        board.placeShip(mini, 6, 6, board);
         when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square up = opponentPlayer.getUp();
