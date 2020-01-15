@@ -2,12 +2,12 @@ package entity.board;
 
 import entity.Game;
 import entity.OpponentPlayer;
-import entity.ships.Ship;
 import entity.Square;
 import entity.ships.BattleShip;
 import entity.ships.Carrier;
 import entity.ships.Cruiser;
 import entity.ships.Destroyer;
+import entity.ships.Ship;
 import entity.ships.Submarine;
 
 import java.util.ArrayList;
