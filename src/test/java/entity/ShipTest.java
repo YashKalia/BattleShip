@@ -2,87 +2,84 @@ package entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import entity.ships.BattleShip;
+import entity.ships.Carrier;
+import entity.ships.Destroyer;
+import entity.ships.Ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShipTest {
 
-    private transient Ship ship;
+    private transient Ship destroyer;
+    private transient Ship battleship;
+    private transient Ship carrier;
+
 
     @BeforeEach
     public void setUpEnvironment() {
-        ship = new Ship("BattleShip", 4, true);
+        destroyer = new Destroyer("Destroyer", 2, true);
+        battleship = new BattleShip("BattleShip", 4, true);
+        carrier = new Carrier("Carrier", 5, false);
+
     }
+
 
     @Test
     public void getshipName() {
-        String actual = ship.getShipName();
-        assertEquals("BattleShip", actual);
-    }
-
-    @Test
-    public void setshipName() {
-        ship.setShipName("Carrier");
-        String actual = ship.getShipName();
-        assertEquals("Carrier", actual);
+        String actual = destroyer.getShipName();
+        assertEquals("Destroyer", actual);
     }
 
     @Test
     public void getShipType() {
-        int actual = ship.getTypeShip();
-        assertEquals(4, actual);
-    }
-
-    @Test
-    public void setShipType() {
-        ship.setTypeShip(2);
-        int actual = ship.getTypeShip();
+        int actual = destroyer.getTypeShip();
         assertEquals(2, actual);
     }
 
     @Test
     public void getOrientation() {
-        boolean actual = ship.isOrientation();
+        boolean actual = destroyer.isOrientation();
         assertEquals(true, actual);
     }
 
     @Test
     public void setOrientation() {
-        ship.setOrientation(false);
-        boolean actual = ship.isOrientation();
+        destroyer.setOrientation(false);
+        boolean actual = destroyer.isOrientation();
         assertEquals(false, actual);
     }
 
     @Test
     public void getDamage() {
-        int actual = ship.getDamage();
-        assertEquals(ship.getTypeShip(), actual);
+        int actual = destroyer.getDamage();
+        assertEquals(destroyer.getTypeShip(), actual);
     }
 
     @Test
     public void setDamage() {
-        ship.setDamage(5);
-        int actual = ship.getDamage();
+        destroyer.setDamage(5);
+        int actual = destroyer.getDamage();
         assertEquals(5, actual);
     }
 
     @Test
     public void shot() {
-        ship.shot();
-        int actual = ship.getDamage();
-        assertEquals(3, actual);
+        destroyer.shot();
+        int actual = destroyer.getDamage();
+        assertEquals(1, actual);
     }
 
     @Test
     public void shipDestroyed() {
-        ship.setDamage(1);
-        assertEquals(true, ship.isNotDestroyed());
+        destroyer.setDamage(1);
+        assertEquals(true, destroyer.isNotDestroyed());
     }
 
     @Test
     public void shipIsDestroyed() {
-        ship.setDamage(0);
-        assertEquals(false, ship.isNotDestroyed());
+        destroyer.setDamage(0);
+        assertEquals(false, destroyer.isNotDestroyed());
     }
 
 
