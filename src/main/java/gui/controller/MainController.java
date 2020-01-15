@@ -55,9 +55,9 @@ public class MainController {
      * @throws IOException if error occurs.
      */
     @SuppressWarnings("deprecation")
-    public void close_Window(ActionEvent event){
+    public void close_Window(ActionEvent event) {
         Stage primaryStage = Main.getStage();
         primaryStage.close();
-        }
+    }
 
 }

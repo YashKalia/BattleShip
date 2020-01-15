@@ -1,15 +1,15 @@
 package gui.controller;
 
 import gui.Main;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 public class TutorialController {
 

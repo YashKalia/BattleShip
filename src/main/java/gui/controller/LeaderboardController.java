@@ -1,14 +1,13 @@
 package gui.controller;
 
 import database.Connect;
+import gui.Main;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-import gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,10 +23,10 @@ import javafx.stage.Stage;
 public class LeaderboardController {
 
     @FXML
-    public javafx.scene.control.TableView tableView;
+    public transient javafx.scene.control.TableView tableView;
 
-    public TableColumn username;
-    public TableColumn score;
+    public transient TableColumn username;
+    public transient TableColumn score;
 
     /**Display the home screen.
      *
@@ -61,18 +60,24 @@ public class LeaderboardController {
         primaryStage.setScene(scene);
     }
 
-
-
     /**
      * Get leaders and populate the leaderboard.
      */
-    private void getLeaders(ActionEvent event) throws SQLException, ClassNotFoundException {
+    private void getLeaders() throws SQLException, ClassNotFoundException {
         ObservableList listTopFive = FXCollections.observableArrayList(Connect.getTopFive());
         tableView.setItems(listTopFive);
 
         username.setCellValueFactory(new PropertyValueFactory("name"));
         score.setCellValueFactory(new PropertyValueFactory("score"));
         tableView.getColumns().setAll(username, score);
+
+
+        //  System.out.println("<table>");
+        //  ArrayList dataList = Connect.getTopFive();
+        //  for (Iterator iter = dataList.iterator(); iter.hasNext();) {
+        //System.out.println("<tr><td>" + (String)(iter.next()) + "</td></tr>");
+        //  }
+        //  System.out.println("</table>");
     }
 
 
