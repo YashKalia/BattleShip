@@ -63,7 +63,7 @@ public class LeaderboardController {
      * Get leaders and populate the leaderboard.
      */
     private void getLeaders() throws SQLException, ClassNotFoundException {
-        Connect.getLeaderboard();
+        Connect.getTopFive();
 //        username.setCellValueFactory(new PropertyValueFactory("name"));
 //        score.setCellValueFactory(new PropertyValueFactory("score"));
 //        tableView.getColumns().setAll(username, score);

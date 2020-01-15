@@ -15,7 +15,7 @@
         <Label layoutX="150.0" layoutY="95.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="which is played against the computer." />
         <Label layoutX="150.0" layoutY="120.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="The goal is to find and destroy" />
         <Label layoutX="150.0" layoutY="135.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="the ships that your enemy has placed." />
-        <Label layoutX="150.0" layoutY="160.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Set 5 ships on the opponent's (above) board" />
+        <Label layoutX="150.0" layoutY="160.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Set 5 ships on your (above) board" />
         <Label layoutX="150.0" layoutY="175.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Then press squares on the (below) board" />
         <Button layoutX="150.0" layoutY="250.0" mnemonicParsing="false" id="grey_button" onAction="#show_home_page" prefWidth="200.0" text="Back"/>
 
