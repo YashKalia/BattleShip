@@ -2,12 +2,7 @@ package database;
 
 import entity.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -128,14 +123,24 @@ public class Connect {
      * @throws ClassNotFoundException if class not found.
      * @throws SQLException if query is incorrect.
      */
-    public static ResultSet getTopFive() throws ClassNotFoundException, SQLException {
+    public static ArrayList getTopFive() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
         connection5 = DriverManager.getConnection(url4, username, password);
         ps6 = connection5.createStatement();
         rs3 = ps6.executeQuery("select highscore from"
                 + " projects_BattleShip.User"
                 + " order by highscore desc limit 5;");
-        return rs3;
+        ResultSetMetaData rsm3R = rs3.getMetaData();
+        int rs3Count = rsm3R.getColumnCount();
+
+        ArrayList<String> leaderboard = new ArrayList<>(rs3Count);
+        while (rs3.next()) {
+            int i = 1;
+            while (i <= rs3Count) {
+                leaderboard.add(rs3.getString(i++));
+            }
+        }
+        return leaderboard;
     }
 
 
@@ -215,6 +220,7 @@ public class Connect {
      * @throws ClassNotFoundException if error occurs.
      */
     public static ArrayList<User> getLeaderboard() throws SQLException, ClassNotFoundException {
+
         ArrayList<User> leaderboard = new ArrayList<>();
         Class.forName(driver);
         connection5 = DriverManager.getConnection(url4, username, password);

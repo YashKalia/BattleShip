@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import gui.Main;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
@@ -63,10 +65,12 @@ public class LeaderboardController {
      * Get leaders and populate the leaderboard.
      */
     private void getLeaders() throws SQLException, ClassNotFoundException {
-        Connect.getTopFive();
-//        username.setCellValueFactory(new PropertyValueFactory("name"));
-//        score.setCellValueFactory(new PropertyValueFactory("score"));
-//        tableView.getColumns().setAll(username, score);
+        ArrayList result = Connect.getTopFive();
+        System.out.println(result);
+
+        username.setCellValueFactory(new PropertyValueFactory("name"));
+        score.setCellValueFactory(new PropertyValueFactory("score"));
+        tableView.getColumns().setAll(username, score);
     }
 
 
