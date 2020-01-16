@@ -75,7 +75,7 @@ class StudentTest {
     }
 
     @Test
-    void testToString(){
+    void testToString() {
         String name = student1.getName();
         int number = student1.getStudentNumber();
         String result = name + " (" + number + ")";

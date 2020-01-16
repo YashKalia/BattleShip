@@ -20,7 +20,7 @@ class SquareTest {
 
     private transient Square square;
     private Board board;
-    private Board boardOpponent;
+    private transient Board boardOpponent;
     private transient Board opponentBoard;
 
     @BeforeEach
@@ -158,7 +158,9 @@ class SquareTest {
     public void getSquareLeftOpponent() {
         square = new Square(3, 4, boardOpponent);
         Square result = square.getSquareLeft(square);
-        Square actual = Board.squaresInGrid.get(10 * square.getCoordinateY() + square.getCoordinateX() -1);
+        int part1 = 10 * square.getCoordinateY();
+        int part2 = square.getCoordinateX() - 1;
+        Square actual = Board.squaresInGrid.get(part1 + part2);
         assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
@@ -182,7 +184,9 @@ class SquareTest {
     public void getSquareRightOpponent() {
         square = new Square(3, 4, boardOpponent);
         Square result = square.getSquareRight(square);
-        Square actual = Board.squaresInGrid.get(10 * square.getCoordinateY() + square.getCoordinateX() +1);
+        int part1 = 10 * square.getCoordinateY();
+        int part2 = square.getCoordinateX() + 1;
+        Square actual = Board.squaresInGrid.get(part1 + part2);
         assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
@@ -206,7 +210,8 @@ class SquareTest {
     public void getSquareUpOpponent() {
         square = new Square(3, 4, boardOpponent);
         Square result = square.getSquareUp(square);
-        Square actual = Board.squaresInGrid.get(10 * (square.getCoordinateY() -1) + square.getCoordinateX());
+        int part1 = 10 * (square.getCoordinateY() - 1);
+        Square actual = Board.squaresInGrid.get(part1 + square.getCoordinateX());
         assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
@@ -230,7 +235,8 @@ class SquareTest {
     public void getSquareBelowOpponent() {
         square = new Square(3, 4, boardOpponent);
         Square result = square.getSquareBelow(square);
-        Square actual = Board.squaresInGrid.get(10 * (square.getCoordinateY() - 1)+ square.getCoordinateX());
+        int part1 = 10 * (square.getCoordinateY() - 1);
+        Square actual = Board.squaresInGrid.get(part1 + square.getCoordinateX());
         assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
