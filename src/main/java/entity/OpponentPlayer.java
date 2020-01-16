@@ -377,6 +377,14 @@ public class OpponentPlayer {
             int x = randomizer.nextInt(10);
             int y = randomizer.nextInt(10);
 
+            int orientation = randomizer.nextInt(2);
+            if (orientation == 0) {
+                ships.get(allShipsPlaced).orientation = false;
+            }
+            if (orientation == 1) {
+                ships.get(allShipsPlaced).orientation = true;
+            }
+
             if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y, opponentBoard)) {
                 allShipsPlaced--;
             }

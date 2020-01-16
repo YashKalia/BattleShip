@@ -54,7 +54,17 @@ public class EnhancedBoardCreator implements BoardCreator  {
 
             List<Ship> ships = playerBoard.makeListWithShips();
 
+
+
             Square square = (Square) event.getSource();
+            
+            if (event.getButton().toString() == "PRIMARY") {
+                ships.get(allShipsPlaced).orientation = false;
+            }
+
+            if (event.getButton().toString() == "SECONDARY") {
+                ships.get(allShipsPlaced).orientation = true;
+            }
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY, playerBoard.getBoard())) {
