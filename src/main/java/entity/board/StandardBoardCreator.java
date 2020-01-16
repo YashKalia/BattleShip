@@ -22,6 +22,9 @@ public class StandardBoardCreator implements BoardCreator {
     protected static Board playerBoard;
     protected static Game game;
     private static int allShipsPlaced = 4;
+    private static String primary = "PRIMARY";
+    private static String secondary = "SECONDARY";
+
 
     /**
      * Verifying whether the application is running.
@@ -76,11 +79,11 @@ public class StandardBoardCreator implements BoardCreator {
 
 
             Square square = (Square) event.getSource();
-            if (event.getButton().toString() == "PRIMARY") {
+            if (event.getButton().toString().equals(primary)) {
                 ships.get(allShipsPlaced).orientation = false;
             }
 
-            if (event.getButton().toString() == "SECONDARY") {
+            if (event.getButton().toString().equals(secondary)) {
                 ships.get(allShipsPlaced).orientation = true;
             }
 

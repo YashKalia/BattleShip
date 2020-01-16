@@ -18,6 +18,7 @@ public class OpponentPlayer {
     private transient int nine = 9;
     private transient int allShipsPlaced = 4;
     private transient int seventeen = 17;
+    private transient int one = 1;
 
     public static ArrayList<Square> getShotSquares() {
         return shotSquares;
@@ -381,7 +382,7 @@ public class OpponentPlayer {
             if (orientation == 0) {
                 ships.get(allShipsPlaced).orientation = false;
             }
-            if (orientation == 1) {
+            if (orientation == one) {
                 ships.get(allShipsPlaced).orientation = true;
             }
 
