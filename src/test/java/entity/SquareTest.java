@@ -1,8 +1,5 @@
 package entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import entity.board.Board;
 import entity.board.StandardBoard;
 import entity.ships.Carrier;
@@ -15,6 +12,8 @@ import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scoresystem.Scoring;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class SquareTest {
 
