@@ -21,7 +21,7 @@ class SquareTest {
     private transient Square square;
     private Board board;
     private transient Board boardOpponent;
-    private transient Board opponentBoard;
+    private transient String carrierName;
 
     @BeforeEach
     public void setUpEnvironment() {
@@ -30,6 +30,7 @@ class SquareTest {
         board = new StandardBoard(opponent, handler);
         boardOpponent = new StandardBoard(true, handler);
         square = new Square(3, 4, board);
+        carrierName = "Carrier";
     }
 
     @Test
@@ -66,7 +67,7 @@ class SquareTest {
 
     @Test
     public void setShip() {
-        Ship ship = new Carrier("Carrier", 5, false);
+        Ship ship = new Carrier(carrierName, 5, false);
         square.setShip(ship);
         Ship actual = square.getShip();
         assertEquals(ship, actual);
@@ -241,13 +242,33 @@ class SquareTest {
     }
 
     @Test
+    public void getSquareTest() {
+        square = new Square(3,4,board);
+        Square result = square.getSquare(3,4);
+        Square actual = Board.squaresInGrid.get(10 * 4 + 3);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
     public void setColorSquareLeft() {
-        Ship carrier = new Carrier("Carrier", 3, true);
+        Ship carrier = new Carrier(carrierName, 3, true);
         board.placeShip(carrier,3, 4, board);
         Square leftSquare = new Square(3, 4, board);
         square.setSquareColorLeft(leftSquare);
         assertTrue(square.getSquareUp(leftSquare).isShooted());
         assertTrue(square.getSquareBelow(leftSquare).isShooted());
+    }
+
+    @Test
+    public void setColorSquareLeftFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareLeft(square).getCoordinateX();
+        int y = square.getSquareLeft(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorLeft(square);
+        assertTrue(square.getSquareUp(square).isShooted());
+        assertTrue(square.getSquareBelow(square).isShooted());
     }
 
     @Test
@@ -261,13 +282,37 @@ class SquareTest {
     }
 
     @Test
+    public void setColorSquareRightFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareRight(square).getCoordinateX();
+        int y = square.getSquareRight(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorRight(square);
+        assertTrue(square.getSquareUp(square).isShooted());
+        assertTrue(square.getSquareBelow(square).isShooted());
+    }
+
+    @Test
     public void setColorSquareUp() {
-        Ship carrier = new Carrier("Carrier", 3, true);
+        Ship carrier = new Carrier(carrierName, 3, true);
         board.placeShip(carrier,4, 2, board);
         Square leftSquare = new Square(4, 2, board);
         square.setSquareColorUp(leftSquare);
         assertTrue(square.getSquareLeft(leftSquare).isShooted());
         assertTrue(square.getSquareRight(leftSquare).isShooted());
+    }
+
+    @Test
+    public void setColorSquareUpFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareUp(square).getCoordinateX();
+        int y = square.getSquareUp(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorUp(square);
+        assertTrue(square.getSquareLeft(square).isShooted());
+        assertTrue(square.getSquareRight(square).isShooted());
     }
 
     @Test
@@ -278,6 +323,18 @@ class SquareTest {
         square.setSquareColorBelow(leftSquare);
         assertTrue(square.getSquareLeft(leftSquare).isShooted());
         assertTrue(square.getSquareRight(leftSquare).isShooted());
+    }
+
+    @Test
+    public void setColorSquareBelowFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareBelow(square).getCoordinateX();
+        int y = square.getSquareBelow(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorBelow(square);
+        assertTrue(square.getSquareLeft(square).isShooted());
+        assertTrue(square.getSquareRight(square).isShooted());
     }
 
 
