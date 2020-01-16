@@ -49,22 +49,15 @@ public class MainController {
         primaryStage.setScene(scene);
     }
 
-    /**Display the leaderboard.
+    /**Display the register screen.
      *
      * @param event When user click on login option.
      * @throws IOException if error occurs.
      */
     @SuppressWarnings("deprecation")
-    public void show_Leaderboard(ActionEvent event) throws IOException {
-        Stage primaryStage = new Stage();
-        URL url = new File("src/main/java/gui/fxml/Leaderboard.fxml").toURL();
-        Parent root = FXMLLoader.load(url);
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void close_Window(ActionEvent event) {
+        Stage primaryStage = Main.getStage();
+        primaryStage.close();
     }
-
-
-
 
 }
