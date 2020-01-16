@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import entity.ships.Ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,7 @@ class StudentTest {
     private transient Student student2;
     private transient Student student3;
     private transient Student notValid;
+    private transient Ship ship;
 
 
     @BeforeEach
@@ -48,6 +50,11 @@ class StudentTest {
     }
 
     @Test
+    void testEqualsNegativeObject() {
+        assertEquals(student1.equals(ship), false);
+    }
+
+    @Test
     void testEqualsNegative() {
         assertNotEquals(student1, student2);
     }
@@ -65,6 +72,14 @@ class StudentTest {
     @Test
     void testHashCode() {
         assertEquals(1425489871, student1.hashCode());
+    }
+
+    @Test
+    void testToString(){
+        String name = student1.getName();
+        int number = student1.getStudentNumber();
+        String result = name + " (" + number + ")";
+        assertEquals(student1.toString(), result);
     }
 
 }
