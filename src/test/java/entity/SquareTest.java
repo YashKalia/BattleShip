@@ -20,6 +20,7 @@ class SquareTest {
 
     private transient Square square;
     private Board board;
+    private Board boardOpponent;
     private transient Board opponentBoard;
 
     @BeforeEach
@@ -27,6 +28,7 @@ class SquareTest {
         boolean opponent = false;
         EventHandler<? super MouseEvent> handler = null;
         board = new StandardBoard(opponent, handler);
+        boardOpponent = new StandardBoard(true, handler);
         square = new Square(3, 4, board);
     }
 
@@ -145,11 +147,43 @@ class SquareTest {
     }
 
     @Test
+    public void getSquareLeftFail() {
+        square = new Square(0, 1, board);
+        Square result = square.getSquareLeft(square);
+        Square actual = new Square(11,11, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareLeftOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareLeft(square);
+        Square actual = Board.squaresInGrid.get(10 * square.getCoordinateY() + square.getCoordinateX() -1);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
     public void getSquareRight() {
         square = new Square(3, 4, board);
         Square result = square.getSquareRight(square);
         Square actual = Board.squaresInGrid.get(44);
         assertEquals(result, actual);
+    }
+
+    @Test
+    public void getSquareRightFail() {
+        square = new Square(9, 1, board);
+        Square result = square.getSquareRight(square);
+        Square actual = new Square(-1,-1, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareRightOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareRight(square);
+        Square actual = Board.squaresInGrid.get(10 * square.getCoordinateY() + square.getCoordinateX() +1);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
     @Test
@@ -161,11 +195,43 @@ class SquareTest {
     }
 
     @Test
+    public void getSquareUpFail() {
+        square = new Square(3, 0, board);
+        Square result = square.getSquareUp(square);
+        Square actual = new Square(-1,-1, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareUpOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareUp(square);
+        Square actual = Board.squaresInGrid.get(10 * (square.getCoordinateY() -1) + square.getCoordinateX());
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
     public void getSquareBelow() {
         square = new Square(3, 4, board);
         Square result = square.getSquareBelow(square);
         Square actual = Board.squaresInGrid.get(53);
         assertEquals(result, actual);
+    }
+
+    @Test
+    public void getSquareBelowFail() {
+        square = new Square(3, 9, board);
+        Square result = square.getSquareBelow(square);
+        Square actual = new Square(-1,-1, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareBelowOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareBelow(square);
+        Square actual = Board.squaresInGrid.get(10 * (square.getCoordinateY() - 1)+ square.getCoordinateX());
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
     @Test
