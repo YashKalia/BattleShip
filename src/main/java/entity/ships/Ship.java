@@ -1,39 +1,20 @@
-package entity;
+package entity.ships;
 
 /**
- * Class entity.Ship.
+ * Class entity.ships.Ship.
  */
-public class Ship  {
-    public String shipName;
-    public int typeShip;
+public abstract class Ship  {
     public boolean orientation = false;
     private int damage;
 
-
-    public String getShipName() {
-        return shipName;
-    }
-
-    public void setShipName(String shipName) {
-        this.shipName = shipName;
-    }
+    public abstract String getShipName();
 
     /**
      * Getting the type of the ship.
      * The type is specified by the amount of squares it occupies.
      * @return the amount of squares a ship occupies.
      */
-    public int getTypeShip() {
-        return typeShip;
-    }
-
-    /**
-     * Setting the type of the ship.
-     * @param typeShip The amount of squares the ship occupies.
-     */
-    public void setTypeShip(int typeShip) {
-        this.typeShip = typeShip;
-    }
+    public abstract int getTypeShip();
 
     /**
      * Getting the orientation of the ship.
@@ -74,8 +55,6 @@ public class Ship  {
      * @param orientation The orientation of the ship.
      */
     public Ship(String shipName, int typeShip, boolean orientation) {
-        this.shipName = shipName;
-        this.typeShip = typeShip;
         this.orientation = orientation;
         damage = typeShip;
     }
