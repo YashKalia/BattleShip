@@ -8,7 +8,6 @@ import javafx.scene.shape.Rectangle;
 import scoresystem.Scoring;
 
 
-
 /**
  * Class entity.Square, representing a single block of the board.
  */
@@ -114,6 +113,7 @@ public class Square extends Rectangle {
 
     /**
      * Get the x and y coordinate of the specified square.
+     *
      * @return The X and Y coordinate of the square.
      */
     public Point2D getCoordinates() {
@@ -122,6 +122,7 @@ public class Square extends Rectangle {
 
     /**
      * Set the x and y coordinate of the specified square.
+     *
      * @param coordinates The wanted X and Y for the square.
      */
     public void setCoordinates(Point2D coordinates) {
@@ -130,6 +131,7 @@ public class Square extends Rectangle {
 
     /**
      * Getting the achieved score by the player.
+     *
      * @return The amount of points a player has obtained.
      */
     public Scoring getObjectScore() {
@@ -138,6 +140,7 @@ public class Square extends Rectangle {
 
     /**
      * Updating the amount of points obtained by a player.
+     *
      * @param objectScore The new amount of points a player has obtained.
      */
     public void setObjectScore(Scoring objectScore) {
@@ -320,6 +323,7 @@ public class Square extends Rectangle {
      * method until we find a square without a ship part on it.
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well.
+     *
      * @param square entity.Square that has to be colored and for which you want to check squares
      *               to the left.
      */
@@ -347,8 +351,9 @@ public class Square extends Rectangle {
      * rerun the method until we find a square without a ship part on it.
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well
+     *
      * @param square entity.Square that has to be colored and for which you want to check squares
-     *              to the right.
+     *               to the right.
      */
     public void setSquareColorRight(Square square) {
         square.setFill((Color.GREEN));
@@ -374,8 +379,9 @@ public class Square extends Rectangle {
      * rerun the method until we find a square without a ship part on it.
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
+     *
      * @param square entity.Square that has to be colored and for which you want to check
-     *              squares above.
+     *               squares above.
      */
     public void setSquareColorUp(Square square) {
         square.setFill((Color.GREEN));
@@ -402,8 +408,9 @@ public class Square extends Rectangle {
      * part on it.
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
+     *
      * @param square entity.Square that has to be colored and for which you want to
-     *              check squares below.
+     *               check squares below.
      */
     public void setSquareColorBelow(Square square) {
         square.setFill((Color.GREEN));
@@ -429,7 +436,7 @@ public class Square extends Rectangle {
      *
      * @return Whether square is shot.
      */
-    public boolean shoot() {
+    public boolean shoot(Square square) {
         shooted = true;
 
 

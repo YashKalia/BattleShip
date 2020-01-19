@@ -44,7 +44,7 @@ public class StandardBoardCreator implements BoardCreator {
      * @return Parent root.
      */
     @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-    public Parent createBord() {
+    public static Parent createBord() {
         opponentBoard = new StandardBoard(true, event -> {
             if (!inProgress) {
                 return;
@@ -53,7 +53,7 @@ public class StandardBoardCreator implements BoardCreator {
             if (square.shooted) {
                 return;
             }
-            game.opponentTurn = !square.shoot();
+            game.opponentTurn = !square.shoot(square);
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
                 //System.exit(0);

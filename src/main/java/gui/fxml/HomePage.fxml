@@ -12,12 +12,12 @@
   <children>
     <Label layoutX="200.0" layoutY="36.0" prefHeight="56.0" prefWidth="327.0" id="main_title" text="Naval Battle" />
     <Label layoutX="202.0" layoutY="65.0" prefHeight="56.0" prefWidth="327.0" id="sub_title" text="Welcome, Tom Cruise. Please continue." />
-
-    <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" id="green_button" onAction="#startGame" prefWidth="200.0" text="New Game"/>
-    <Button layoutX="200.0" layoutY="180.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Tutorial" onAction="#show_Tutorial"/>
-    <Button layoutX="200.0" layoutY="225.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Highscores" onAction="#show_Leaderboard"/>
-    <Button layoutX="200.0" layoutY="270.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="My scores"/>
-    <Button layoutX="200.0" layoutY="315.0" mnemonicParsing="false" id="grey_button" onAction="#show_main_screen" prefWidth="200.0" text="Logout"/>
+    <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" id="green_button" onAction="#startStandardGame" prefWidth="200.0" text="New Standard Game"/>
+    <Button layoutX="200.0" layoutY="180.0" mnemonicParsing="false" id="green_button" onAction="#startEnhancedGame" prefWidth="200.0" text="New Enhanced Game"/>
+    <Button layoutX="200.0" layoutY="225.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Tutorial" onAction="#show_Tutorial"/>
+    <Button layoutX="200.0" layoutY="270.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="Highscores" onAction="#show_Leaderboard"/>
+    <Button layoutX="200.0" layoutY="315.0" mnemonicParsing="false" id="blue_button" prefWidth="200.0" text="My scores"/>
+    <Button layoutX="200.0" layoutY="370.0" mnemonicParsing="false" id="grey_button" onAction="#show_main_screen" prefWidth="200.0" text="Logout"/>
   </children>
   <stylesheets>
     <URL value="@style.css" />

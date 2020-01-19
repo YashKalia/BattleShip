@@ -74,8 +74,13 @@ public class OpponentPlayer {
                 break;
             }
 
-            int x = randomizer.nextInt(10);
-            int y = randomizer.nextInt(10);
+            int x = -1;
+            int y = -1;
+
+            while (!playerBoard.inRange(x, y, playerBoard)) {
+                x = randomizer.nextInt(10);
+                y = randomizer.nextInt(10);
+            }
 
             Square square = playerBoard.getSquare(x, y);
             if (square.shooted) {
@@ -110,7 +115,9 @@ public class OpponentPlayer {
      * @param y           coordinate of square location
      */
     public void enemyShotCoordinates(Board playerBoard, int x, int y, Random randomizer) {
-        while (Game.opponentTurn) {
+
+        while (Game.opponentTurn
+                && playerBoard.inRange(x, y, playerBoard)) {
 
             int random = randomizer.nextInt(4);
             switch (random) {
@@ -146,7 +153,8 @@ public class OpponentPlayer {
      * @param y           coordinate of square location
      */
     public void shootUp(Board playerBoard, int x, int y, Random randomizer) {
-        if (y == 0 || (playerBoard.getSquare(x, y - 1).isShooted())) {
+        if (y == 0 || (playerBoard.getSquare(x, y - 1).isShooted())
+                || !playerBoard.inRange(x, y, playerBoard)) {
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
             }
@@ -195,7 +203,7 @@ public class OpponentPlayer {
      */
     public void shootLeft(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (x == 0) {
+        if (x == 0 || !playerBoard.inRange(x, y, playerBoard)) {
 
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
@@ -268,7 +276,8 @@ public class OpponentPlayer {
      */
     public void shootRight(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (x == nine || (playerBoard.getSquare(x + 1, y).isShooted())) {
+        if (x == nine || (playerBoard.getSquare(x + 1, y).isShooted())
+                || !playerBoard.inRange(x, y, playerBoard)) {
 
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
@@ -322,7 +331,8 @@ public class OpponentPlayer {
      */
     public void shootDown(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (y == nine || (playerBoard.getSquare(x, y + 1).isShooted())) {
+        if (y == nine || (playerBoard.getSquare(x, y + 1).isShooted())
+                || !playerBoard.inRange(x, y, playerBoard)) {
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
             }
@@ -374,8 +384,14 @@ public class OpponentPlayer {
         while (!ships.isEmpty()) {
 
             randomizer = new Random();
-            int x = randomizer.nextInt(10);
-            int y = randomizer.nextInt(10);
+
+            int x = -1;
+            int y = -1;
+
+            while (!opponentBoard.inRange(x, y, opponentBoard)) {
+                x = randomizer.nextInt(10);
+                y = randomizer.nextInt(10);
+            }
 
             if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y, opponentBoard)) {
                 allShipsPlaced--;

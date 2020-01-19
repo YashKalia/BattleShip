@@ -26,7 +26,7 @@ public class EnhancedBoardCreator implements BoardCreator  {
      * @return Parent root.
      */
     @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-    public Parent createBord() {
+     public static Parent createBord() {
 
         opponentBoard = new EnhancedBoard(true, event -> {
             if (!inProgress) {
@@ -36,7 +36,7 @@ public class EnhancedBoardCreator implements BoardCreator  {
             if (square.shooted) {
                 return;
             }
-            game.opponentTurn = !square.shoot();
+            game.opponentTurn = !square.shoot(square);
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
                 //System.exit(0);
@@ -64,6 +64,9 @@ public class EnhancedBoardCreator implements BoardCreator  {
                 }
             }
         });
+
+        playerBoard.reshape(playerBoard);
+        opponentBoard.reshape(opponentBoard);
 
         VBox player = new VBox(playerBoard);
         VBox opponent = new VBox(opponentBoard);

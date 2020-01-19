@@ -356,4 +356,5 @@ public abstract class Board extends Parent {
      */
     public abstract boolean inRange(int x, int y, Board board);
 
+    public abstract Board reshape(Board board);
 }

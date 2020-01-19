@@ -42,4 +42,7 @@ public class StandardBoard extends Board {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
+    public Board reshape(Board board) {
+        return board;
+    }
 }

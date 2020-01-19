@@ -121,7 +121,7 @@ class SquareTest {
 
     @Test
     public void shootMis() {
-        square.shoot();
+        square.shoot(square);
         boolean actual = square.isShooted();
         assertEquals(true, actual);
     }
@@ -131,7 +131,7 @@ class SquareTest {
         Ship placedShip = new Destroyer("Destroyer", 1, true);
         square.setShip(placedShip);
         board.setMisses(1);
-        square.shoot();
+        square.shoot(square);
         boolean actual = square.isShooted();
         assertEquals(true, actual);
     }

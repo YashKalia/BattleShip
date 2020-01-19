@@ -45,7 +45,7 @@ public class EnhancedBoard extends Board {
      * Removing squares to create new shape.
      * @param board Board with new shape.
      */
-    public void reshape(Board board) {
+    public Board reshape(Board board) {
         board.getBoard().getSquare(3, 0).setFill(Color.WHITE);
         board.getBoard().getSquare(3, 1).setFill(Color.WHITE);
         board.getBoard().getSquare(4, 0).setFill(Color.WHITE);
@@ -56,6 +56,7 @@ public class EnhancedBoard extends Board {
         board.getBoard().getSquare(5, 2).setFill(Color.WHITE);
         board.getBoard().getSquare(6, 0).setFill(Color.WHITE);
         board.getBoard().getSquare(6, 1).setFill(Color.WHITE);
+        return board;
     }
 
     /**
