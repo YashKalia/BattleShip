@@ -10,6 +10,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class Connect {
@@ -41,6 +43,9 @@ public class Connect {
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
 
+    private static String key = "JabbaTheHutt";
+    private static String algorithmType = "Blowfish";
+
 
     /*
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
@@ -67,7 +72,7 @@ public class Connect {
      * @return a String that will be printed on the screen.
      * @throws SQLException If error occurs.
      */
-    public static String registerUser(User user) throws SQLException, ClassNotFoundException {
+    public static String registerUser(User user) throws Exception {
         Class.forName(driver);
         connection1 = DriverManager.getConnection(url4, username, password);
         if (!doesUserExist(user)) {
@@ -75,7 +80,7 @@ public class Connect {
                     "insert into projects_BattleShip.User ("
                             + "username,password,highscore) values (?,?,0);");
             ps4.setString(1, user.getUsername());
-            ps4.setString(2, user.getPassword());
+            ps4.setString(2, Connect.encrypt(user.getPassword(),key));
             int status1 = ps4.executeUpdate();
             if (status1 != 0) {
                 connection1.close();
@@ -99,7 +104,7 @@ public class Connect {
      * @return a String which will be printed on the screen.
      * @throws SQLException IF error occurs.
      */
-    public static String authenticate(User user) throws SQLException, ClassNotFoundException {
+    public static String authenticate(User user) throws Exception {
         if (!doesUserExist(user)) {
             return new String("User does not exist.");
         } else {
@@ -110,8 +115,9 @@ public class Connect {
             rs2 = ps3.executeQuery("select password from projects_BattleShip.User where"
                     + " username='" + user.getUsername() + "';");
             rs2.next();
-            String password = (rs2.getString("password"));
-            if (password.equals(user.getPassword())) {
+            String encryptedPassword = (rs2.getString("password"));
+            String decryptedPassword = Connect.decrypt(encryptedPassword,key);
+            if (decryptedPassword.equals(user.getPassword())) {
                 connection2.close();
                 return new String("Authentication successful.");
             } else {
@@ -218,7 +224,55 @@ public class Connect {
         }
     }
 
-    //Need a method to check if the score being added is a high score or not.
+    /**Encrypts the password before storing it in the database.
+     *
+     * @param strClearText The password.
+     * @param strKey The private key.
+     * @return the encrypted string
+     * @throws Exception error.
+     */
+    public static String encrypt(String strClearText,String strKey) throws Exception {
+
+
+        try {
+            SecretKeySpec skeyspec = new SecretKeySpec(strKey.getBytes(),algorithmType);
+            Cipher cipher = Cipher.getInstance(algorithmType);
+            cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
+            byte[] encrypted = cipher.doFinal(strClearText.getBytes());
+            String strData = new String(encrypted);
+            return strData;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+
+    }
+
+    /**
+     * Decrypts the password retrieved from the database.
+     * @param strEncrypted the encrypted [password).
+     * @param strKey the private key.
+     * @return the decrypted key.
+     * @throws Exception error.
+     */
+    public static String decrypt(String strEncrypted,String strKey) throws Exception {
+
+
+        try {
+            SecretKeySpec skeyspec = new SecretKeySpec(strKey.getBytes(),algorithmType);
+            Cipher cipher = Cipher.getInstance(algorithmType);
+            cipher.init(Cipher.DECRYPT_MODE, skeyspec);
+            byte[] decrypted = cipher.doFinal(strEncrypted.getBytes());
+            String strData = new String(decrypted);
+            return strData;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+
+    }
 
 
 
