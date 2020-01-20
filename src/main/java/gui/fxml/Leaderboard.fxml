@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
 <?import java.net.URL?>
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.controller.LeaderboardController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LeaderboardController">
     <children>
-        <Label layoutX="200.0" layoutY="36.0" prefHeight="56.0" prefWidth="327.0" id="main_title" text="Leaderboard" />
-
-        <Button layoutX="200.0" layoutY="360.0" mnemonicParsing="false" id="grey_button" onAction="#show_home_page" prefWidth="200.0" text="Back"/>
-        <Button layoutX="200.0" layoutY="315.0" mnemonicParsing="false" id="grey_button" onAction="#show_main_screen" prefWidth="200.0" text="Logout"/>
-
-        <TableView fx:id="tableView" depthTest="DISABLE" layoutX="180.0" prefHeight="600.0" prefWidth="720.0" styleClass="dashboardscreenside"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+        <TableView fx:id="tableView" depthTest="DISABLE" layoutX="180.0" prefHeight="600.0" prefWidth="720.0" styleClass="dashboardscreenside" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
             <columns>
                 <TableColumn fx:id="username" editable="false" prefWidth="160.0" sortable="false" text="Name" />
                 <TableColumn fx:id="score" editable="false" prefWidth="173.0" text="Score" />
@@ -24,6 +23,13 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+        <Label id="main_title" layoutX="14.0" layoutY="14.0" prefHeight="65.0" prefWidth="180.0" text="Leaderboard">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+
+        <Button id="grey_button" layoutX="6.0" layoutY="461.0" mnemonicParsing="false" onAction="#show_home_page" prefHeight="32.0" prefWidth="165.0" text="Back" />
+        <Button id="grey_button" layoutX="6.0" layoutY="424.0" mnemonicParsing="false" onAction="#show_main_screen" prefHeight="32.0" prefWidth="165.0" text="Logout" />
     </children>
     <stylesheets>
         <URL value="@style.css" />

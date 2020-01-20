@@ -269,7 +269,7 @@ public class Square extends Rectangle {
      * @param y y-coordinate of the square in the board.
      * @return the square which has those x and y coordinates.
      */
-    public Square getSquare(int x, int y) {
+    public static Square getSquare(int x, int y) {
         return Board.squaresInGrid.get(10 * y + x);
     }
 
