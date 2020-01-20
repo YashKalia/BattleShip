@@ -50,16 +50,18 @@ public class StandardBoardCreator implements BoardCreator {
                 return;
             }
             Square square = (Square) event.getSource();
-            if (square.shooted) {
-                return;
-            }
-            game.opponentTurn = !square.shoot(square);
-            if (opponentBoard.ships == 0) {
-                System.out.println("YOU WIN");
-                //System.exit(0);
-            }
-            if (game.opponentTurn) {
-                opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
+            if (opponentBoard.inRange(square.getCoordinateX(), square.getCoordinateY(), opponentBoard)) {
+                if (square.shooted) {
+                    return;
+                }
+                game.opponentTurn = !square.shoot(square);
+                if (opponentBoard.ships == 0) {
+                    System.out.println("YOU WIN");
+                    //System.exit(0);
+                }
+                if (game.opponentTurn) {
+                    opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
+                }
             }
 
         });

@@ -288,32 +288,34 @@ public class Square extends Rectangle {
      * @param square The last square that was shot before the ship sunk.
      */
     public void setDestroyedShipColour(Square square) {
-        if (getSquareLeft(square).getShip() != null) {
-            setSquareColorLeft((square));
-        } else {
-            getSquareLeft(square).setFill(Color.BLACK);
-            getSquareLeft(square).shooted = true;
-        }
+        if (square.getShip().getDamage() <= 0) {
+            if (getSquareLeft(square).getShip() != null) {
+                setSquareColorLeft((square));
+            } else {
+                getSquareLeft(square).setFill(Color.BLACK);
+                getSquareLeft(square).shooted = true;
+            }
 
-        if (getSquareRight(square).getShip() != null) {
-            setSquareColorRight((square));
-        } else {
-            getSquareRight(square).setFill(Color.BLACK);
-            getSquareRight(square).shooted = true;
-        }
+            if (getSquareRight(square).getShip() != null) {
+                setSquareColorRight((square));
+            } else {
+                getSquareRight(square).setFill(Color.BLACK);
+                getSquareRight(square).shooted = true;
+            }
 
-        if (getSquareUp(square).getShip() != null) {
-            setSquareColorUp((square));
-        } else {
-            getSquareUp(square).setFill(Color.BLACK);
-            getSquareUp(square).shooted = true;
-        }
+            if (getSquareUp(square).getShip() != null) {
+                setSquareColorUp((square));
+            } else {
+                getSquareUp(square).setFill(Color.BLACK);
+                getSquareUp(square).shooted = true;
+            }
 
-        if (getSquareBelow(square).getShip() != null) {
-            setSquareColorBelow((square));
-        } else {
-            getSquareBelow(square).setFill(Color.BLACK);
-            getSquareBelow(square).shooted = true;
+            if (getSquareBelow(square).getShip() != null) {
+                setSquareColorBelow((square));
+            } else {
+                getSquareBelow(square).setFill(Color.BLACK);
+                getSquareBelow(square).shooted = true;
+            }
         }
     }
 
@@ -328,20 +330,22 @@ public class Square extends Rectangle {
      *               to the left.
      */
     public void setSquareColorLeft(Square square) {
-        square.setFill((Color.GREEN));
-        if (getSquareLeft(square) != null && getSquareLeft(square).getShip() != null) {
-            setSquareColorLeft(getSquareLeft(square));
-            getSquareUp(square).setFill(Color.BLACK);
-            getSquareBelow(square).setFill(Color.BLACK);
-            getSquareUp(square).shooted = true;
-            getSquareBelow(square).shooted = true;
-        } else {
-            getSquareLeft(square).setFill(Color.BLACK);
-            getSquareUp(square).setFill(Color.BLACK);
-            getSquareBelow(square).setFill(Color.BLACK);
-            getSquareLeft(square).shooted = true;
-            getSquareUp(square).shooted = true;
-            getSquareBelow(square).shooted = true;
+        if (square.getShip().getDamage() <= 0) {
+            square.setFill((Color.GREEN));
+            if (getSquareLeft(square) != null && getSquareLeft(square).getShip() != null) {
+                setSquareColorLeft(getSquareLeft(square));
+                getSquareUp(square).setFill(Color.BLACK);
+                getSquareBelow(square).setFill(Color.BLACK);
+                getSquareUp(square).shooted = true;
+                getSquareBelow(square).shooted = true;
+            } else {
+                getSquareLeft(square).setFill(Color.BLACK);
+                getSquareUp(square).setFill(Color.BLACK);
+                getSquareBelow(square).setFill(Color.BLACK);
+                getSquareLeft(square).shooted = true;
+                getSquareUp(square).shooted = true;
+                getSquareBelow(square).shooted = true;
+            }
         }
     }
 
@@ -356,20 +360,22 @@ public class Square extends Rectangle {
      *               to the right.
      */
     public void setSquareColorRight(Square square) {
-        square.setFill((Color.GREEN));
-        if (getSquareRight(square) != null && getSquareRight(square).getShip() != null) {
-            setSquareColorRight(getSquareRight(square));
-            getSquareUp(square).setFill(Color.BLACK);
-            getSquareBelow(square).setFill(Color.BLACK);
-            getSquareUp(square).shooted = true;
-            getSquareBelow(square).shooted = true;
-        } else {
-            getSquareRight(square).setFill(Color.BLACK);
-            getSquareUp(square).setFill(Color.BLACK);
-            getSquareBelow(square).setFill(Color.BLACK);
-            getSquareRight(square).shooted = true;
-            getSquareUp(square).shooted = true;
-            getSquareBelow(square).shooted = true;
+        if (square.getShip().getDamage() <= 0) {
+            square.setFill((Color.GREEN));
+            if (getSquareRight(square) != null && getSquareRight(square).getShip() != null) {
+                setSquareColorRight(getSquareRight(square));
+                getSquareUp(square).setFill(Color.BLACK);
+                getSquareBelow(square).setFill(Color.BLACK);
+                getSquareUp(square).shooted = true;
+                getSquareBelow(square).shooted = true;
+            } else {
+                getSquareRight(square).setFill(Color.BLACK);
+                getSquareUp(square).setFill(Color.BLACK);
+                getSquareBelow(square).setFill(Color.BLACK);
+                getSquareRight(square).shooted = true;
+                getSquareUp(square).shooted = true;
+                getSquareBelow(square).shooted = true;
+            }
         }
     }
 
@@ -384,20 +390,22 @@ public class Square extends Rectangle {
      *               squares above.
      */
     public void setSquareColorUp(Square square) {
-        square.setFill((Color.GREEN));
-        if (getSquareUp(square) != null && getSquareUp(square).getShip() != null) {
-            setSquareColorUp(getSquareUp(square));
-            getSquareLeft(square).setFill(Color.BLACK);
-            getSquareRight(square).setFill(Color.BLACK);
-            getSquareLeft(square).shooted = true;
-            getSquareRight(square).shooted = true;
-        } else {
-            getSquareUp(square).setFill(Color.BLACK);
-            getSquareLeft(square).setFill(Color.BLACK);
-            getSquareRight(square).setFill(Color.BLACK);
-            getSquareLeft(square).shooted = true;
-            getSquareRight(square).shooted = true;
-            getSquareUp(square).shooted = true;
+        if (square.getShip().getDamage() <= 0) {
+            square.setFill((Color.GREEN));
+            if (getSquareUp(square) != null && getSquareUp(square).getShip() != null) {
+                setSquareColorUp(getSquareUp(square));
+                getSquareLeft(square).setFill(Color.BLACK);
+                getSquareRight(square).setFill(Color.BLACK);
+                getSquareLeft(square).shooted = true;
+                getSquareRight(square).shooted = true;
+            } else {
+                getSquareUp(square).setFill(Color.BLACK);
+                getSquareLeft(square).setFill(Color.BLACK);
+                getSquareRight(square).setFill(Color.BLACK);
+                getSquareLeft(square).shooted = true;
+                getSquareRight(square).shooted = true;
+                getSquareUp(square).shooted = true;
+            }
         }
     }
 
@@ -413,20 +421,22 @@ public class Square extends Rectangle {
      *               check squares below.
      */
     public void setSquareColorBelow(Square square) {
-        square.setFill((Color.GREEN));
-        if (getSquareBelow(square) != null && getSquareBelow(square).getShip() != null) {
-            setSquareColorBelow(getSquareBelow(square));
-            getSquareLeft(square).setFill(Color.BLACK);
-            getSquareRight(square).setFill(Color.BLACK);
-            getSquareLeft(square).shooted = true;
-            getSquareRight(square).shooted = true;
-        } else {
-            getSquareBelow(square).setFill(Color.BLACK);
-            getSquareLeft(square).setFill(Color.BLACK);
-            getSquareRight(square).setFill(Color.BLACK);
-            getSquareBelow(square).shooted = true;
-            getSquareLeft(square).shooted = true;
-            getSquareRight(square).shooted = true;
+        if (square.getShip().getDamage() <= 0) {
+            square.setFill((Color.GREEN));
+            if (getSquareBelow(square) != null && getSquareBelow(square).getShip() != null) {
+                setSquareColorBelow(getSquareBelow(square));
+                getSquareLeft(square).setFill(Color.BLACK);
+                getSquareRight(square).setFill(Color.BLACK);
+                getSquareLeft(square).shooted = true;
+                getSquareRight(square).shooted = true;
+            } else {
+                getSquareBelow(square).setFill(Color.BLACK);
+                getSquareLeft(square).setFill(Color.BLACK);
+                getSquareRight(square).setFill(Color.BLACK);
+                getSquareBelow(square).shooted = true;
+                getSquareLeft(square).shooted = true;
+                getSquareRight(square).shooted = true;
+            }
         }
     }
 
@@ -437,32 +447,35 @@ public class Square extends Rectangle {
      * @return Whether square is shot.
      */
     public boolean shoot(Square square) {
-        shooted = true;
+
+        if (board.inRange(square.getCoordinateX(), square.getCoordinateY(), board)) {
+            shooted = true;
 
 
-        if (ship != null) {
-            if (ship.getDamage() == ship.getTypeShip()) {
-                int achieved = objectScore.scoreSystem(coordinates, board, ship);
-                board.totalScore = board.totalScore + achieved;
-                System.out.println("Achieved " + achieved);
-                System.out.println("Total" + board.totalScore);
+            if (ship != null) {
+                if (ship.getDamage() == ship.getTypeShip()) {
+                    int achieved = objectScore.scoreSystem(coordinates, board, ship);
+                    board.totalScore = board.totalScore + achieved;
+                    System.out.println("Achieved " + achieved);
+                    System.out.println("Total" + board.totalScore);
+                }
+                ship.shot();
+
+                setFill(Color.RED);
+                if (!ship.isNotDestroyed()) {
+                    setDestroyedShipColour(this);
+                    board.ships--;
+                }
+                return true;
+            } else {
+                this.setFill(Color.BLACK);
+                int miss = board.getMisses() + 1;
+                board.setMisses(miss);
+                System.out.println(board.misses);
             }
-            ship.shot();
-
-            setFill(Color.RED);
-            if (!ship.isNotDestroyed()) {
-                setDestroyedShipColour(this);
-                board.ships--;
-            }
-            return true;
-        } else {
-            this.setFill(Color.BLACK);
-            int miss = board.getMisses() + 1;
-            board.setMisses(miss);
-            System.out.println(board.misses);
         }
+            return false;
 
-        return false;
     }
 
     /**
