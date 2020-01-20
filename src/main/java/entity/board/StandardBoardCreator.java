@@ -1,9 +1,11 @@
 package entity.board;
 
+import database.Scoring;
 import entity.Game;
 import entity.Square;
 import entity.ships.Ship;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
@@ -56,6 +58,14 @@ public class StandardBoardCreator implements BoardCreator {
             game.opponentTurn = !square.shoot();
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
+                try {
+                    Scoring.addScoreToDatabase();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 //System.exit(0);
             }
             if (game.opponentTurn) {

@@ -1,14 +1,18 @@
-package scoresystem;
+package database;
 
+import entity.User;
 import entity.board.Board;
 import entity.ships.Ship;
 import javafx.geometry.Point2D;
+
+import java.sql.SQLException;
 
 /**
  * Class Score, specifies the amount of points the player has obtained.
  */
 public class Scoring {
-    int score = 0;
+    static int score = 0;
+    int finalScore=0;
     String shipname = null;
 
     public String getShipname() {
@@ -179,5 +183,12 @@ public class Scoring {
                     throw new IllegalStateException("Ship does not Exist: " + shipname);
             }
         }
+    }
+
+    /**
+     *
+     */
+    public static void addScoreToDatabase() throws SQLException, ClassNotFoundException {
+        Connect.addScore(Connect.user,score);
     }
 }

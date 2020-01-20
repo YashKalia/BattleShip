@@ -5,7 +5,7 @@ import entity.ships.Ship;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import scoresystem.Scoring;
+import database.Scoring;
 
 
 

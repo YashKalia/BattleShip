@@ -1,5 +1,7 @@
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import database.Scoring;
 import entity.Square;
 import entity.board.Board;
 import entity.board.StandardBoard;
@@ -18,7 +20,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import scoresystem.Scoring;
+
 
 class ScoringTest {
     private transient Board board;

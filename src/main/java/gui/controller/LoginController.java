@@ -50,6 +50,7 @@ public class LoginController {
         if (r.equals("User does not exist.")) {
             response.setText("User does not exist.");
         } else if (r.equals("Authentication successful.")) {
+            Connect.user=user;
             response.setText("Authentication successful.");
             Stage primaryStage = Main.getStage();
             URL url = new File("src/main/java/gui/fxml/HomePage.fxml").toURL();
@@ -57,8 +58,6 @@ public class LoginController {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
-            //Stage firstStage = (Stage) txtUsername.getScene().getWindow();
-            //firstStage.close();
 
 
         } else {

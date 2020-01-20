@@ -40,6 +40,7 @@ public class Connect {
     static ResultSet rs2 = null;
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
+    public static User user = null;
 
 
     /*

@@ -1,6 +1,7 @@
 package gui.controller;
 
 import entity.board.BoardCreator;
+import entity.board.StandardBoardCreator;
 import gui.Main;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 public class HomePageController {
 
-    protected static BoardCreator boardCreator;
+    protected static BoardCreator boardCreator=new StandardBoardCreator();
 
     /**Shows the game screen,finally.
      *
