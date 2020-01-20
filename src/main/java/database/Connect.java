@@ -116,6 +116,7 @@ public class Connect {
                     + " username='" + user.getUsername() + "';");
             rs2.next();
             String encryptedPassword = (rs2.getString("password"));
+            String paddedPassword=padString(encryptedPassword);
             String decryptedPassword = Connect.decrypt(encryptedPassword,key);
             if (decryptedPassword.equals(user.getPassword())) {
                 connection2.close();
@@ -263,7 +264,7 @@ public class Connect {
             SecretKeySpec skeyspec = new SecretKeySpec(strKey.getBytes(),algorithmType);
             Cipher cipher = Cipher.getInstance(algorithmType);
             cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-            byte[] decrypted = cipher.doFinal(strEncrypted.getBytes());
+            byte[] decrypted = cipher.doFinal((padString(strEncrypted)).getBytes());
             String strData = new String(decrypted);
             return strData;
 
@@ -272,6 +273,19 @@ public class Connect {
             throw new Exception(e);
         }
 
+    }
+
+    public static String padString(String input){
+        int size=input.length();
+        int quotient=size/8;
+        int no=(quotient+1)*8;
+        int i=0;
+        while(i<no-size){
+            input=input+" ";
+            i++;
+        }
+        System.out.println("Length of string to be decrypted is "+input.length());
+        return input;
     }
 
 
