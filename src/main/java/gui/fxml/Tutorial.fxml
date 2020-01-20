@@ -15,23 +15,22 @@
     <children>
         <Label id="main_title" layoutX="150.0" layoutY="36.0" prefHeight="56.0" prefWidth="327.0" text="Tutorial" />
         <Label id="sub_title" layoutX="150.0" layoutY="80.0" prefHeight="56.0" prefWidth="327.0" text="Naval battle is a strategy type guessing game" />
-        <Label id="sub_title" layoutX="150.0" layoutY="105.0" prefHeight="56.0" prefWidth="327.0" text="which is played against the computer." />
-        <Label id="sub_title" layoutX="150.0" layoutY="130.0" prefHeight="56.0" prefWidth="327.0" text="The goal is to find and destroy" />
-        <Label id="sub_title" layoutX="150.0" layoutY="155.0" prefHeight="56.0" prefWidth="327.0" text="the ships that your enemy has placed." />
-        <Label id="sub_title" layoutX="150.0" layoutY="180.0" prefHeight="56.0" prefWidth="327.0" text="Set 5 ships on your (above) board" />
+        <Label id="sub_title" layoutX="150.0" layoutY="105.0" prefHeight="56.0" prefWidth="327.0" text="played against the computer." />
+        <Label id="sub_title" layoutX="150.0" layoutY="130.0" prefHeight="56.0" prefWidth="352.0" text="The goal is to find and destroy the enemy's ships." />
+        <Label id="sub_title" layoutX="150.0" layoutY="180.0" prefHeight="56.0" prefWidth="327.0" text="Set 5 ships on your (above) board." />
         <Label id="sub_title" layoutX="150.0" layoutY="205.0" prefHeight="56.0" prefWidth="327.0" text="Then press squares on the (below) board" />
-        <Label id="sub_title" layoutX="150.0" layoutY="230.0" prefHeight="56.0" prefWidth="327.0" text="A square can be: Blue, Black, Red or Green" />
-        <Label id="sub_title" layoutX="150.0" layoutY="255.0" prefHeight="56.0" prefWidth="327.0" text="Blue Square: Starting colour" />
-        <Label id="sub_title" layoutX="150.0" layoutY="280.0" prefHeight="56.0" prefWidth="327.0" text="Black (Single) Square: Missed shot" />
-        <Label id="sub_title" layoutX="150.0" layoutY="305.0" prefHeight="56.0" prefWidth="327.0" text="Black (Border) Square: Unavailable squares" />
-        <Label id="sub_title" layoutX="150.0" layoutY="330.0" prefHeight="56.0" prefWidth="327.0" text="Red Square: A ship has been hit" />
-        <Label id="sub_title" layoutX="150.0" layoutY="355.0" prefHeight="56.0" prefWidth="327.0" text="Green Square: A ship has been destroyed" />
-        <Button id="grey_button" layoutX="150.0" layoutY="411.0" mnemonicParsing="false" onAction="#show_home_page" prefWidth="200.0" text="Back" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2eb8aa" height="17.0" layoutX="350.0" layoutY="275.0" stroke="#2eb8a8" strokeType="INSIDE" width="16.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#111111" height="17.0" layoutX="397.0" layoutY="302.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#111111" height="17.0" layoutX="453.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="17.0" layoutX="377.0" layoutY="352.0" stroke="RED" strokeType="INSIDE" width="16.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#02a802" height="17.0" layoutX="443.0" layoutY="377.0" stroke="#03a603" strokeType="INSIDE" width="16.0" />
+        <Label id="sub_title" layoutX="150.0" layoutY="255.0" prefHeight="56.0" prefWidth="327.0" text="A square can be: Blue, Black, Red or Green" />
+        <Label id="sub_title" layoutX="150.0" layoutY="280.0" prefHeight="56.0" prefWidth="327.0" text="Blue Square: Starting colour" />
+        <Label id="sub_title" layoutX="150.0" layoutY="305.0" prefHeight="56.0" prefWidth="327.0" text="Black (Single) Square: Missed shot" />
+        <Label id="sub_title" layoutX="150.0" layoutY="330.0" prefHeight="56.0" prefWidth="327.0" text="Black (Border) Square: Unavailable squares" />
+        <Label id="sub_title" layoutX="150.0" layoutY="355.0" prefHeight="56.0" prefWidth="327.0" text="Red Square: A ship has been hit" />
+        <Label id="sub_title" layoutX="150.0" layoutY="380.0" prefHeight="56.0" prefWidth="327.0" text="Green Square: A ship has been destroyed" />
+        <Button id="grey_button" layoutX="150.0" layoutY="440.0" mnemonicParsing="false" onAction="#show_home_page" prefWidth="200.0" text="Back" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2eb8aa" height="17.0" layoutX="126.0" layoutY="303.0" stroke="#2eb8a8" strokeType="INSIDE" width="16.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#111111" height="17.0" layoutX="126.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#111111" height="17.0" layoutX="126.0" layoutY="353.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="17.0" layoutX="126.0" layoutY="378.0" stroke="RED" strokeType="INSIDE" width="16.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#02a802" height="17.0" layoutX="126.0" layoutY="403.0" stroke="#03a603" strokeType="INSIDE" width="16.0" />
 
     </children>
     <stylesheets>
