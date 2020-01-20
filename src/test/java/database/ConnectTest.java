@@ -1,4 +1,27 @@
-//package database;
+package database;
+
+import entity.User;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.rules.ExpectedException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
+
 //
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //
@@ -9,8 +32,8 @@
 //
 //import org.mockito.Mockito;
 //
-//public class ConnectTest {
-//
+public class ConnectTest {
+    //
 //    private transient User user;
 //    private transient int score;
 //    private transient String regSuccess;
@@ -102,3 +125,51 @@
 //        assertEquals("Score not added.", connection.addScore(user, score));
 //    }
 //}
+    @InjectMocks private Connect connect;
+    @Mock private Connection mockConnection;
+    @Mock private Statement mockStatement;
+    @Mock private Connect mockedConnect;
+    @Mock private ResultSet mockedResultSet;
+
+    //public ExpectedException exception = ExpectedException.none();
+    public transient User mahira;
+    public transient int score;
+    public transient ResultSet resultSet;
+
+
+    @BeforeEach
+    public void setUp() {
+        mockedConnect = Mockito.mock(Connect.class);
+        mockedResultSet = Mockito.mock(ResultSet.class);
+        mockStatement = Mockito.mock(Statement.class);
+        //MockitoAnnotations.initMocks(this);
+        //mockConnection = Mockito.mock(Connection.class);
+        mahira = new User("Mahira", "pwd");
+        score = 250;
+    }
+
+    @Test
+    public void registerUserTest() throws Exception {
+
+    }
+
+    @Test
+    public void testConnection() throws Exception {
+        Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
+        Mockito.when(mockConnection.createStatement().executeUpdate(Mockito.any())).thenReturn(1);
+//        when(mockConnection.doesUserExist(mahira)).thenReturn(true);
+        //Mockito.when(connect.doesUserExists())
+        Boolean result = connect.doesUserExist(mahira, mockedResultSet);
+        Assert.assertEquals(result, true);
+        Mockito.verify(mockConnection.createStatement(), Mockito.times(1));
+    }
+
+
+}
+
+// WEBLAB
+
+
+
+
+
