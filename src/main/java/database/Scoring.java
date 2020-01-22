@@ -1,11 +1,13 @@
 package database;
 
 import entity.User;
+
 import entity.board.Board;
 import entity.ships.Ship;
+import java.sql.SQLException;
 import javafx.geometry.Point2D;
 
-import java.sql.SQLException;
+
 
 /**
  * Class Score, specifies the amount of points the player has obtained.
@@ -185,7 +187,7 @@ public class Scoring {
     }
 
     /**
-     *
+     *This method adds a score to the database.
      */
     public void addScoreToDatabase() throws SQLException, ClassNotFoundException {
         Connect.addScore(Connect.user,score);

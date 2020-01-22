@@ -1,15 +1,9 @@
-<<<<<<< HEAD:src/test/java/ScoringTest.java
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import database.Scoring;
-import entity.Square;
-=======
 package entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
->>>>>>> 9a2c66a7f11a98eadc05ab5319bc5f04b344ff4e:src/test/java/entity/ScoringTest.java
+import database.Scoring;
+
 import entity.board.Board;
 import entity.board.StandardBoard;
 import entity.ships.BattleShip;

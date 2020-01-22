@@ -1,11 +1,12 @@
 package entity;
 
+import database.Scoring;
 import entity.board.Board;
 import entity.ships.Ship;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import database.Scoring;
+
 
 
 

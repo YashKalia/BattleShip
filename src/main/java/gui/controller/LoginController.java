@@ -50,7 +50,7 @@ public class LoginController {
         if (r.equals("User does not exist.")) {
             response.setText("User does not exist.");
         } else if (r.equals("Authentication successful.")) {
-            Connect.user=user;
+            Connect.user = user;
             response.setText("Authentication successful.");
             Stage primaryStage = Main.getStage();
             URL url = new File("src/main/java/gui/fxml/HomePage.fxml").toURL();

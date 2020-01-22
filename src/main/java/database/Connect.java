@@ -42,25 +42,6 @@ public class Connect {
     static ResultSet rs4 = null;
     public static User user = null;
 
-
-    /*
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        //User newuser = new User(new String("Ice"), new String("Cube"))
-        try {
-            rs4 = Connect.getTopFive();
-            while (rs4.next()) {
-                for (int i = 1;i <= rs4.getMetaData().getColumnCount();i++) {
-                    System.out.println(rs4.getInt(i));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            rs4.close();
-        }
-    }*/
-
     /**
      * Register a user to the database.
      *
@@ -218,11 +199,4 @@ public class Connect {
             return new String("Score not added.");
         }
     }
-
-    //Need a method to check if the score being added is a high score or not.
-
-
-
-
-
 }

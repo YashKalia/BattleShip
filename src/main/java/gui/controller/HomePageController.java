@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class HomePageController {
 
-    protected static BoardCreator boardCreator=new StandardBoardCreator();
+    protected static BoardCreator boardCreator = new StandardBoardCreator();
 
     /**Shows the game screen,finally.
      *
