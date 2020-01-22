@@ -21,14 +21,17 @@ class SquareTest {
 
     private transient Square square;
     private Board board;
-    private transient Board opponentBoard;
+    private transient Board boardOpponent;
+    private transient String carrierName;
 
     @BeforeEach
     public void setUpEnvironment() {
         boolean opponent = false;
         EventHandler<? super MouseEvent> handler = null;
         board = new StandardBoard(opponent, handler);
+        boardOpponent = new StandardBoard(true, handler);
         square = new Square(3, 4, board);
+        carrierName = "Carrier";
     }
 
     @Test
@@ -65,7 +68,7 @@ class SquareTest {
 
     @Test
     public void setShip() {
-        Ship ship = new Carrier("Carrier", 5, false);
+        Ship ship = new Carrier(carrierName, 5, false);
         square.setShip(ship);
         Ship actual = square.getShip();
         assertEquals(ship, actual);
@@ -146,11 +149,47 @@ class SquareTest {
     }
 
     @Test
+    public void getSquareLeftFail() {
+        square = new Square(0, 1, board);
+        Square result = square.getSquareLeft(square);
+        Square actual = new Square(11,11, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareLeftOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareLeft(square);
+        int part1 = 10 * square.getCoordinateY();
+        int part2 = square.getCoordinateX() - 1;
+        Square actual = Board.squaresInGrid.get(part1 + part2);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
     public void getSquareRight() {
         square = new Square(3, 4, board);
         Square result = square.getSquareRight(square);
         Square actual = Board.squaresInGrid.get(44);
         assertEquals(result, actual);
+    }
+
+    @Test
+    public void getSquareRightFail() {
+        square = new Square(9, 1, board);
+        Square result = square.getSquareRight(square);
+        Square actual = new Square(-1,-1, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareRightOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareRight(square);
+        int part1 = 10 * square.getCoordinateY();
+        int part2 = square.getCoordinateX() + 1;
+        Square actual = Board.squaresInGrid.get(part1 + part2);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
     @Test
@@ -162,6 +201,23 @@ class SquareTest {
     }
 
     @Test
+    public void getSquareUpFail() {
+        square = new Square(3, 0, board);
+        Square result = square.getSquareUp(square);
+        Square actual = new Square(-1,-1, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareUpOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareUp(square);
+        int part1 = 10 * (square.getCoordinateY() - 1);
+        Square actual = Board.squaresInGrid.get(part1 + square.getCoordinateX());
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
     public void getSquareBelow() {
         square = new Square(3, 4, board);
         Square result = square.getSquareBelow(square);
@@ -170,13 +226,50 @@ class SquareTest {
     }
 
     @Test
+    public void getSquareBelowFail() {
+        square = new Square(3, 9, board);
+        Square result = square.getSquareBelow(square);
+        Square actual = new Square(-1,-1, board);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareBelowOpponent() {
+        square = new Square(3, 4, boardOpponent);
+        Square result = square.getSquareBelow(square);
+        int part1 = 10 * (square.getCoordinateY() - 1);
+        Square actual = Board.squaresInGrid.get(part1 + square.getCoordinateX());
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
+    public void getSquareTest() {
+        square = new Square(3,4,board);
+        Square result = square.getSquare(3,4);
+        Square actual = Board.squaresInGrid.get(10 * 4 + 3);
+        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
+    }
+
+    @Test
     public void setColorSquareLeft() {
-        Ship carrier = new Carrier("Carrier", 3, true);
+        Ship carrier = new Carrier(carrierName, 3, true);
         board.placeShip(carrier,3, 4, board);
         Square leftSquare = new Square(3, 4, board);
         square.setSquareColorLeft(leftSquare);
         assertTrue(square.getSquareUp(leftSquare).isShooted());
         assertTrue(square.getSquareBelow(leftSquare).isShooted());
+    }
+
+    @Test
+    public void setColorSquareLeftFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareLeft(square).getCoordinateX();
+        int y = square.getSquareLeft(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorLeft(square);
+        assertTrue(square.getSquareUp(square).isShooted());
+        assertTrue(square.getSquareBelow(square).isShooted());
     }
 
     @Test
@@ -190,13 +283,37 @@ class SquareTest {
     }
 
     @Test
+    public void setColorSquareRightFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareRight(square).getCoordinateX();
+        int y = square.getSquareRight(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorRight(square);
+        assertTrue(square.getSquareUp(square).isShooted());
+        assertTrue(square.getSquareBelow(square).isShooted());
+    }
+
+    @Test
     public void setColorSquareUp() {
-        Ship carrier = new Carrier("Carrier", 3, true);
+        Ship carrier = new Carrier(carrierName, 3, true);
         board.placeShip(carrier,4, 2, board);
         Square leftSquare = new Square(4, 2, board);
         square.setSquareColorUp(leftSquare);
         assertTrue(square.getSquareLeft(leftSquare).isShooted());
         assertTrue(square.getSquareRight(leftSquare).isShooted());
+    }
+
+    @Test
+    public void setColorSquareUpFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareUp(square).getCoordinateX();
+        int y = square.getSquareUp(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorUp(square);
+        assertTrue(square.getSquareLeft(square).isShooted());
+        assertTrue(square.getSquareRight(square).isShooted());
     }
 
     @Test
@@ -207,6 +324,18 @@ class SquareTest {
         square.setSquareColorBelow(leftSquare);
         assertTrue(square.getSquareLeft(leftSquare).isShooted());
         assertTrue(square.getSquareRight(leftSquare).isShooted());
+    }
+
+    @Test
+    public void setColorSquareBelowFirstIf() {
+        Ship carrier = new Carrier(carrierName, 3, true);
+        Square square = new Square(3, 4, board);
+        int x = square.getSquareBelow(square).getCoordinateX();
+        int y = square.getSquareBelow(square).getCoordinateY();
+        board.placeShip(carrier,x, y, board);
+        square.setSquareColorBelow(square);
+        assertTrue(square.getSquareLeft(square).isShooted());
+        assertTrue(square.getSquareRight(square).isShooted());
     }
 
 

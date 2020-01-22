@@ -128,7 +128,7 @@ class StandardBoardTest {
 
     @Test
     public void canNotPlaceShipVertical_OutsideBoardPartially() {
-        Ship ship = new BattleShip(battleship, 4, false);
+        Ship ship = new BattleShip(battleship, 4, true);
         boolean actual = board.canPlaceShip(ship, 7, 1, board);
         assertEquals(false, actual);
     }
@@ -167,7 +167,7 @@ class StandardBoardTest {
 
     @Test
     public void canNotPlaceShipHorizontal_OutsideBoardPartially() {
-        Ship ship = new BattleShip(battleship, 4, true);
+        Ship ship = new BattleShip(battleship, 4, false);
         boolean actual = board.canPlaceShip(ship, 1, 7, board);
         assertEquals(false, actual);
     }
