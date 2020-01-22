@@ -40,10 +40,7 @@ public class Connect {
     static ResultSet rs2 = null;
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
-
-    private static String algorithmType = "Blowfish";
-
-    final static String secretKey = "ssshhhhhhhhhhh!!!!";
+    static String secretKey = "ssshhhhhhhhhhh!!!!";
     private static byte[] key;
 
     /**
@@ -61,7 +58,7 @@ public class Connect {
                     "insert into projects_BattleShip.User ("
                             + "username,password,highscore) values (?,?,0);");
             ps4.setString(1, user.getUsername());
-            ps4.setString(2, AES.encrypt(user.getPassword(),secretKey));
+            ps4.setString(2, Aes.encrypt(user.getPassword(),secretKey));
             int status1 = ps4.executeUpdate();
             if (status1 != 0) {
                 connection1.close();
@@ -97,7 +94,7 @@ public class Connect {
                     + " username='" + user.getUsername() + "';");
             rs2.next();
             String encryptedPassword = (rs2.getString("password"));
-            String decryptedPassword = AES.decrypt(encryptedPassword,secretKey);
+            String decryptedPassword = Aes.decrypt(encryptedPassword,secretKey);
             if (decryptedPassword.equals(user.getPassword())) {
                 connection2.close();
                 return new String("Authentication successful.");
@@ -205,4 +202,4 @@ public class Connect {
         }
     }
 
-    }
+}
