@@ -10,8 +10,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 
 
 public class Connect {
@@ -43,27 +41,10 @@ public class Connect {
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
 
-    private static String key = "JabbaTheHutt";
     private static String algorithmType = "Blowfish";
 
-
-    /*
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        //User newuser = new User(new String("Ice"), new String("Cube"))
-        try {
-            rs4 = Connect.getTopFive();
-            while (rs4.next()) {
-                for (int i = 1;i <= rs4.getMetaData().getColumnCount();i++) {
-                    System.out.println(rs4.getInt(i));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            rs4.close();
-        }
-    }*/
+    final static String secretKey = "ssshhhhhhhhhhh!!!!";
+    private static byte[] key;
 
     /**
      * Register a user to the database.
@@ -80,7 +61,7 @@ public class Connect {
                     "insert into projects_BattleShip.User ("
                             + "username,password,highscore) values (?,?,0);");
             ps4.setString(1, user.getUsername());
-            ps4.setString(2, Connect.encrypt(user.getPassword(),key));
+            ps4.setString(2, AES.encrypt(user.getPassword(),secretKey));
             int status1 = ps4.executeUpdate();
             if (status1 != 0) {
                 connection1.close();
@@ -116,8 +97,7 @@ public class Connect {
                     + " username='" + user.getUsername() + "';");
             rs2.next();
             String encryptedPassword = (rs2.getString("password"));
-            String paddedPassword=padString(encryptedPassword);
-            String decryptedPassword = Connect.decrypt(encryptedPassword,key);
+            String decryptedPassword = AES.decrypt(encryptedPassword,secretKey);
             if (decryptedPassword.equals(user.getPassword())) {
                 connection2.close();
                 return new String("Authentication successful.");
@@ -225,71 +205,4 @@ public class Connect {
         }
     }
 
-    /**Encrypts the password before storing it in the database.
-     *
-     * @param strClearText The password.
-     * @param strKey The private key.
-     * @return the encrypted string
-     * @throws Exception error.
-     */
-    public static String encrypt(String strClearText,String strKey) throws Exception {
-
-
-        try {
-            SecretKeySpec skeyspec = new SecretKeySpec(strKey.getBytes(),algorithmType);
-            Cipher cipher = Cipher.getInstance(algorithmType);
-            cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-            byte[] encrypted = cipher.doFinal(strClearText.getBytes());
-            String strData = new String(encrypted);
-            return strData;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception(e);
-        }
-
     }
-
-    /**
-     * Decrypts the password retrieved from the database.
-     * @param strEncrypted the encrypted [password).
-     * @param strKey the private key.
-     * @return the decrypted key.
-     * @throws Exception error.
-     */
-    public static String decrypt(String strEncrypted,String strKey) throws Exception {
-
-
-        try {
-            SecretKeySpec skeyspec = new SecretKeySpec(strKey.getBytes(),algorithmType);
-            Cipher cipher = Cipher.getInstance(algorithmType);
-            cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-            byte[] decrypted = cipher.doFinal((padString(strEncrypted)).getBytes());
-            String strData = new String(decrypted);
-            return strData;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception(e);
-        }
-
-    }
-
-    public static String padString(String input){
-        int size=input.length();
-        int quotient=size/8;
-        int no=(quotient+1)*8;
-        int i=0;
-        while(i<no-size){
-            input=input+" ";
-            i++;
-        }
-        System.out.println("Length of string to be decrypted is "+input.length());
-        return input;
-    }
-
-
-
-
-
-}
