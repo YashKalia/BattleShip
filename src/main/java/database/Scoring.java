@@ -12,7 +12,6 @@ import java.sql.SQLException;
  */
 public class Scoring {
     static int score = 0;
-    int finalScore=0;
     String shipname = null;
 
     public String getShipname() {
@@ -28,7 +27,7 @@ public class Scoring {
      *
      * @return The amount of points the player has achieved.
      */
-    public int getScore() {
+    public static int getScore() {
         return score;
     }
 
@@ -188,7 +187,7 @@ public class Scoring {
     /**
      *
      */
-    public static void addScoreToDatabase() throws SQLException, ClassNotFoundException {
+    public void addScoreToDatabase() throws SQLException, ClassNotFoundException {
         Connect.addScore(Connect.user,score);
     }
 }

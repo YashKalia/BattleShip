@@ -58,14 +58,6 @@ public class StandardBoardCreator implements BoardCreator {
             game.opponentTurn = !square.shoot();
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
-                try {
-                    Scoring.addScoreToDatabase();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
                 //System.exit(0);
             }
             if (game.opponentTurn) {
