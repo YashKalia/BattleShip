@@ -1,11 +1,7 @@
-package entity;
+package entity.ships;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import entity.ships.BattleShip;
-import entity.ships.Carrier;
-import entity.ships.Destroyer;
-import entity.ships.Ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,7 @@
-package gui;
+package entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import entity.Game;
 import entity.board.Board;
 import entity.board.StandardBoard;
 
@@ -11,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class HelloWorldTest {
+class GameTest {
 
     private transient Game helloWorld;
 
