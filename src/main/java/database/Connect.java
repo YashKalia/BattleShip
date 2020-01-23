@@ -40,25 +40,8 @@ public class Connect {
     static ResultSet rs2 = null;
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
-
-
-    /*
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        //User newuser = new User(new String("Ice"), new String("Cube"))
-        try {
-            rs4 = Connect.getTopFive();
-            while (rs4.next()) {
-                for (int i = 1;i <= rs4.getMetaData().getColumnCount();i++) {
-                    System.out.println(rs4.getInt(i));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            rs4.close();
-        }
-    }*/
+    static String secretKey = "ssshhhhhhhhhhh!!!!";
+    private static byte[] key;
 
     /**
      * Register a user to the database.
@@ -67,7 +50,7 @@ public class Connect {
      * @return a String that will be printed on the screen.
      * @throws SQLException If error occurs.
      */
-    public static String registerUser(User user) throws SQLException, ClassNotFoundException {
+    public static String registerUser(User user) throws Exception {
         Class.forName(driver);
         connection1 = DriverManager.getConnection(url4, username, password);
         if (!doesUserExist(user)) {
@@ -75,7 +58,7 @@ public class Connect {
                     "insert into projects_BattleShip.User ("
                             + "username,password,highscore) values (?,?,0);");
             ps4.setString(1, user.getUsername());
-            ps4.setString(2, user.getPassword());
+            ps4.setString(2, Aes.encrypt(user.getPassword(),secretKey));
             int status1 = ps4.executeUpdate();
             if (status1 != 0) {
                 connection1.close();
@@ -99,7 +82,7 @@ public class Connect {
      * @return a String which will be printed on the screen.
      * @throws SQLException IF error occurs.
      */
-    public static String authenticate(User user) throws SQLException, ClassNotFoundException {
+    public static String authenticate(User user) throws Exception {
         if (!doesUserExist(user)) {
             return new String("User does not exist.");
         } else {
@@ -110,8 +93,9 @@ public class Connect {
             rs2 = ps3.executeQuery("select password from projects_BattleShip.User where"
                     + " username='" + user.getUsername() + "';");
             rs2.next();
-            String password = (rs2.getString("password"));
-            if (password.equals(user.getPassword())) {
+            String encryptedPassword = (rs2.getString("password"));
+            String decryptedPassword = Aes.decrypt(encryptedPassword,secretKey);
+            if (decryptedPassword.equals(user.getPassword())) {
                 connection2.close();
                 return new String("Authentication successful.");
             } else {
@@ -217,11 +201,5 @@ public class Connect {
             return new String("Score not added.");
         }
     }
-
-    //Need a method to check if the score being added is a high score or not.
-
-
-
-
 
 }

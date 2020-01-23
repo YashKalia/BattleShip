@@ -3,6 +3,7 @@ package gui.controller;
 import database.Connect;
 import entity.User;
 import gui.Main;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-
 public class RegisterController {
 
 
@@ -32,16 +32,16 @@ public class RegisterController {
     transient Label result;
 
 
-    /**register.
+    /**
+     * register.
      *
      * @param event if mouse clicked.
-     * @throws SQLException if exception occurs.
+     * @throws SQLException           if exception occurs.
      * @throws ClassNotFoundException if exception occurs.
-     * @throws IOException if exception occurs.
+     * @throws IOException            if exception occurs.
      */
     @SuppressWarnings("deprecation")
-    public void registerUser(ActionEvent event) throws SQLException,
-            ClassNotFoundException, IOException {
+    public void registerUser(ActionEvent event) throws Exception {
 
         String response = Connect.registerUser(
                 new User(fieldusername.getText(), fieldpassword.getText()));
@@ -60,7 +60,8 @@ public class RegisterController {
         }
     }
 
-    /**Display the home screen.
+    /**
+     * Display the home screen.
      *
      * @param event When user click on back option.
      * @throws IOException if error occurs.
