@@ -56,7 +56,8 @@ public class StandardBoardCreator implements BoardCreator {
                 return;
             }
             Square square = (Square) event.getSource();
-            if (opponentBoard.inRange(square.getCoordinateX(), square.getCoordinateY(), opponentBoard)) {
+            if (opponentBoard.inRange(square.getCoordinateX(), square.getCoordinateY(),
+                    opponentBoard)) {
                 if (square.shooted) {
                     return;
                 }

@@ -43,6 +43,7 @@ test {
         enabled = true
         includes = ['entity.*', 'database.*', 'gui.*']
         excludes = []
+
     }
 }
 
