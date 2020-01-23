@@ -1,6 +1,5 @@
 package entity;
 
-import database.Scoring;
 import entity.board.Board;
 import entity.ships.Ship;
 import javafx.geometry.Point2D;

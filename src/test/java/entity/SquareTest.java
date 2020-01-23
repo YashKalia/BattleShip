@@ -3,7 +3,6 @@ package entity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import database.Scoring;
 import entity.board.Board;
 import entity.board.StandardBoard;
 import entity.ships.Carrier;

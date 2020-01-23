@@ -1,21 +1,16 @@
 package entity.board;
 
-import database.Scoring;
 import entity.Game;
 import entity.Square;
 import entity.ships.Ship;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import javax.sound.midi.SysexMessage;
 
 public class StandardBoardCreator implements BoardCreator {
 
