@@ -9,8 +9,11 @@ import java.util.Random;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+
+import javax.sound.midi.SysexMessage;
 
 public class StandardBoardCreator implements BoardCreator {
 
@@ -19,6 +22,9 @@ public class StandardBoardCreator implements BoardCreator {
     protected static Board playerBoard;
     protected static Game game;
     private static int allShipsPlaced = 4;
+    private static String primary = "PRIMARY";
+    private static String secondary = "SECONDARY";
+
 
     /**
      * Verifying whether the application is running.
@@ -73,7 +79,15 @@ public class StandardBoardCreator implements BoardCreator {
 
             List<Ship> ships = playerBoard.makeListWithShips();
 
+
             Square square = (Square) event.getSource();
+            if (event.getButton().toString().equals(primary)) {
+                ships.get(allShipsPlaced).orientation = false;
+            }
+
+            if (event.getButton().toString().equals(secondary)) {
+                ships.get(allShipsPlaced).orientation = true;
+            }
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY, playerBoard.getBoard())) {

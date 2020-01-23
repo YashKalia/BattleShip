@@ -20,6 +20,8 @@ public class EnhancedBoardCreator implements BoardCreator  {
     protected static Board playerBoard;
     protected static Game game;
     private static int allShipsPlaced = 4;
+    private static String primary = "PRIMARY";
+    private static String secondary = "SECONDARY";
 
     /**
      * Creation of an Enhanced Board.
@@ -56,7 +58,17 @@ public class EnhancedBoardCreator implements BoardCreator  {
 
             List<Ship> ships = playerBoard.makeListWithShips();
 
+
+
             Square square = (Square) event.getSource();
+
+            if (event.getButton().toString().equals(primary)) {
+                ships.get(allShipsPlaced).orientation = false;
+            }
+
+            if (event.getButton().toString().equals(secondary)) {
+                ships.get(allShipsPlaced).orientation = true;
+            }
 
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY, playerBoard.getBoard())) {

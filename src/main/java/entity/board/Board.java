@@ -59,6 +59,7 @@ public abstract class Board extends Parent {
                 }
                 s.setOnMouseClicked(handler);
                 row.getChildren().add(s);
+
             }
 
             rows.getChildren().add(row);
@@ -197,13 +198,13 @@ public abstract class Board extends Parent {
     public static List<Ship> makeListWithShips() {
         Ship carrier = new Carrier("Carrier", 5, true);
         shipList.add(carrier);
-        Ship battleShip = new BattleShip("BattleShip", 4, true);
+        Ship battleShip = new BattleShip("BattleShip", 4, false);
         shipList.add(battleShip);
-        Ship cruiser = new Cruiser("Cruiser", 3, true);
+        Ship cruiser = new Cruiser("Cruiser", 3, false);
         shipList.add(cruiser);
-        Ship submarine = new Submarine("Submarine", 3, true);
+        Ship submarine = new Submarine("Submarine", 3, false);
         shipList.add(submarine);
-        Ship destroyer = new Destroyer("Destroyer", 2, true);
+        Ship destroyer = new Destroyer("Destroyer", 2, false);
         shipList.add(destroyer);
 
         return shipList;
@@ -260,7 +261,7 @@ public abstract class Board extends Parent {
         int length = ship.getTypeShip();
 
 
-        if (ship.orientation) {
+        if (!ship.orientation) {
             startCoordinate = y;
         } else {
             startCoordinate = x;
@@ -268,7 +269,7 @@ public abstract class Board extends Parent {
 
         for (int i = startCoordinate; i < startCoordinate + length; i++) {
 
-            if (ship.orientation) {
+            if (!ship.orientation) {
                 if (!inRange(x, i, board)) {
                     return false;
                 }
@@ -310,17 +311,17 @@ public abstract class Board extends Parent {
             int length = ship.getTypeShip();
 
             if (ship.orientation) {
-                startCoordinate = y;
-            } else {
                 startCoordinate = x;
+            } else {
+                startCoordinate = y;
             }
 
             for (int i = startCoordinate; i < startCoordinate + length; i++) {
 
                 if (ship.orientation) {
-                    startSquare = getSquare(x, i);
-                } else {
                     startSquare = getSquare(i, y);
+                } else {
+                    startSquare = getSquare(x, i);
                 }
 
                 startSquare.ship = ship;

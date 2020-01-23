@@ -18,6 +18,7 @@ public class OpponentPlayer {
     private transient int nine = 9;
     private transient int allShipsPlaced = 4;
     private transient int seventeen = 17;
+    private transient int one = 1;
 
     public static ArrayList<Square> getShotSquares() {
         return shotSquares;
@@ -91,6 +92,7 @@ public class OpponentPlayer {
             if (Game.opponentTurn) {
                 shotSquares.add(square);
                 if (!square.getShip().isNotDestroyed()) {
+                    playerBoard.ships--;
                     shotSquares.clear();
                     enemyShot(playerBoard, new Random());
                     counter = 0;
@@ -180,6 +182,7 @@ public class OpponentPlayer {
         if (Game.opponentTurn) {
             shotSquares.add(up);
             if (!up.getShip().isNotDestroyed()) {
+                playerBoard.ships--;
                 counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard, new Random());
@@ -254,6 +257,7 @@ public class OpponentPlayer {
         if (Game.opponentTurn) {
             shotSquares.add(left);
             if (!left.getShip().isNotDestroyed()) {
+                playerBoard.ships--;
                 counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard, new Random());
@@ -306,6 +310,7 @@ public class OpponentPlayer {
         if (Game.opponentTurn) {
             shotSquares.add(right);
             if (!right.getShip().isNotDestroyed()) {
+                playerBoard.ships--;
                 counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard, new Random());
@@ -360,6 +365,7 @@ public class OpponentPlayer {
         if (Game.opponentTurn) {
             shotSquares.add(down);
             if (!down.getShip().isNotDestroyed()) {
+                playerBoard.ships--;
                 counter = 0;
                 shotSquares.clear();
                 enemyShot(playerBoard, new Random());
@@ -391,6 +397,14 @@ public class OpponentPlayer {
             while (!opponentBoard.inRange(x, y, opponentBoard)) {
                 x = randomizer.nextInt(10);
                 y = randomizer.nextInt(10);
+            }
+
+            int orientation = randomizer.nextInt(2);
+            if (orientation == 0) {
+                ships.get(allShipsPlaced).orientation = false;
+            }
+            if (orientation == one) {
+                ships.get(allShipsPlaced).orientation = true;
             }
 
             if (opponentBoard.placeShip(ships.get(allShipsPlaced), x, y, opponentBoard)) {

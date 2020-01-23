@@ -272,7 +272,7 @@ public class Square extends Rectangle {
      * @param y y-coordinate of the square in the board.
      * @return the square which has those x and y coordinates.
      */
-    public Square getSquare(int x, int y) {
+    public static Square getSquare(int x, int y) {
         return Board.squaresInGrid.get(10 * y + x);
     }
 
@@ -288,7 +288,6 @@ public class Square extends Rectangle {
      * @param square The last square that was shot before the ship sunk.
      */
     public void setDestroyedShipColour(Square square) {
-        if (square.getShip().getDamage() <= 0) {
             if (getSquareLeft(square).getShip() != null) {
                 setSquareColorLeft((square));
             } else {
@@ -317,7 +316,6 @@ public class Square extends Rectangle {
                 getSquareBelow(square).shooted = true;
             }
         }
-    }
 
     /**
      * We apply recursion until we discover a square without a ship part on it. When the square
@@ -330,7 +328,6 @@ public class Square extends Rectangle {
      *               to the left.
      */
     public void setSquareColorLeft(Square square) {
-        if (square.getShip().getDamage() <= 0) {
             square.setFill((Color.GREEN));
             if (getSquareLeft(square) != null && getSquareLeft(square).getShip() != null) {
                 setSquareColorLeft(getSquareLeft(square));
@@ -347,7 +344,6 @@ public class Square extends Rectangle {
                 getSquareBelow(square).shooted = true;
             }
         }
-    }
 
     /**
      * We apply recursion until we discover a square without a ship part on it. When the
@@ -360,7 +356,6 @@ public class Square extends Rectangle {
      *               to the right.
      */
     public void setSquareColorRight(Square square) {
-        if (square.getShip().getDamage() <= 0) {
             square.setFill((Color.GREEN));
             if (getSquareRight(square) != null && getSquareRight(square).getShip() != null) {
                 setSquareColorRight(getSquareRight(square));
@@ -377,7 +372,6 @@ public class Square extends Rectangle {
                 getSquareBelow(square).shooted = true;
             }
         }
-    }
 
     /**
      * We apply recursion until we discover a square without a ship part on it. When the
@@ -390,7 +384,6 @@ public class Square extends Rectangle {
      *               squares above.
      */
     public void setSquareColorUp(Square square) {
-        if (square.getShip().getDamage() <= 0) {
             square.setFill((Color.GREEN));
             if (getSquareUp(square) != null && getSquareUp(square).getShip() != null) {
                 setSquareColorUp(getSquareUp(square));
@@ -407,7 +400,6 @@ public class Square extends Rectangle {
                 getSquareUp(square).shooted = true;
             }
         }
-    }
 
     /**
      * We apply recursion until we discover a square without a ship part on it. When the
@@ -421,7 +413,6 @@ public class Square extends Rectangle {
      *               check squares below.
      */
     public void setSquareColorBelow(Square square) {
-        if (square.getShip().getDamage() <= 0) {
             square.setFill((Color.GREEN));
             if (getSquareBelow(square) != null && getSquareBelow(square).getShip() != null) {
                 setSquareColorBelow(getSquareBelow(square));
@@ -438,7 +429,6 @@ public class Square extends Rectangle {
                 getSquareRight(square).shooted = true;
             }
         }
-    }
 
     /**
      * Set the color of a square, not containing a ship, that has been shot for player.
@@ -447,10 +437,8 @@ public class Square extends Rectangle {
      * @return Whether square is shot.
      */
     public boolean shoot(Square square) {
-
         if (board.inRange(square.getCoordinateX(), square.getCoordinateY(), board)) {
             shooted = true;
-
 
             if (ship != null) {
                 if (ship.getDamage() == ship.getTypeShip()) {
@@ -462,6 +450,7 @@ public class Square extends Rectangle {
                 ship.shot();
 
                 setFill(Color.RED);
+
                 if (!ship.isNotDestroyed()) {
                     setDestroyedShipColour(this);
                     board.ships--;
