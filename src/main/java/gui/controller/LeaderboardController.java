@@ -15,18 +15,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
 public class LeaderboardController {
-
     @FXML
-    public transient javafx.scene.control.TableView tableView;
-
-    public transient TableColumn username;
-    public transient TableColumn score;
+    public transient Label label1;
+    @FXML
+    private transient Label label2;
+    @FXML
+    private transient Label label3;
+    @FXML
+    private transient Label label4;
+    @FXML
+    private transient Label label5;
 
     /**Display the home screen.
      *
@@ -63,22 +68,18 @@ public class LeaderboardController {
     /**
      * Get leaders and populate the leaderboard.
      */
-    private void getLeaders() throws SQLException, ClassNotFoundException {
-        ObservableList listTopFive = FXCollections.observableArrayList(Connect.getTopFive());
-        tableView.setItems(listTopFive);
-
-        username.setCellValueFactory(new PropertyValueFactory("name"));
-        score.setCellValueFactory(new PropertyValueFactory("score"));
-        tableView.getColumns().setAll(username, score);
-
-
-        //  System.out.println("<table>");
-        //  ArrayList dataList = Connect.getTopFive();
-        //  for (Iterator iter = dataList.iterator(); iter.hasNext();) {
-        //System.out.println("<tr><td>" + (String)(iter.next()) + "</td></tr>");
-        //  }
-        //  System.out.println("</table>");
+    public void getLeaders() throws SQLException, ClassNotFoundException {
+        String zero = Connect.getTopFive().get(0).toString();
+        System.out.println(zero);
+        label1.setText(zero);
+        label2.setText(Connect.getTopFive().get(1).toString());
+        label3.setText(Connect.getTopFive().get(2).toString());
+        label4.setText(Connect.getTopFive().get(3).toString());
+        label5.setText(Connect.getTopFive().get(4).toString());
     }
 
+    public void show_leaderboard(ActionEvent event)throws SQLException, ClassNotFoundException {
+        getLeaders();
+    }
 
 }

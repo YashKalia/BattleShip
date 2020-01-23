@@ -186,10 +186,10 @@ public class Scoring {
         }
     }
 
-       /**
-        *This method adds a score to the database.
-        */
-       public void addScoreToDatabase() throws SQLException, ClassNotFoundException {
-           Connect.addScore(Connect.user,score);
-       }
+    /**
+     *This method adds a score to the database.
+     */
+    public static void addScoreToDatabase() throws SQLException, ClassNotFoundException {
+        Connect.addScore(Connect.user,score);
+    }
 }

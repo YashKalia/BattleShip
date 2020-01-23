@@ -1,5 +1,6 @@
 package gui.controller;
 
+import database.Connect;
 import entity.board.BoardCreator;
 import entity.board.StandardBoardCreator;
 import gui.Main;
@@ -9,9 +10,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 

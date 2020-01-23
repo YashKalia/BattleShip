@@ -1,5 +1,6 @@
 package database;
 
+import com.sun.net.httpserver.Authenticator;
 import entity.User;
 
 import java.sql.Connection;
