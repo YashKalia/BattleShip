@@ -1,19 +1,18 @@
 package entity.board;
 
 import entity.Game;
+import entity.Scoring;
 import entity.Square;
 import entity.ships.Ship;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import javax.sound.midi.SysexMessage;
 
 public class StandardBoardCreator implements BoardCreator {
 
@@ -50,33 +49,38 @@ public class StandardBoardCreator implements BoardCreator {
      * @return Parent root.
      */
     @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-    public Parent createBord() {
+    public static Parent createBord() {
         opponentBoard = new StandardBoard(true, event -> {
             if (!inProgress) {
                 return;
             }
             Square square = (Square) event.getSource();
+
             if (square.shooted) {
                 return;
             }
-            game.opponentTurn = !square.shoot();
+            game.opponentTurn = !square.shoot(square);
             if (opponentBoard.ships == 0) {
                 System.out.println("YOU WIN");
+                try {
+                    Scoring.addScoreToDatabase();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 //System.exit(0);
             }
             if (game.opponentTurn) {
                 opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
             }
-
         });
 
         playerBoard = new StandardBoard(false, event -> {
             if (inProgress) {
                 return;
             }
-
             List<Ship> ships = playerBoard.makeListWithShips();
-
 
             Square square = (Square) event.getSource();
             if (event.getButton().toString().equals(primary)) {

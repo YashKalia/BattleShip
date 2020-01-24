@@ -28,46 +28,40 @@ public class EnhancedBoardCreator implements BoardCreator  {
      * @return Parent root.
      */
     @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-    public Parent createBord() {
+     public static Parent createBord() {
 
         opponentBoard = new EnhancedBoard(true, event -> {
             if (!inProgress) {
                 return;
             }
             Square square = (Square) event.getSource();
-            if (square.shooted) {
-                return;
+            if (opponentBoard.inRange(square.getCoordinateX(), square.getCoordinateY(),
+                    opponentBoard)) {
+                if (square.shooted) {
+                    return;
+                }
+                game.opponentTurn = !square.shoot(square);
+                if (opponentBoard.ships == 0) {
+                    System.out.println("YOU WIN");
+                }
+                if (game.opponentTurn) {
+                    opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
+                }
             }
-            game.opponentTurn = !square.shoot();
-            if (opponentBoard.ships == 0) {
-                System.out.println("YOU WIN");
-                //System.exit(0);
-            }
-            if (game.opponentTurn) {
-                opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
-            }
-
         });
 
         playerBoard = new EnhancedBoard(false, event -> {
             if (inProgress) {
                 return;
             }
-
             List<Ship> ships = playerBoard.makeListWithShips();
-
-
-
             Square square = (Square) event.getSource();
-
             if (event.getButton().toString().equals(primary)) {
                 ships.get(allShipsPlaced).orientation = false;
             }
-
             if (event.getButton().toString().equals(secondary)) {
                 ships.get(allShipsPlaced).orientation = true;
             }
-
             if (playerBoard.placeShip(ships.get(allShipsPlaced), square.coordinateX,
                     square.coordinateY, playerBoard.getBoard())) {
                 allShipsPlaced--;
@@ -76,6 +70,9 @@ public class EnhancedBoardCreator implements BoardCreator  {
                 }
             }
         });
+
+        playerBoard.reshape(playerBoard);
+        opponentBoard.reshape(opponentBoard);
 
         VBox player = new VBox(playerBoard);
         VBox opponent = new VBox(opponentBoard);

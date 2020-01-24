@@ -1,9 +1,11 @@
 package gui.controller;
 
+import database.Connect;
 import gui.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

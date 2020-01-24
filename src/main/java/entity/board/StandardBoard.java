@@ -22,16 +22,6 @@ public class StandardBoard extends Board {
     }
 
     /**
-     * Verifying the point is valid.
-     *
-     * @param point The point, location, the user wants to place the ship.
-     * @return Whether the point is valid.
-     */
-    public boolean isValidPoint(Point2D point, Board board) {
-        return inRange((int)point.getX(), (int)point.getY(), board);
-    }
-
-    /**
      * Verifying whether the specified point is lying inside the board.
      *
      * @param x The X-Coordinate of the specified location.
@@ -42,4 +32,7 @@ public class StandardBoard extends Board {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
+    public Board reshape(Board board) {
+        return board;
+    }
 }

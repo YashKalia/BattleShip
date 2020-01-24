@@ -5,8 +5,6 @@ import entity.ships.Ship;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import scoresystem.Scoring;
-
 
 
 /**
@@ -17,9 +15,9 @@ public class Square extends Rectangle {
     public int coordinateY;
     public Ship ship = null;
     public boolean shooted = false;
-    public Board board;
-    public Point2D coordinates = new Point2D(coordinateX, coordinateY);
-    public Scoring objectScore = new Scoring();
+    public transient Board board;
+    public transient Point2D coordinates = new Point2D(coordinateX, coordinateY);
+    public transient Scoring objectScore = new Scoring();
 
     /**
      * Getting the X coordinate of the square.
@@ -94,57 +92,6 @@ public class Square extends Rectangle {
     }
 
     /**
-     * Getting the board.
-     *
-     * @return The board.
-     */
-    public Board getBoard() {
-        return board;
-    }
-
-
-    /**
-     * Setting the board.
-     *
-     * @param board The board of the game.
-     */
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
-    /**
-     * Get the x and y coordinate of the specified square.
-     * @return The X and Y coordinate of the square.
-     */
-    public Point2D getCoordinates() {
-        return coordinates;
-    }
-
-    /**
-     * Set the x and y coordinate of the specified square.
-     * @param coordinates The wanted X and Y for the square.
-     */
-    public void setCoordinates(Point2D coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    /**
-     * Getting the achieved score by the player.
-     * @return The amount of points a player has obtained.
-     */
-    public Scoring getObjectScore() {
-        return objectScore;
-    }
-
-    /**
-     * Updating the amount of points obtained by a player.
-     * @param objectScore The new amount of points a player has obtained.
-     */
-    public void setObjectScore(Scoring objectScore) {
-        this.objectScore = objectScore;
-    }
-
-    /**
      * Constructor of square class.
      *
      * @param x     X-Coordinate of square.
@@ -160,7 +107,6 @@ public class Square extends Rectangle {
         setStroke(Color.LIGHTCYAN);
     }
 
-
     /**
      * Getting the square left of an given square.
      *
@@ -171,13 +117,10 @@ public class Square extends Rectangle {
         int x = square.getCoordinateX();
         int y = square.getCoordinateY();
         Square squareNotVisible;
-
         if (!board.inRange(x, y, board) || x == 0) {
             squareNotVisible = new Square(11, 11, board);
             return squareNotVisible;
         } else {
-
-
             if (square.board.isOpponent()) {
                 return Board.squaresInGridOpponent.get(10 * y + x - 1);
             } else {
@@ -196,9 +139,7 @@ public class Square extends Rectangle {
         int x = square.getCoordinateX();
         int y = square.getCoordinateY();
         Square squareNotVisible;
-
-        final int nine = 9; //To avoid pmd error
-
+        final int nine = 9;
         if (!board.inRange(x, y, board) || x == nine) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
@@ -213,7 +154,6 @@ public class Square extends Rectangle {
 
     /**
      * Getting the square above of an given square.
-     *
      * @param square square of which you want to receive the square above.
      * @return the square which is positioned above the square.
      */
@@ -221,7 +161,6 @@ public class Square extends Rectangle {
         int x = square.getCoordinateX();
         int y = square.getCoordinateY();
         Square squareNotVisible;
-
         if (!board.inRange(x, y, board) || y == 0) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
@@ -231,13 +170,11 @@ public class Square extends Rectangle {
             } else {
                 return Board.squaresInGrid.get(10 * (y - 1) + x);
             }
-
         }
     }
 
     /**
      * Getting the square below of an given square.
-     *
      * @param square square of which you want to receive the square below.
      * @return the square which is positioned below the square.
      */
@@ -245,32 +182,17 @@ public class Square extends Rectangle {
         int x = square.getCoordinateX();
         int y = square.getCoordinateY();
         Square squareNotVisible;
-
-        final int nine = 9; //To avoid pmd error
-
+        final int nine = 9;
         if (!board.inRange(x, y, board) || y == nine) {
             squareNotVisible = new Square(-1, -1, board);
             return squareNotVisible;
         } else {
-
             if (square.board.isOpponent()) {
                 return Board.squaresInGridOpponent.get(10 * (y + 1) + x);
             } else {
                 return Board.squaresInGrid.get(10 * (y + 1) + x);
             }
         }
-    }
-
-    /**
-     * }
-     * Getter for a square.
-     *
-     * @param x x-coordinate of the square in the board.
-     * @param y y-coordinate of the square in the board.
-     * @return the square which has those x and y coordinates.
-     */
-    public static Square getSquare(int x, int y) {
-        return Board.squaresInGrid.get(10 * y + x);
     }
 
     /**
@@ -281,7 +203,6 @@ public class Square extends Rectangle {
      * methods (see below).Blocks around the ship have to be marked as well, in this case with
      * the color black, this is what happens if we don't find a ship on the square
      * left/right/up/down.
-     *
      * @param square The last square that was shot before the ship sunk.
      */
     public void setDestroyedShipColour(Square square) {
@@ -291,21 +212,18 @@ public class Square extends Rectangle {
             getSquareLeft(square).setFill(Color.BLACK);
             getSquareLeft(square).shooted = true;
         }
-
         if (getSquareRight(square).getShip() != null) {
             setSquareColorRight((square));
         } else {
             getSquareRight(square).setFill(Color.BLACK);
             getSquareRight(square).shooted = true;
         }
-
         if (getSquareUp(square).getShip() != null) {
             setSquareColorUp((square));
         } else {
             getSquareUp(square).setFill(Color.BLACK);
             getSquareUp(square).shooted = true;
         }
-
         if (getSquareBelow(square).getShip() != null) {
             setSquareColorBelow((square));
         } else {
@@ -348,7 +266,7 @@ public class Square extends Rectangle {
      * We also give the squares up and down the colors orange, which are blocks around the
      * ships that have to be marked as well
      * @param square entity.Square that has to be colored and for which you want to check squares
-     *              to the right.
+     *               to the right.
      */
     public void setSquareColorRight(Square square) {
         square.setFill((Color.GREEN));
@@ -375,7 +293,7 @@ public class Square extends Rectangle {
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
      * @param square entity.Square that has to be colored and for which you want to check
-     *              squares above.
+     *               squares above.
      */
     public void setSquareColorUp(Square square) {
         square.setFill((Color.GREEN));
@@ -403,7 +321,7 @@ public class Square extends Rectangle {
      * We also give the squares left and right the colors orange, which are blocks around
      * the ships that have to be marked as well
      * @param square entity.Square that has to be colored and for which you want to
-     *              check squares below.
+     *               check squares below.
      */
     public void setSquareColorBelow(Square square) {
         square.setFill((Color.GREEN));
@@ -426,60 +344,52 @@ public class Square extends Rectangle {
     /**
      * Set the color of a square, not containing a ship, that has been shot for player.
      * Set the color of a square, containing a ship, that has been shot for player.
-     *
      * @return Whether square is shot.
      */
-    public boolean shoot() {
-        shooted = true;
-
-
-        if (ship != null) {
-            if (ship.getDamage() == ship.getTypeShip()) {
-                int achieved = objectScore.scoreSystem(coordinates, board, ship);
-                board.totalScore = board.totalScore + achieved;
-                System.out.println("Achieved " + achieved);
-                System.out.println("Total" + board.totalScore);
+    public boolean shoot(Square square) {
+        if (board.inRange(square.getCoordinateX(), square.getCoordinateY(), board)) {
+            shooted = true;
+            if (ship != null) {
+                if (ship.getDamage() == ship.getTypeShip()) {
+                    int achieved = objectScore.scoreSystem(coordinates, board, ship);
+                    board.totalScore = board.totalScore + achieved;
+                    System.out.println("Achieved " + achieved);
+                    System.out.println("Total" + board.totalScore);
+                }
+                ship.shot();
+                setFill(Color.RED);
+                if (!ship.isNotDestroyed()) {
+                    setDestroyedShipColour(this);
+                    board.ships--;
+                }
+                return true;
+            } else {
+                this.setFill(Color.BLACK);
+                int miss = board.getMisses() + 1;
+                board.setMisses(miss);
+                System.out.println(board.misses);
             }
-            ship.shot();
-
-            setFill(Color.RED);
-            if (!ship.isNotDestroyed()) {
-                setDestroyedShipColour(this);
-                board.ships--;
-            }
-            return true;
-        } else {
-            this.setFill(Color.BLACK);
-            int miss = board.getMisses() + 1;
-            board.setMisses(miss);
-            System.out.println(board.misses);
         }
-
         return false;
     }
 
     /**
      * Set the color of a square, not containing a ship, that has been shot for computer.
      * Set the color of a square, containing a ship, that has been shot for computer.
-     *
      * @return Whether square is shot.
      */
     public boolean shootEnemy() {
         shooted = true;
         this.setFill(Color.BLACK);
-
-
         if (ship != null) {
             ship.shot();
             setFill(Color.RED);
             if (!ship.isNotDestroyed()) {
                 setDestroyedShipColour(this);
                 board.ships--;
-
             }
             return true;
         }
         return false;
     }
-
 }

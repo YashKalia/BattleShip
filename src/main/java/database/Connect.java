@@ -1,5 +1,6 @@
 package database;
 
+import com.sun.net.httpserver.Authenticator;
 import entity.User;
 
 import java.sql.Connection;
@@ -40,8 +41,10 @@ public class Connect {
     static ResultSet rs2 = null;
     static ResultSet rs3 = null;
     static ResultSet rs4 = null;
+    public static User user = null;
     static String secretKey = "ssshhhhhhhhhhh!!!!";
     private static byte[] key;
+
 
     /**
      * Register a user to the database.
@@ -201,5 +204,4 @@ public class Connect {
             return new String("Score not added.");
         }
     }
-
 }

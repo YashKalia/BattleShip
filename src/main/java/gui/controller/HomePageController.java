@@ -1,11 +1,12 @@
 package gui.controller;
 
 import entity.board.BoardCreator;
+import entity.board.EnhancedBoardCreator;
+import entity.board.StandardBoardCreator;
 import gui.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXMLLoader;
@@ -16,14 +17,25 @@ import javafx.stage.Stage;
 
 public class HomePageController {
 
-    protected static BoardCreator boardCreator;
-
-    /**Shows the game screen,finally.
+    /**Shows the game screen with the standardboard,finally.
      *
-     * @param event if button is pressed.
+     * @param event if Standard button is pressed.
      */
-    public void startGame(ActionEvent event) {
-        Parent root = boardCreator.createBord();
+    public void startStandardGame(ActionEvent event) {
+        Parent root = StandardBoardCreator.createBord();
+        Scene scene = new Scene(root);
+        Stage primaryStage = Main.getStage();
+        primaryStage.setScene(scene);
+    }
+
+    protected static BoardCreator boardCreator = new StandardBoardCreator();
+
+    /**Shows the game screen with the enhancedboard,finally.
+     *
+     * @param event if Enhanced button is pressed.
+     */
+    public void startEnhancedGame(ActionEvent event) {
+        Parent root = EnhancedBoardCreator.createBord();
         Scene scene = new Scene(root);
         Stage primaryStage = Main.getStage();
         primaryStage.setScene(scene);
