@@ -43,7 +43,7 @@ public class LoginController {
      * @throws Exception HUGE OFF
      */
     @SuppressWarnings("deprecation")
-    public void login(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    public void login(ActionEvent event) throws Exception {
         //txtUsername.getText(), txtPassword.getText()
         user = new User(txtUsername.getText(),txtPassword.getText());
         String r = Connect.authenticate(user);
