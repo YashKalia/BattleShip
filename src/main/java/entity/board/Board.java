@@ -25,8 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public abstract class Board extends Parent {
-    public VBox rows = new VBox();
-    public boolean opponent = false;
+    private VBox rows = new VBox();
+    private boolean opponent = false;
     public int ships = 5;
     public static ArrayList<Square> squaresInGrid = new ArrayList<>();
     public static ArrayList<Square> squaresInGridOpponent = new ArrayList<>();
@@ -34,10 +34,10 @@ public abstract class Board extends Parent {
     public int misses = 0;
     public int totalScore = 0;
     public Map<String, Point2D> frontShip = new HashMap<String, Point2D>();
-    public static List<Ship> shipList = new ArrayList<>();
-    public transient int startCoordinate = -1;
-    public transient Square startSquare = null;
-    public Game game;
+    private static List<Ship> shipList = new ArrayList<>();
+    private transient int startCoordinate = -1;
+    private transient Square startSquare = null;
+    private Game game;
 
     /**
      * Creation of a board.
@@ -346,7 +346,9 @@ public abstract class Board extends Parent {
      * @param point The point, location, the user wants to place the ship.
      * @return Whether the point is valid.
      */
-    public abstract boolean isValidPoint(Point2D point, Board board);
+    public boolean isValidPoint(Point2D point, Board board) {
+        return inRange((int)point.getX(), (int)point.getY(), board);
+    }
 
     /**
      * Verifying whether the specified point is lying inside the board.

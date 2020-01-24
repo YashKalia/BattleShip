@@ -3,7 +3,6 @@ package entity.board;
 import entity.Square;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -20,15 +19,6 @@ public class EnhancedBoard extends Board {
         super(opponent,handler);
     }
 
-    /**
-     * Verifying the point is valid.
-     *
-     * @param point The point, location, the user wants to place the ship.
-     * @return Whether the point is valid.
-     */
-    public boolean isValidPoint(Point2D point, Board board) {
-        return inRange((int) point.getX(), (int) point.getY(), board);
-    }
 
     /**
      * Verifying whether the specified point is lying inside the board.

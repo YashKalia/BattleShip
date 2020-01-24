@@ -27,6 +27,4 @@ public class BattleShip extends Ship {
     public int getTypeShip() {
         return 4;
     }
-
-
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("PMD.AvoidBranchingStatementAsLastInLoop")
 public class OpponentPlayer {
 
     public static ArrayList<Square> shotSquares = new ArrayList<Square>();
@@ -121,23 +122,12 @@ public class OpponentPlayer {
         while (Game.opponentTurn
                 && playerBoard.inRange(x, y, playerBoard)) {
 
-            int random = randomizer.nextInt(4);
-            switch (random) {
-                case 0:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                case 3:
-                    shootUp(playerBoard, x, y, new Random());
-                    break;
-                default:
-                    break;
+            int random = -1;
+            while (random == -1) {
+                random = randomizer.nextInt(4);
             }
+            randomizedMove(playerBoard, x, y, random);
+            return;
         }
 
         if (playerBoard.ships == 0) {
@@ -161,20 +151,14 @@ public class OpponentPlayer {
                 enemyShot(playerBoard, new Random());
             }
             counter++;
-            int random = randomizer.nextInt(3);
-            switch (random) {
-                case 0:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
+
+            int random = -1;
+            while (random == -1 || random == 2) {
+                random = randomizer.nextInt(4);
             }
+            randomizedMove(playerBoard, x, y, random);
+            return;
+
         }
         up = playerBoard.getSquare(x, y - 1);
 
@@ -182,6 +166,7 @@ public class OpponentPlayer {
         if (Game.opponentTurn) {
             shotSquares.add(up);
             if (!up.getShip().isNotDestroyed()) {
+                up.shooted = true;
                 playerBoard.ships--;
                 counter = 0;
                 shotSquares.clear();
@@ -206,57 +191,30 @@ public class OpponentPlayer {
      */
     public void shootLeft(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (x == 0 || !playerBoard.inRange(x, y, playerBoard)) {
+        if (x == 0 || (playerBoard.getSquare(x - 1, y).isShooted())
+                || !playerBoard.inRange(x, y, playerBoard)) {
 
             if (counter > seventeen) {
                 enemyShot(playerBoard, new Random());
             }
             counter++;
 
-            int random = randomizer.nextInt(3);
-
-            switch (random) {
-                case 0:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootUp(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
+            int random = -1;
+            while (random == -1 || random == 1) {
+                random = randomizer.nextInt(4);
             }
+            randomizedMove(playerBoard, x, y, random);
+            return;
+
         }
+
         left = playerBoard.getSquare(x - 1, y);
 
-        if (left.shooted) {
-            if (counter > seventeen) {
-                enemyShot(playerBoard, new Random());
-            }
-            counter++;
-
-            int random = randomizer.nextInt(3);
-
-            switch (random) {
-                case 0:
-                    shootUp(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
-            }
-        }
         Game.opponentTurn = left.shootEnemy();
         if (Game.opponentTurn) {
             shotSquares.add(left);
             if (!left.getShip().isNotDestroyed()) {
+                left.shooted = true;
                 playerBoard.ships--;
                 counter = 0;
                 shotSquares.clear();
@@ -280,7 +238,7 @@ public class OpponentPlayer {
      */
     public void shootRight(Board playerBoard, int x, int y, Random randomizer) {
 
-        if (x == nine || (playerBoard.getSquare(x + 1, y).isShooted())
+        if (x == 9 || (playerBoard.getSquare(x + 1, y).isShooted())
                 || !playerBoard.inRange(x, y, playerBoard)) {
 
             if (counter > seventeen) {
@@ -288,27 +246,19 @@ public class OpponentPlayer {
             }
             counter++;
 
-            int random = randomizer.nextInt(3);
-
-            switch (random) {
-                case 0:
-                    shootUp(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootDown(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
+            int random = -1;
+            while (random == -1 || random == 0) {
+                random = randomizer.nextInt(4);
             }
+            randomizedMove(playerBoard, x, y, random);
+            return;
         }
         right = playerBoard.getSquare(x + 1, y);
 
         Game.opponentTurn = right.shootEnemy();
         if (Game.opponentTurn) {
             shotSquares.add(right);
+            right.shooted = true;
             if (!right.getShip().isNotDestroyed()) {
                 playerBoard.ships--;
                 counter = 0;
@@ -343,21 +293,15 @@ public class OpponentPlayer {
             }
             counter++;
 
-            int random = randomizer.nextInt(3);
-            switch (random) {
-                case 0:
-                    shootRight(playerBoard, x, y, new Random());
-                    return;
-                case 1:
-                    shootLeft(playerBoard, x, y, new Random());
-                    return;
-                case 2:
-                    shootUp(playerBoard, x, y, new Random());
-                    return;
-                default:
-                    break;
+            int random = -1;
+            while (random == -1 || random == 3) {
+                random = randomizer.nextInt(4);
             }
+
+            randomizedMove(playerBoard, x, y, random);
+            return;
         }
+
         down = playerBoard.getSquare(x, y + 1);
 
         Game.opponentTurn = down.shootEnemy();
@@ -379,10 +323,34 @@ public class OpponentPlayer {
         }
     }
 
+    /**
+     * Randomly select which method should be executed.
+     * @param playerBoard Board is played on.
+     * @param x The X-coordinate
+     * @param y The Y-coordinate
+     * @param random The randomized number passed.
+     */
+    public void randomizedMove(Board playerBoard, int x, int y, int random) {
+        switch (random) {
+            case 0:
+                shootRight(playerBoard, x, y, new Random());
+                return;
+            case 1:
+                shootLeft(playerBoard, x, y, new Random());
+                return;
+            case 2:
+                shootUp(playerBoard, x, y, new Random());
+                return;
+            case 3:
+                shootDown(playerBoard, x, y, new Random());
+                return;
+            default:
+                break;
+        }
+    }
 
     /**
      * method to place the opponent ships.
-     *
      * @param opponentBoard board of the opponent.
      */
     public void placeShipsOpponent(Board opponentBoard, Random randomizer) {
@@ -415,5 +383,4 @@ public class OpponentPlayer {
             }
         }
     }
-
 }

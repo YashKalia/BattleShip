@@ -64,22 +64,18 @@ public class StandardBoardCreator implements BoardCreator {
                 game.opponentTurn = !square.shoot(square);
                 if (opponentBoard.ships == 0) {
                     System.out.println("YOU WIN");
-                    //System.exit(0);
                 }
                 if (game.opponentTurn) {
                     opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
                 }
             }
-
         });
 
         playerBoard = new StandardBoard(false, event -> {
             if (inProgress) {
                 return;
             }
-
             List<Ship> ships = playerBoard.makeListWithShips();
-
 
             Square square = (Square) event.getSource();
             if (event.getButton().toString().equals(primary)) {

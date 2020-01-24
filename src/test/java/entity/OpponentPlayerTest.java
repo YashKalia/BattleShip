@@ -131,7 +131,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootDownEmpty() {
-        when(random.nextInt(4)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square down = opponentPlayer.getDown();
         // Verifying the lower square is indeed shot
@@ -145,7 +145,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootUpEmpty() {
-        when(random.nextInt(4)).thenReturn(3);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square up = opponentPlayer.getUp();
         // Verifying the upper square is indeed shot
@@ -232,7 +232,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootDown_PartOfShip() {
         board.placeShip(destroyer, 6, 8, board);
-        when(random.nextInt(4)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square down = opponentPlayer.getDown();
         // Verifying the down square is shot
@@ -248,7 +248,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootDown_WholeShip() {
         board.placeShip(mini, 6, 8, board);
-        when(random.nextInt(4)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square down = opponentPlayer.getDown();
         // Verifying the down square is shot
@@ -268,7 +268,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootUp_PartOfShip() {
         board.placeShip(destroyer, 6, 6, board);
-        when(random.nextInt(4)).thenReturn(3);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot
@@ -284,7 +284,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootUp_WholeShip() {
         board.placeShip(mini, 6, 6, board);
-        when(random.nextInt(4)).thenReturn(3);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.enemyShotCoordinates(board, 6, 7, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot
@@ -319,7 +319,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootUpBoarder_1() {
 
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.shootUp(board, 4, 0, random);
         Square left = opponentPlayer.getLeft();
         // Verifying the up square is shots
@@ -334,7 +334,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootUpBoarder_2() {
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.shootUp(board, 4, 0, random);
         Square down = opponentPlayer.getDown();
         // Verifying the up square is shots
@@ -368,7 +368,7 @@ public class OpponentPlayerTest {
     public void opponentShootUpAlreadyShot_1() {
         Square square = board.getSquare(6, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.shootUp(board, 6, 5, random);
         Square left = opponentPlayer.getLeft();
         // Verifying the up square is shots
@@ -385,7 +385,7 @@ public class OpponentPlayerTest {
     public void opponentShootUpAlreadyShot_2() {
         Square square = board.getSquare(6, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.shootUp(board, 6, 5, random);
         Square down = opponentPlayer.getDown();
         // Verifying the up square is shots
@@ -400,7 +400,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootLeftBoarder_0() {
-        when(random.nextInt(3)).thenReturn(0);
+        when(random.nextInt(4)).thenReturn(0);
         opponentPlayer.shootLeft(board, 0, 7, random);
         Square right = opponentPlayer.getRight();
         // Verifying the right square is shot
@@ -416,7 +416,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootLeftBoarder_1() {
 
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.shootLeft(board, 0, 7, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot
@@ -431,7 +431,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootLeftBoarder_2() {
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.shootLeft(board, 0, 7, random);
         Square down = opponentPlayer.getDown();
         // Verifying the down square is shots
@@ -448,7 +448,7 @@ public class OpponentPlayerTest {
     public void opponentShootLeftAlreadyShot_0() {
         Square square = board.getSquare(7, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(0);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.shootLeft(board, 8, 4, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shots
@@ -465,7 +465,7 @@ public class OpponentPlayerTest {
     public void opponentShootLeftAlreadyShot_1() {
         Square square = board.getSquare(7, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.shootLeft(board, 8, 4, random);
         Square down = opponentPlayer.getDown();
         // Verifying the down square is shots
@@ -482,7 +482,7 @@ public class OpponentPlayerTest {
     public void opponentShootLeftAlreadyShot_2() {
         Square square = board.getSquare(7, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(0);
         opponentPlayer.shootLeft(board, 8, 4, random);
         Square right = opponentPlayer.getRight();
         // Verifying the right square is shot
@@ -497,7 +497,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootRightBoarder_0() {
-        when(random.nextInt(3)).thenReturn(0);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.shootRight(board, 9, 5, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot
@@ -513,7 +513,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootRightBoarder_1() {
 
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.shootRight(board, 9, 5, random);
         Square left = opponentPlayer.getLeft();
         // Verifying the left square is shot
@@ -528,7 +528,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootRightBoarder_2() {
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.shootRight(board, 9, 5, random);
         Square down = opponentPlayer.getDown();
         // Verifying the down square is shots
@@ -545,7 +545,7 @@ public class OpponentPlayerTest {
     public void opponentShootRightAlreadyShot_0() {
         Square square = board.getSquare(8, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(0);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.shootRight(board, 7, 4, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot
@@ -562,7 +562,7 @@ public class OpponentPlayerTest {
     public void opponentShootRightAlreadyShot_1() {
         Square square = board.getSquare(8, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.shootRight(board, 7, 4, random);
         Square left = opponentPlayer.getLeft();
         // Verifying the left square is shot
@@ -579,7 +579,7 @@ public class OpponentPlayerTest {
     public void opponentShootRightAlreadyShot_2() {
         Square square = board.getSquare(8, 4);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(3);
         opponentPlayer.shootRight(board, 7, 4, random);
         Square down = opponentPlayer.getDown();
         // Verifying the down square is shot
@@ -594,7 +594,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootDownBoarder_0() {
-        when(random.nextInt(3)).thenReturn(0);
+        when(random.nextInt(4)).thenReturn(0);
         opponentPlayer.shootDown(board, 5, 9, random);
         Square right = opponentPlayer.getRight();
         // Verifying the right square is shot
@@ -610,7 +610,7 @@ public class OpponentPlayerTest {
     @Test
     public void opponentShootDownBoarder_1() {
 
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.shootDown(board, 5, 9, random);
         Square left = opponentPlayer.getLeft();
         // Verifying the left square is shot
@@ -625,7 +625,7 @@ public class OpponentPlayerTest {
 
     @Test
     public void opponentShootDownBoarder_2() {
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.shootDown(board, 5, 9, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot
@@ -642,7 +642,7 @@ public class OpponentPlayerTest {
     public void opponentShootDownAlreadyShot_0() {
         Square square = board.getSquare(7, 5);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(0);
+        when(random.nextInt(4)).thenReturn(0);
         opponentPlayer.shootDown(board, 7, 4, random);
         Square right = opponentPlayer.getRight();
         // Verifying the right square is shot
@@ -658,7 +658,7 @@ public class OpponentPlayerTest {
     public void opponentShootDownAlreadyShot_1() {
         Square square = board.getSquare(7, 5);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(1);
+        when(random.nextInt(4)).thenReturn(1);
         opponentPlayer.shootDown(board, 7, 4, random);
         Square left = opponentPlayer.getLeft();
         // Verifying the left square is shot
@@ -675,7 +675,7 @@ public class OpponentPlayerTest {
     public void opponentShootDownAlreadyShot_2() {
         Square square = board.getSquare(7, 5);
         square.setShooted(true);
-        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(4)).thenReturn(2);
         opponentPlayer.shootDown(board, 7, 4, random);
         Square up = opponentPlayer.getUp();
         // Verifying the up square is shot

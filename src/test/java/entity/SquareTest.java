@@ -10,16 +10,14 @@ import entity.ships.Destroyer;
 import entity.ships.Ship;
 import entity.ships.Submarine;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import scoresystem.Scoring;
 
 class SquareTest {
 
     private transient Square square;
-    private Board board;
+    private transient Board board;
     private transient Board boardOpponent;
     private transient String carrierName;
 
@@ -84,42 +82,6 @@ class SquareTest {
         square.setShooted(true);
         boolean actual = square.isShooted();
         assertEquals(true, actual);
-    }
-
-    @Test
-    public void getBoard() {
-        Board actual = square.getBoard();
-        assertEquals(board, actual);
-    }
-
-    @Test
-    public void setBoard() {
-        square.setBoard(null);
-        Board actual = square.getBoard();
-        assertEquals(null, actual);
-    }
-
-    @Test
-    public void getCoordinates() {
-        Point2D point = new Point2D(0, 0);
-        Point2D actual = square.getCoordinates();
-        assertEquals(point, actual);
-    }
-
-    @Test
-    public void setCoordinates() {
-        Point2D point = new Point2D(3, 7);
-        square.setCoordinates(point);
-        Point2D actual = square.getCoordinates();
-        assertEquals(point, actual);
-    }
-
-    @Test
-    public void score() {
-        Scoring score = new Scoring();
-        square.setObjectScore(score);
-        Scoring actual = square.getObjectScore();
-        assertEquals(score, actual);
     }
 
     @Test
@@ -238,14 +200,6 @@ class SquareTest {
         Square result = square.getSquareBelow(square);
         int part1 = 10 * (square.getCoordinateY() - 1);
         Square actual = Board.squaresInGrid.get(part1 + square.getCoordinateX());
-        assertEquals(result.getCoordinateX(), actual.getCoordinateX());
-    }
-
-    @Test
-    public void getSquareTest() {
-        square = new Square(3,4,board);
-        Square result = square.getSquare(3,4);
-        Square actual = Board.squaresInGrid.get(10 * 4 + 3);
         assertEquals(result.getCoordinateX(), actual.getCoordinateX());
     }
 
