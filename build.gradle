@@ -41,8 +41,8 @@ test {
 
     jacoco {
         enabled = true
-        includes = ['entity.board.*', 'entity.ships.*', 'entity.*', 'scoresystem.*']
-        excludes = ['gui.*', 'gui.controller.*']
+        includes = ['entity.*', 'scoresystem.*']
+        excludes = ['entity.board.EnhancedBoardCreator','entity.board.StandardBoardCreator', 'gui.*', 'gui.controller.*']
 
     }
 }

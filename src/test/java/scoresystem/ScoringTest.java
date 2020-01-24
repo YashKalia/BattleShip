@@ -2,6 +2,7 @@ package scoresystem;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import entity.Scoring;
 import entity.Square;
 import entity.board.Board;
 import entity.board.StandardBoard;
@@ -73,8 +74,7 @@ class ScoringTest {
 
     @Test
     void getScore() {
-        Scoring score = new Scoring();
-        assertEquals(score.getScore(), 0);
+        assertEquals(Scoring.getScore(), 500);
 
     }
 
@@ -86,6 +86,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulBattleship() {
+        Scoring.setScore(0);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
         int result = score.scoreSystem(coordinate, board, testShipB);
@@ -94,6 +95,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCarrier() {
+        Scoring.setScore(0);
         square.setShip(testShipC);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
         int result = score.scoreSystem(coordinate, board, testShipC);
@@ -102,6 +104,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCruiser() {
+        Scoring.setScore(0);
         square.setShip(testShipCr);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
         int result = score.scoreSystem(coordinate, board, testShipCr);
@@ -110,6 +113,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulSubmarine() {
+        Scoring.setScore(0);
         square.setShip(testShipS);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
         int result = score.scoreSystem(coordinate, board, testShipS);
@@ -118,6 +122,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulDestroyer() {
+        Scoring.setScore(0);
         square.setShip(testShipD);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
         int result = score.scoreSystem(coordinate, board, testShipD);
@@ -126,6 +131,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulBattleShipMiss() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -140,6 +146,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulBattleShipMissWeak1() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -155,6 +162,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulBattleShipMissWeak2() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipB);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -170,6 +178,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCarrierMissWeak1() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipC);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -184,6 +193,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCarrierMiss() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipC);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -199,6 +209,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCarrierMissCoordinate2() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipC);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -214,6 +225,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulSubmarineMissWeak1() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipS);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -228,6 +240,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulSubmarineMissWeak2() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipS);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -244,6 +257,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulDestroyerMiss() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipD);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -258,6 +272,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulDestroyerMissWeak1() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipD);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -273,6 +288,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCruiserMiss() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipCr);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -287,6 +303,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCruiserMissWeak1() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipCr);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());
@@ -302,6 +319,7 @@ class ScoringTest {
 
     @Test
     void scoreSystemSuccessfulCruiserMissWeak2() {
+        Scoring.setScore(0);
         board.setMisses(2);
         square.setShip(testShipCr);
         Point2D coordinate = new Point2D(square.getCoordinateX(), square.getCoordinateY());

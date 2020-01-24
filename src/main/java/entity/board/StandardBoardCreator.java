@@ -1,19 +1,18 @@
 package entity.board;
 
 import entity.Game;
+import entity.Scoring;
 import entity.Square;
 import entity.ships.Ship;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import javax.sound.midi.SysexMessage;
 
 public class StandardBoardCreator implements BoardCreator {
 
@@ -56,18 +55,24 @@ public class StandardBoardCreator implements BoardCreator {
                 return;
             }
             Square square = (Square) event.getSource();
-            if (opponentBoard.inRange(square.getCoordinateX(), square.getCoordinateY(),
-                    opponentBoard)) {
-                if (square.shooted) {
-                    return;
+
+            if (square.shooted) {
+                return;
+            }
+            game.opponentTurn = !square.shoot(square);
+            if (opponentBoard.ships == 0) {
+                System.out.println("YOU WIN");
+                try {
+                    Scoring.addScoreToDatabase();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-                game.opponentTurn = !square.shoot(square);
-                if (opponentBoard.ships == 0) {
-                    System.out.println("YOU WIN");
-                }
-                if (game.opponentTurn) {
-                    opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
-                }
+                //System.exit(0);
+            }
+            if (game.opponentTurn) {
+                opponentBoard.opponentPlayer.enemyShot(playerBoard.getBoard(), new Random());
             }
         });
 

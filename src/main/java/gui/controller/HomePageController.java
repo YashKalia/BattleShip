@@ -1,14 +1,12 @@
 package gui.controller;
 
 import entity.board.BoardCreator;
-import entity.board.EnhancedBoard;
 import entity.board.EnhancedBoardCreator;
 import entity.board.StandardBoardCreator;
 import gui.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXMLLoader;
@@ -29,6 +27,8 @@ public class HomePageController {
         Stage primaryStage = Main.getStage();
         primaryStage.setScene(scene);
     }
+
+    protected static BoardCreator boardCreator = new StandardBoardCreator();
 
     /**Shows the game screen with the enhancedboard,finally.
      *
